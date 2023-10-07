@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: @project.name@
+    description: @project.version@
+    version: @project.description@
+
+
+logging:
+  pattern:
+    console: "%d{ABSOLUTE_MICROS} [%-5level] [%t] %c{1} - %msg%n"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+server:
+  error:
+    include-stacktrace: never # desabilitar stacktrace no json que e retornado em caso de erro
+  port: 8080
+
+##
+application:
+  title: '@project.name@'
+  version: '@project.version@'
+
+  swagger:
+    application:
+      name: '@project.name@'
+      description: '@project.description@'
+      version: '@project.version@'
+
