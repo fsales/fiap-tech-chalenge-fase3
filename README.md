@@ -3,7 +3,6 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/fsales/fiap-tech-chalenge-fase3)
 ![GitHub top language](https://img.shields.io/github/languages/top/fsales/fiap-tech-chalenge-fase3)
 ![GitHub issues](https://img.shields.io/github/issues/fsales/fiap-tech-chalenge-fase3)
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/fsales/fiap-tech-chalenge-fase3/maven)
 [![Create release](https://github.com/fsales/fiap-tech-chalenge-fase3/actions/workflows/create-release.yml/badge.svg)](https://github.com/fsales/fiap-tech-chalenge-fase3/actions/workflows/create-release.yml)
 [![Publish Image Registry - Branch Develop](https://github.com/fsales/fiap-tech-chalenge-fase3/actions/workflows/git-flow-publish-image-develop.yml/badge.svg)](https://github.com/fsales/fiap-tech-chalenge-fase3/actions/workflows/git-flow-publish-image-develop.yml)
 
