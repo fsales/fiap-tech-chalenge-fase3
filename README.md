@@ -53,18 +53,23 @@ Pós-Graduação em Arquitetura e Desenvolvimento Java
 
 ## CI/CD
 
-        CI/CD é a abreviação de Continuous Integration/Continuous Delivery, traduzindo para o português: integração e entrega contínuas. Trata-se de uma prática de desenvolvimento de software que visa tornar a 
-    integração de código mais eficiente por meio de builds e testes automatizados. [^1]
+
+  CI/CD é a abreviação de Continuous Integration/Continuous Delivery, traduzindo para o português: integração e entrega contínuas. 
+Trata-se de uma prática de desenvolvimento de software que visa tornar a integração de código mais eficiente por meio de builds e testes automatizados. [^1]
+    
 
 ### Github Action
 
-        GitHub Actions é uma plataforma de integração contínua e entrega contínua (CI/CD) que permite automatizar a sua compilação, testar e pipeline de implantação. É possível criar fluxos de trabalho que criam e 
-    testam cada pull request no seu repositório, ou implantar pull requests mesclados em produção.[^2]
+
+  GitHub Actions é uma plataforma de integração contínua e entrega contínua (CI/CD) que permite automatizar a sua compilação, testar e pipeline de implantação.
+É possível criar fluxos de trabalho que criam e testam cada pull request no seu repositório, ou implantar pull requests mesclados em produção.[^2]
+    
 
 #### Secrets
 
-        Secrets são variáveis que você cria em uma organização, repositório ou ambiente de repositório. Os Secrets que você cria estão disponíveis para utilização nos fluxos de trabalho em GitHub Actions. GitHub 
-    Actions só poderá ler um Secrets se você incluí-lo explicitamente em um fluxo de trabalho.
+
+ Secrets são variáveis que você cria em uma organização, repositório ou ambiente de repositório. Os Secrets que você cria estão disponíveis 
+para utilização nos fluxos de trabalho em GitHub Actions. GitHub Actions só poderá ler um Secrets se você incluí-lo explicitamente em um fluxo de trabalho.
 
     1. relação dos secrets que devem ser configurados no repositório:
 
