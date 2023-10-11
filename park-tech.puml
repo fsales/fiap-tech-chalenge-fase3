@@ -1,0 +1,120 @@
+@startuml
+!theme toy
+'https://plantuml.com/class-diagram
+'http://www.dsc.ufcg.edu.br/~jacques/cursos/map/html/uml/diagramas/classes/classes3.htm
+enum TipoVeiculo{
+    MOTO
+    CARRO
+    CAMINHAO
+    CAMINHONETE
+    MICROONIBUS
+    ONIBUS
+}
+
+enum TipoCarto {
+    CREDITO
+    DEBITO
+}
+
+enum TipoMovimentacao{
+    FIXO
+    HORA
+}
+
+enum Estado {
+    DISTRITO_FEDERAL
+    GOIAS
+    MINAS_GERAIS
+}
+
+
+abstract class Pessoa{
+    # String nome
+    # Contato contato
+    # Endereco endereco
+}
+
+class Condutor {
+    - String numeroCnh
+    - List<Veiculo> veiculos
+}
+
+class PessoaFisica {
+    - String cpf
+}
+
+
+class Endereco{
+    - String rua
+    - String logradouro
+    - String numero
+    - String complemento
+    - String bairro
+    - String cep
+    - Estado estado
+}
+
+class Contato{
+    - String email
+    - String telefone
+}
+
+class Veiculo{
+    - String placa
+    - String renavam
+    - String nome
+    - TipoVeiculo tipo
+}
+
+class Movimentacao{
+ - Condutor condutor
+ - Veiculo veiculos
+ - LocalDateTime inicio
+ - LocalDateTime saida
+ - Double valor
+ - TipoMovimentacao tipo
+ - Pagamento pagamento
+ - Integer tempoEstimado
+ - Integer tempoReal
+}
+
+class Pix{
+}
+
+
+class Pagamento{
+ - Pix pix
+ - Cartao cartao
+ - boolean preferido
+}
+
+class Cartao {
+    - String numero
+    - String vencimento
+    - String cvv
+    - PessoaFisica pessoa
+    - TipoCarto tipo
+}
+
+Endereco::estado --> Estado
+Pessoa --> Endereco
+Pessoa --> Contato
+Pessoa <|-- PessoaFisica #line.bold; : extends
+PessoaFisica <|-- Condutor #line.bold; : extends
+
+
+Condutor::veiculos --> Veiculo
+Veiculo::tipo --> TipoVeiculo
+
+
+Cartao::tipo --> TipoCarto
+Cartao::pessoa --> PessoaFisica
+Pagamento::pix --> Pix
+Pagamento::cartao --> Cartao
+
+Movimentacao::tipo --> TipoMovimentacao
+Movimentacao::pagamento --> Pagamento
+Movimentacao::condutor --> Condutor
+Movimentacao::veiculos --> Veiculo
+
+@enduml
