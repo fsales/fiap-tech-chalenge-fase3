@@ -4,10 +4,30 @@ spring:
     description: @project.version@
     version: @project.description@
 
+  data:
+    mongodb:
+      username: park_tech
+      password: park_tech
+      port: 27017
+      host: 127.0.0.1
+      authentication-database: admin
+      database: park_tech
+
+  docker:
+    compose:
+      enabled: false
+
+  profiles:
+    active: ${PARK_TECH_PROFILE_ENVIRONMENT:}
 
 logging:
   pattern:
     console: "%d{ABSOLUTE_MICROS} [%-5level] [%t] %c{1} - %msg%n"
+  level:
+    br:
+      com:
+        fsales: info
+
 management:
   endpoints:
     web:
