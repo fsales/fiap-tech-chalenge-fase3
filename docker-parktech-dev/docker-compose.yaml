@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+
+  mongo:
+    container_name: mongo-park-tech-dev
+    image: mongo
+    restart: always
+    volumes:
+      - mongodb_dev:/data/db
+    env_file:
+      - mongo-config/.env-mongodb
+    command: [--auth]
+    ports:
+      - 27017:27017
+    networks:
+      - spring-docker-compose-dev
+
+  mongo-express:
+    container_name: mongo-express-park-tech-dev
+    image: mongo-express
+    restart: always
+    depends_on:
+      - mongo
+    env_file:
+      - mongo-config/.env-mongoexpress
+    ports:
+      - 8081:8081
+    networks:
+      - spring-docker-compose-dev
+
+volumes:
+  mongodb_dev:
+
+networks:
+  spring-docker-compose-dev:

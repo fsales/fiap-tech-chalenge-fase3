@@ -6,12 +6,12 @@ spring:
 
   data:
     mongodb:
-      username: park_tech
-      password: park_tech
-      port: 27017
-      host: 127.0.0.1
-      authentication-database: admin
-      database: park_tech
+      host: ${PARK_TECH_MONGODB_HOST:}
+      port: ${PARK_TECH_MONGODB_PORT:27017}
+      database: ${PARK_TECH_MONGODB_DATABASE:}
+      username: ${PARK_TECH_MONGODB_USERNAME:}
+      password: ${PARK_TECH_MONGODB_PASSWORD:}
+      authentication-database : ${PARK_TECH_MONGODB_AUTHENTICATION_DATABASE:}
 
   docker:
     compose:
@@ -27,6 +27,12 @@ logging:
     br:
       com:
         fsales: info
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: debug
 
 management:
   endpoints:
