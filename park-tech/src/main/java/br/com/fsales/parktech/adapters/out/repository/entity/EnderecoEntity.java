@@ -1,21 +1,37 @@
 package br.com.fsales.parktech.adapters.out.repository.entity;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import org.springframework.data.mongodb.core.index.Indexed;
+
 public class EnderecoEntity {
 
+	@NotBlank
 	private String rua;
 
+	@NotBlank
 	private String logradouro;
 
+	@NotNull
 	private Integer numero;
 
+	@NotBlank
 	private String complemento;
 
+	@NotBlank
 	private String bairro;
 
+	@NotBlank
 	private String cidade;
 
+	@Pattern(regexp = "[0-9]{8}")
+	@NotBlank
 	private String cep;
 
+	@Size(min = 2, max = 2)
+	@NotBlank
 	private String uf;
 
 	public EnderecoEntity() {

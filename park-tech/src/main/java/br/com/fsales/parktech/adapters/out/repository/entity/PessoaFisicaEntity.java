@@ -1,16 +1,28 @@
 package br.com.fsales.parktech.adapters.out.repository.entity;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.mongodb.core.index.Indexed;
+
+import java.time.LocalDate;
+
 public sealed abstract class PessoaFisicaEntity extends PessoaEntity permits CondutorEntity {
 
+	@Indexed(unique = true)
+	@NotBlank
 	protected String cpf;
+
+	@NotBlank
+	protected LocalDate dataNascimento;
 
 	public PessoaFisicaEntity() {
 		super();
 	}
 
-	public PessoaFisicaEntity(String nome, ContatoEntity contatoEntity, EnderecoEntity enderecoEntity, String cpf) {
+	public PessoaFisicaEntity(String nome, LocalDate dataNascimento, ContatoEntity contatoEntity, EnderecoEntity enderecoEntity, String cpf) {
 		super(nome, contatoEntity, enderecoEntity);
 		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String cpf() {
@@ -22,14 +34,25 @@ public sealed abstract class PessoaFisicaEntity extends PessoaEntity permits Con
 		return this;
 	}
 
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public PessoaFisicaEntity setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+		return this;
+	}
 }
 
 abstract sealed class PessoaEntity permits PessoaFisicaEntity {
 
+	@NotBlank
 	protected String nome;
 
+	@NotNull
 	protected ContatoEntity contatoEntity;
 
+	@NotNull
 	protected EnderecoEntity enderecoEntity;
 
 	public PessoaEntity() {

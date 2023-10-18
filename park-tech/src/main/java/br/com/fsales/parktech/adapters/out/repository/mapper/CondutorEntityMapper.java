@@ -23,7 +23,7 @@ public interface CondutorEntityMapper {
 				condutor.endereco().numero(), condutor.endereco().complemento(), condutor.endereco().bairro(),
 				condutor.endereco().cidade(), condutor.endereco().cep(), condutor.endereco().uf());
 
-		return new CondutorEntity(condutor.nome(), contatoEntity, enderecoEntity, condutor.cpf(),
+		return new CondutorEntity(condutor.nome(), condutor.getDataNascimento(), contatoEntity, enderecoEntity, condutor.cpf(),
 				condutor.numeroHabilitacao());
 	}
 

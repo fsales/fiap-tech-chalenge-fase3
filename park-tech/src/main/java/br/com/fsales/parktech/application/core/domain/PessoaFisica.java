@@ -1,5 +1,7 @@
 package br.com.fsales.parktech.application.core.domain;
 
+import java.time.LocalDate;
+
 public sealed abstract class PessoaFisica extends Pessoa permits Condutor {
 
 	protected String cpf;
@@ -8,8 +10,8 @@ public sealed abstract class PessoaFisica extends Pessoa permits Condutor {
 		super();
 	}
 
-	public PessoaFisica(String nome, Contato contato, Endereco endereco, String cpf) {
-		super(nome, contato, endereco);
+	public PessoaFisica(String nome, LocalDate dataNascimento, Contato contato, Endereco endereco, String cpf) {
+		super(nome,dataNascimento , contato, endereco);
 		this.cpf = cpf;
 	}
 
@@ -28,6 +30,7 @@ abstract sealed class Pessoa permits PessoaFisica {
 
 	protected String nome;
 
+	protected LocalDate dataNascimento;
 	protected Contato contato;
 
 	protected Endereco endereco;
@@ -36,10 +39,11 @@ abstract sealed class Pessoa permits PessoaFisica {
 		super();
 	}
 
-	public Pessoa(String nome, Contato contato, Endereco endereco) {
+	public Pessoa(String nome, LocalDate dataNascimento, Contato contato, Endereco endereco) {
 		this.nome = nome;
 		this.contato = contato;
 		this.endereco = endereco;
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String nome() {
@@ -69,4 +73,12 @@ abstract sealed class Pessoa permits PessoaFisica {
 		return this;
 	}
 
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public Pessoa setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+		return this;
+	}
 }

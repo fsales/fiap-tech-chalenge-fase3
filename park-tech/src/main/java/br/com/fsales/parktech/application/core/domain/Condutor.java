@@ -1,5 +1,7 @@
 package br.com.fsales.parktech.application.core.domain;
 
+import java.time.LocalDate;
+
 public final class Condutor extends PessoaFisica {
 
 	private String numeroHabilitacao;
@@ -8,8 +10,8 @@ public final class Condutor extends PessoaFisica {
 		super();
 	}
 
-	public Condutor(String nome, Contato contato, Endereco endereco, String cpf, String numeroHabilitacao) {
-		super(nome, contato, endereco, cpf);
+	public Condutor(String nome, LocalDate dataNascimento, Contato contato, Endereco endereco, String cpf, String numeroHabilitacao) {
+		super(nome, dataNascimento, contato, endereco, cpf);
 		this.numeroHabilitacao = numeroHabilitacao;
 	}
 

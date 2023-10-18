@@ -6,12 +6,13 @@ spring:
 
   data:
     mongodb:
-      host: ${PARK_TECH_MONGODB_HOST:}
+      host: ${PARK_TECH_MONGODB_HOST}
       port: ${PARK_TECH_MONGODB_PORT:27017}
-      database: ${PARK_TECH_MONGODB_DATABASE:}
-      username: ${PARK_TECH_MONGODB_USERNAME:}
-      password: ${PARK_TECH_MONGODB_PASSWORD:}
+      database: ${PARK_TECH_MONGODB_DATABASE}
+      username: ${PARK_TECH_MONGODB_USERNAME}
+      password: ${PARK_TECH_MONGODB_PASSWORD}
       authentication-database : ${PARK_TECH_MONGODB_AUTHENTICATION_DATABASE:}
+      auto-index-creation: true
 
   docker:
     compose:

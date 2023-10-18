@@ -1,9 +1,13 @@
 package br.com.fsales.parktech.adapters.out.repository.entity;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class ContatoEntity {
 
+	@NotBlank
 	private String email;
 
+	@NotBlank
 	private String telefone;
 
 	public ContatoEntity() {
