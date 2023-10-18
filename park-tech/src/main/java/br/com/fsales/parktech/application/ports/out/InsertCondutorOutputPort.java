@@ -6,7 +6,4 @@ public interface InsertCondutorOutputPort {
 
 	void insert(Condutor condutor);
 
-	default void test() {
-	}
-
 }
