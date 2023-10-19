@@ -60,3 +60,6 @@ application:
       description: '@project.description@'
       version: '@project.version@'
 
+  client:
+    endereco:
+      host: https://viacep.com.br/ws

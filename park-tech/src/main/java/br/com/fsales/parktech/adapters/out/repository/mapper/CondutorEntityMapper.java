@@ -25,7 +25,8 @@ public interface CondutorEntityMapper {
 		var contatoEntity = new ContatoEntity(condutor.contato().email(), condutor.contato().telefone());
 		var enderecoEntity = new EnderecoEntity(condutor.endereco().rua(), condutor.endereco().logradouro(),
 				condutor.endereco().numero(), condutor.endereco().complemento(), condutor.endereco().bairro(),
-				condutor.endereco().cidade(), condutor.endereco().cep(), condutor.endereco().uf());
+				condutor.endereco().cidade(), condutor.endereco().cep(), condutor.endereco().estado(),
+				condutor.endereco().uf());
 
 		return new CondutorEntity(condutor.id(), condutor.nome(), condutor.getDataNascimento(), contatoEntity,
 				enderecoEntity, condutor.cpf(),

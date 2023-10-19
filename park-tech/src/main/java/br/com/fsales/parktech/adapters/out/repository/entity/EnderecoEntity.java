@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import org.springframework.data.mongodb.core.index.Indexed;
 
 public class EnderecoEntity {
 
@@ -30,6 +29,9 @@ public class EnderecoEntity {
 	@NotBlank
 	private String cep;
 
+	@NotBlank
+	private String estado;
+
 	@Size(min = 2, max = 2)
 	@NotBlank
 	private String uf;
@@ -39,7 +41,7 @@ public class EnderecoEntity {
 	}
 
 	public EnderecoEntity(String rua, String logradouro, Integer numero, String complemento, String bairro,
-			String cidade, String cep, String uf) {
+			String cidade, String cep, String estado, String uf) {
 		this.rua = rua;
 		this.logradouro = logradouro;
 		this.numero = numero;
@@ -47,6 +49,7 @@ public class EnderecoEntity {
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.cep = cep;
+		this.estado = estado;
 		this.uf = uf;
 	}
 
@@ -110,6 +113,15 @@ public class EnderecoEntity {
 
 	public EnderecoEntity setCep(String cep) {
 		this.cep = cep;
+		return this;
+	}
+
+	public String estado() {
+		return estado;
+	}
+
+	public EnderecoEntity setEstado(String estado) {
+		this.estado = estado;
 		return this;
 	}
 

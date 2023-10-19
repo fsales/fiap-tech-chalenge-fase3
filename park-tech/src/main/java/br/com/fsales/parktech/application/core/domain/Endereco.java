@@ -1,5 +1,7 @@
 package br.com.fsales.parktech.application.core.domain;
 
+import br.com.fsales.parktech.application.core.domain.enumeration.EstadoEnum;
+
 public class Endereco {
 
 	private String rua;
@@ -95,6 +97,11 @@ public class Endereco {
 	public Endereco setCep(String cep) {
 		this.cep = cep;
 		return this;
+	}
+
+	public String estado() {
+		var estadoEnum = EstadoEnum.getEnum(uf);
+		return estadoEnum == null ? "" : estadoEnum.capital();
 	}
 
 	public String uf() {
