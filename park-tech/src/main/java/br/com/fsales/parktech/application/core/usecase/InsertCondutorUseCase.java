@@ -13,8 +13,8 @@ public class InsertCondutorUseCase implements InsertCondutorInputPort {
 	}
 
 	@Override
-	public void insert(Condutor condutor) {
-		insertCondutorOutputPort.insert(condutor);
+	public Condutor insert(Condutor condutor) {
+		return insertCondutorOutputPort.insert(condutor);
 	}
 
 }

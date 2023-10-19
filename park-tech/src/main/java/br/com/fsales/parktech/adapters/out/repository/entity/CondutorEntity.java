@@ -37,8 +37,8 @@ public final class CondutorEntity extends PessoaFisicaEntity {
 		super();
 	}
 
-	public CondutorEntity(String nome, LocalDate dataNascimento, ContatoEntity contatoEntity, EnderecoEntity enderecoEntity, String cpf,
-						  String id, String numeroHabilitacao) {
+	public CondutorEntity(String id, String nome, LocalDate dataNascimento, ContatoEntity contatoEntity,
+			EnderecoEntity enderecoEntity, String cpf, String numeroHabilitacao) {
 		super(nome, dataNascimento, contatoEntity, enderecoEntity, cpf);
 		this.id = id;
 		this.numeroHabilitacao = numeroHabilitacao;

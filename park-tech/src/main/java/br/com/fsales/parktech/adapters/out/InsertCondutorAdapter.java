@@ -17,11 +17,13 @@ public class InsertCondutorAdapter implements InsertCondutorOutputPort {
 	private final CondutorEntityMapper condutorEntityMapper;
 
 	@Override
-	public void insert(Condutor condutor) {
+	public Condutor insert(Condutor condutor) {
 
 		var condutorEntity = condutorEntityMapper.toCondutorEntity(condutor);
 
-		condutorRepository.save(condutorEntity);
+		condutorEntity = condutorRepository.save(condutorEntity);
+
+		return condutorEntityMapper.toCondutor(condutorEntity);
 	}
 
 }
