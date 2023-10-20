@@ -9,6 +9,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class InsertCondutorConfig {
 
+	/**
+	 * @param insertCondutorAdapter
+	 * @param consultarEnderecoPorCepOutputPort
+	 * @return
+	 */
 	@Bean
 	public InsertCondutorUseCase insertCondutorUseCase(InsertCondutorAdapter insertCondutorAdapter,
 			ConsultarEnderecoPorCepOutputPort consultarEnderecoPorCepOutputPort) {

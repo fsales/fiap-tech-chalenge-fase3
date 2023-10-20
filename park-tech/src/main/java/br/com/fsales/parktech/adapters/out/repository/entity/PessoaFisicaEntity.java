@@ -1,10 +1,11 @@
 package br.com.fsales.parktech.adapters.out.repository.entity;
 
+import java.time.LocalDate;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.mongodb.core.index.Indexed;
-
-import java.time.LocalDate;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 
 public sealed abstract class PessoaFisicaEntity extends PessoaEntity permits CondutorEntity {
 
@@ -47,6 +48,7 @@ public sealed abstract class PessoaFisicaEntity extends PessoaEntity permits Con
 abstract sealed class PessoaEntity permits PessoaFisicaEntity {
 
 	@NotBlank
+	@TextIndexed(weight = 5)
 	protected String nome;
 
 	@NotNull
@@ -57,9 +59,12 @@ abstract sealed class PessoaEntity permits PessoaFisicaEntity {
 
 	public PessoaEntity() {
 		super();
+		this.contatoEntity = new ContatoEntity();
+		this.enderecoEntity = new EnderecoEntity();
 	}
 
 	public PessoaEntity(String nome, ContatoEntity contatoEntity, EnderecoEntity enderecoEntity) {
+		this();
 		this.nome = nome;
 		this.contatoEntity = contatoEntity;
 		this.enderecoEntity = enderecoEntity;

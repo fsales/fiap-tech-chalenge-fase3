@@ -4,6 +4,10 @@ import br.com.fsales.parktech.application.core.domain.Condutor;
 
 public interface InsertCondutorOutputPort {
 
-	Condutor insert(Condutor condutor);
+	/**
+	 * @param condutor
+	 * @return
+	 */
+	Condutor insert(final Condutor condutor);
 
 }

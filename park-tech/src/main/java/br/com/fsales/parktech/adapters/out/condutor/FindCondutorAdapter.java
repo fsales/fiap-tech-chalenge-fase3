@@ -1,13 +1,10 @@
 package br.com.fsales.parktech.adapters.out.condutor;
 
 import br.com.fsales.parktech.adapters.out.repository.CondutorRepository;
-import br.com.fsales.parktech.adapters.out.repository.mapper.CondutorEntityMapper;
+import br.com.fsales.parktech.application.core.domain.Condutor;
+import br.com.fsales.parktech.application.core.domain.paginacao.Page;
 import br.com.fsales.parktech.application.ports.out.FindCondutorOutputPort;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
@@ -17,19 +14,11 @@ public class FindCondutorAdapter implements FindCondutorOutputPort {
 
 	private final CondutorRepository condutorRepository;
 
-	private final CondutorEntityMapper condutorEntityMapper;
+	@Override
+	public Page<Condutor> consultaPaginada(Condutor condutor, int pageNumber, int pageSize) {
 
-	public void ss(int pageNumber, int pageSize) {
+		return condutorRepository.consultaPaginada(condutor, pageNumber, pageSize);
 
-		Pageable paginacao = PageRequest.of(pageNumber, pageSize);
-		var page = condutorRepository.findAll(paginacao);
-
-		var lista = page.getContent();
-		var total = page.getTotalElements();
-
-		Page p = new PageImpl(lista, PageRequest.of(pageNumber, pageSize), total);
-
-		System.out.println(p);
 	}
 
 }

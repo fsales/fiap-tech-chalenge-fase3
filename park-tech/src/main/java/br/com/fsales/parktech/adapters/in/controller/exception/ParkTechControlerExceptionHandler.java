@@ -28,6 +28,10 @@ public class ParkTechControlerExceptionHandler extends ResponseEntityExceptionHa
 		});
 	}
 
+	/**
+	 * @param ex
+	 * @return
+	 */
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<ValidationErrorResponse> handleGeneralExceptions(Exception ex) {
 		var statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -39,6 +43,10 @@ public class ParkTechControlerExceptionHandler extends ResponseEntityExceptionHa
 		return new ResponseEntity<>(error, new HttpHeaders(), statusCode);
 	}
 
+	/**
+	 * @param ex
+	 * @return
+	 */
 	@ExceptionHandler(RuntimeException.class)
 	public final ResponseEntity<ValidationErrorResponse> handleRuntimeExceptions(RuntimeException ex) {
 
@@ -53,6 +61,10 @@ public class ParkTechControlerExceptionHandler extends ResponseEntityExceptionHa
 		return new ResponseEntity<>(error, new HttpHeaders(), statusCode);
 	}
 
+	/**
+	 * @param e
+	 * @return
+	 */
 	@ExceptionHandler(ConstraintViolationException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
@@ -65,6 +77,13 @@ public class ParkTechControlerExceptionHandler extends ResponseEntityExceptionHa
 		return error;
 	}
 
+	/**
+	 * @param e
+	 * @param headers
+	 * @param status
+	 * @param request
+	 * @return
+	 */
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e,
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {

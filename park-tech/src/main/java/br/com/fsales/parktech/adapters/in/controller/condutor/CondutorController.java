@@ -4,13 +4,15 @@ import br.com.fsales.parktech.adapters.in.controller.condutor.mapper.CondutorMap
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.CondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.ListarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.response.CondutorResponse;
-import br.com.fsales.parktech.adapters.out.condutor.FindCondutorAdapter;
 import br.com.fsales.parktech.application.ports.in.FindCondutorByIdInputPort;
+import br.com.fsales.parktech.application.ports.in.FindCondutorInputPort;
 import br.com.fsales.parktech.application.ports.in.InsertCondutorInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +35,7 @@ public class CondutorController {
 
 	private final FindCondutorByIdInputPort findCondutorByIdInputPort;
 
-	// private final FindCondutorInputPort findCondutorInputPort;
-	private final FindCondutorAdapter findCondutorAdapter;
+	private final FindCondutorInputPort findCondutorInputPort;
 
 	private final CondutorMapper condutorMapper;
 
@@ -54,6 +55,8 @@ public class CondutorController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<CondutorResponse> detalhar(@PathVariable String id) {
+		log.debug("detalhar dados do condutor: {}", id);
+
 		var condutor = findCondutorByIdInputPort.find(id);
 
 		return ResponseEntity.ok(condutorMapper.toCondutorResponse(condutor));
@@ -62,10 +65,18 @@ public class CondutorController {
 	@GetMapping
 	public ResponseEntity<Page<CondutorResponse>> listarTodos(ListarCondutorRequest condutorRequest,
 			@PageableDefault(sort = { "nome" }) Pageable pageable) {
+		log.debug("litar dados do condutor: {}", condutorRequest);
 
-		// findCondutorInputPort.consultaPaginada(condutorRequest, pageable);
-		findCondutorAdapter.ss(pageable.getPageNumber(), pageable.getPageSize());
-		return ResponseEntity.ok(Page.empty());
+		var condutor = condutorMapper.toCondutor(condutorRequest);
+
+		var page = findCondutorInputPort.consultaPaginada(condutor, pageable.getPageNumber(), pageable.getPageSize())
+			.map(condutorMapper::toCondutorResponse);
+
+		var total = page.totalElements();
+		var pageSize = pageable.getPageSize();
+		var pageNumber = pageable.getPageNumber();
+
+		return ResponseEntity.ok(new PageImpl<>(page.list(), PageRequest.of(pageNumber, pageSize), total));
 	}
 
 }

@@ -8,6 +8,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FindCondutorByIdConfig {
 
+	/**
+	 * @param findCondutorByIdAdapter
+	 * @return
+	 */
 	@Bean
 	public FindCondutorByIdUseCase findCondutorByIdUseCase(FindCondutorByIdAdapter findCondutorByIdAdapter) {
 		return new FindCondutorByIdUseCase(findCondutorByIdAdapter);

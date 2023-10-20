@@ -4,6 +4,10 @@ import br.com.fsales.parktech.application.core.domain.Endereco;
 
 public interface ConsultarEnderecoPorCepOutputPort {
 
-	Endereco consultaPorCep(String cep);
+	/**
+	 * @param cep
+	 * @return
+	 */
+	Endereco consultaPorCep(final String cep);
 
 }
