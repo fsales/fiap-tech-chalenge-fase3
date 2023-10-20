@@ -4,8 +4,8 @@ import br.com.fsales.parktech.adapters.in.controller.condutor.mapper.CondutorMap
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.CondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.ListarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.response.CondutorResponse;
+import br.com.fsales.parktech.adapters.out.condutor.FindCondutorAdapter;
 import br.com.fsales.parktech.application.ports.in.FindCondutorByIdInputPort;
-import br.com.fsales.parktech.application.ports.in.FindCondutorInputPort;
 import br.com.fsales.parktech.application.ports.in.InsertCondutorInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,8 @@ public class CondutorController {
 
 	private final FindCondutorByIdInputPort findCondutorByIdInputPort;
 
-	private final FindCondutorInputPort findCondutorInputPort;
+	// private final FindCondutorInputPort findCondutorInputPort;
+	private final FindCondutorAdapter findCondutorAdapter;
 
 	private final CondutorMapper condutorMapper;
 
@@ -62,7 +63,8 @@ public class CondutorController {
 	public ResponseEntity<Page<CondutorResponse>> listarTodos(ListarCondutorRequest condutorRequest,
 			@PageableDefault(sort = { "nome" }) Pageable pageable) {
 
-		findCondutorInputPort.consultaPaginada(condutorRequest, pageable);
+		// findCondutorInputPort.consultaPaginada(condutorRequest, pageable);
+		findCondutorAdapter.ss(pageable.getPageNumber(), pageable.getPageSize());
 		return ResponseEntity.ok(Page.empty());
 	}
 
