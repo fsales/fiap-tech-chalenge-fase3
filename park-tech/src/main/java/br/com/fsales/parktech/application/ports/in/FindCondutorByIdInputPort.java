@@ -2,8 +2,8 @@ package br.com.fsales.parktech.application.ports.in;
 
 import br.com.fsales.parktech.application.core.domain.Condutor;
 
-public interface InsertCondutorInputPort {
+public interface FindCondutorByIdInputPort {
 
-	Condutor insert(final Condutor condutor);
+	Condutor find(final String id);
 
 }
