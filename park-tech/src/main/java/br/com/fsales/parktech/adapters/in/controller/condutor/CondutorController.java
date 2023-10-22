@@ -2,11 +2,13 @@ package br.com.fsales.parktech.adapters.in.controller.condutor;
 
 import br.com.fsales.parktech.adapters.in.controller.condutor.mapper.CondutorMapper;
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.CondutorRequest;
+import br.com.fsales.parktech.adapters.in.controller.condutor.request.DadosAtualizarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.ListarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.response.CondutorResponse;
 import br.com.fsales.parktech.application.ports.in.FindCondutorByIdInputPort;
 import br.com.fsales.parktech.application.ports.in.FindCondutorInputPort;
 import br.com.fsales.parktech.application.ports.in.InsertCondutorInputPort;
+import br.com.fsales.parktech.application.ports.in.UpdateCondutorInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -19,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +35,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class CondutorController {
 
 	private final InsertCondutorInputPort insertCondutorInputPort;
+
+	private final UpdateCondutorInputPort updateCondutorInputPort;
 
 	private final FindCondutorByIdInputPort findCondutorByIdInputPort;
 
@@ -51,6 +56,16 @@ public class CondutorController {
 		var uri = uriComponentsBuilder.path("/condutores/{id}").buildAndExpand(condutorResponse.id()).toUri();
 
 		return ResponseEntity.created(uri).body(condutorResponse);
+	}
+
+	@PutMapping
+	public ResponseEntity<CondutorResponse> atualizar(
+			@Valid @RequestBody DadosAtualizarCondutorRequest condutorRequest) {
+		log.debug("Alterando os dados do condutor: {}", condutorRequest);
+
+		var condutor = condutorMapper.toCondutor(condutorRequest);
+		var condutorResponse = condutorMapper.toCondutorResponse(updateCondutorInputPort.update(condutor));
+		return ResponseEntity.ok(condutorResponse);
 	}
 
 	@GetMapping("/{id}")

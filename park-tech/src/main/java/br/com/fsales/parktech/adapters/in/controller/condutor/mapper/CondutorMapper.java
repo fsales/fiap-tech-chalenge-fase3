@@ -1,6 +1,7 @@
 package br.com.fsales.parktech.adapters.in.controller.condutor.mapper;
 
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.CondutorRequest;
+import br.com.fsales.parktech.adapters.in.controller.condutor.request.DadosAtualizarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.ListarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.response.CondutorResponse;
 import br.com.fsales.parktech.application.core.domain.Condutor;
@@ -18,6 +19,8 @@ public interface CondutorMapper {
 	 * @return
 	 */
 	Condutor toCondutor(CondutorRequest condutorRequest);
+
+	Condutor toCondutor(DadosAtualizarCondutorRequest condutorRequest);
 
 	/**
 	 * @param condutor
