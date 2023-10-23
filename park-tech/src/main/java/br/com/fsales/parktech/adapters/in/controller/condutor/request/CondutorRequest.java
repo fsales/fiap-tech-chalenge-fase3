@@ -34,9 +34,7 @@ public record CondutorRequest(@NotBlank String nome,
 
 			@NotBlank String bairro,
 			@NotBlank @Pattern(regexp = "[0-9]{8}",
-					message = "O CEP deve conter somente número com 8 posições") String cep,
-
-			@Size(min = 2, max = 2) @NotBlank String uf) {
+					message = "O CEP deve conter somente número com 8 posições") String cep) {
 	}
 
 }
