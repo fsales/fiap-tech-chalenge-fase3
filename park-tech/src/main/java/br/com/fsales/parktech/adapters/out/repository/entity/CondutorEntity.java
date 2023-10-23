@@ -14,9 +14,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "condutores")
-@CompoundIndexes({
-		@CompoundIndex(name = "nome_cpf", def = "{'nome': 1, 'cpf': 1}")
-})
+@CompoundIndexes({ @CompoundIndex(name = "nome_cpf", def = "{'nome': 1, 'cpf': 1}") })
 public final class CondutorEntity extends PessoaFisicaEntity {
 
 	@Id
@@ -44,8 +42,8 @@ public final class CondutorEntity extends PessoaFisicaEntity {
 		this.numeroHabilitacao = numeroHabilitacao;
 	}
 
-	public CondutorEntity(String nome, LocalDate dataNascimento, ContatoEntity contatoEntity, EnderecoEntity enderecoEntity, String cpf,
-			String numeroHabilitacao) {
+	public CondutorEntity(String nome, LocalDate dataNascimento, ContatoEntity contatoEntity,
+			EnderecoEntity enderecoEntity, String cpf, String numeroHabilitacao) {
 		super(nome, dataNascimento, contatoEntity, enderecoEntity, cpf);
 		this.numeroHabilitacao = numeroHabilitacao;
 	}
@@ -83,6 +81,61 @@ public final class CondutorEntity extends PessoaFisicaEntity {
 
 	public CondutorEntity setLastModifiedDate(LocalDateTime lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
+		return this;
+	}
+
+	@Override
+	public String nome() {
+		return nome;
+	}
+
+	@Override
+	public CondutorEntity setNome(String nome) {
+		this.nome = nome;
+		return this;
+	}
+
+	@Override
+	public ContatoEntity contato() {
+		return contatoEntity;
+	}
+
+	@Override
+	public CondutorEntity setContato(ContatoEntity contatoEntity) {
+		this.contatoEntity = contatoEntity;
+		return this;
+	}
+
+	@Override
+	public EnderecoEntity endereco() {
+		return enderecoEntity;
+	}
+
+	@Override
+	public CondutorEntity setEndereco(EnderecoEntity enderecoEntity) {
+		this.enderecoEntity = enderecoEntity;
+		return this;
+	}
+
+	@Override
+	public String cpf() {
+		return cpf;
+	}
+
+	@Override
+	public CondutorEntity setCpf(String cpf) {
+		this.cpf = cpf;
+		return this;
+	}
+
+	@Override
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	@Override
+	public CondutorEntity setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 		return this;
 	}
 

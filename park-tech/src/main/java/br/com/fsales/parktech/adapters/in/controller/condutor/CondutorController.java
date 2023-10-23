@@ -5,6 +5,7 @@ import br.com.fsales.parktech.adapters.in.controller.condutor.request.CondutorRe
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.DadosAtualizarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.ListarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.response.CondutorResponse;
+import br.com.fsales.parktech.application.ports.in.DeleteCondutorInputPort;
 import br.com.fsales.parktech.application.ports.in.FindCondutorByIdInputPort;
 import br.com.fsales.parktech.application.ports.in.FindCondutorInputPort;
 import br.com.fsales.parktech.application.ports.in.InsertCondutorInputPort;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +43,8 @@ public class CondutorController {
 	private final FindCondutorByIdInputPort findCondutorByIdInputPort;
 
 	private final FindCondutorInputPort findCondutorInputPort;
+
+	private final DeleteCondutorInputPort deleteCondutorInputPort;
 
 	private final CondutorMapper condutorMapper;
 
@@ -66,6 +70,14 @@ public class CondutorController {
 		var condutor = condutorMapper.toCondutor(condutorRequest);
 		var condutorResponse = condutorMapper.toCondutorResponse(updateCondutorInputPort.update(condutor));
 		return ResponseEntity.ok(condutorResponse);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable String id) {
+		log.debug("Deletando os dados do condutor: {}", id);
+
+		deleteCondutorInputPort.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping("/{id}")

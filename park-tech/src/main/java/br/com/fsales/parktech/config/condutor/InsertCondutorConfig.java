@@ -1,8 +1,8 @@
 package br.com.fsales.parktech.config.condutor;
 
-import br.com.fsales.parktech.adapters.out.condutor.InsertCondutorAdapter;
 import br.com.fsales.parktech.application.core.usecase.condutor.InsertCondutorUseCase;
 import br.com.fsales.parktech.application.ports.out.ConsultarEnderecoPorCepOutputPort;
+import br.com.fsales.parktech.application.ports.out.InsertCondutorOutputPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,14 +10,14 @@ import org.springframework.context.annotation.Configuration;
 public class InsertCondutorConfig {
 
 	/**
-	 * @param insertCondutorAdapter
+	 * @param insertCondutorOutputPort
 	 * @param consultarEnderecoPorCepOutputPort
 	 * @return
 	 */
 	@Bean
-	public InsertCondutorUseCase insertCondutorUseCase(InsertCondutorAdapter insertCondutorAdapter,
+	public InsertCondutorUseCase insertCondutorUseCase(InsertCondutorOutputPort insertCondutorOutputPort,
 			ConsultarEnderecoPorCepOutputPort consultarEnderecoPorCepOutputPort) {
-		return new InsertCondutorUseCase(insertCondutorAdapter, consultarEnderecoPorCepOutputPort);
+		return new InsertCondutorUseCase(insertCondutorOutputPort, consultarEnderecoPorCepOutputPort);
 	}
 
 }

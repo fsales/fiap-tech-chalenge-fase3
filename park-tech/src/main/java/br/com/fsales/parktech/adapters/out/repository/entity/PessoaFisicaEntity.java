@@ -18,29 +18,19 @@ public sealed abstract class PessoaFisicaEntity extends PessoaEntity permits Con
 		super();
 	}
 
-	public PessoaFisicaEntity(String nome, LocalDate dataNascimento, ContatoEntity contatoEntity, EnderecoEntity enderecoEntity, String cpf) {
+	public PessoaFisicaEntity(String nome, LocalDate dataNascimento, ContatoEntity contatoEntity,
+			EnderecoEntity enderecoEntity, String cpf) {
 		super(nome, contatoEntity, enderecoEntity);
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String cpf() {
-		return cpf;
-	}
+	public abstract String cpf();
 
-	public PessoaFisicaEntity setCpf(String cpf) {
-		this.cpf = cpf;
-		return this;
-	}
+	public abstract PessoaFisicaEntity setCpf(String cpf);
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
+	public abstract LocalDate getDataNascimento();
 
-	public PessoaFisicaEntity setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-		return this;
-	}
+	public abstract PessoaFisicaEntity setDataNascimento(LocalDate dataNascimento);
+
 }
-
-

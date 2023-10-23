@@ -6,6 +6,7 @@ import br.com.fsales.parktech.application.core.domain.Condutor;
 import br.com.fsales.parktech.application.ports.out.UpdateCondutorOutputPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 
@@ -21,17 +22,19 @@ public class UpdateCondutorAdapter implements UpdateCondutorOutputPort {
 	 * @return
 	 */
 	@Override
+	@Transactional
 	public Condutor update(Condutor condutor) {
+		Condutor condutorRetorno = new Condutor();
+		var condutorEntityOptional = condutorRepository.findById(condutor.id());
 
-		var condutorEntity = condutorRepository.findById(condutor.id()).get();
+		if (condutorEntityOptional.isPresent()) {
+			var condutorEntity = condutorEntityOptional.get();
+			condutorEntityMapper.updateCondutorEntityFromCondutor(condutor, condutorEntity);
+			condutorRepository.save(condutorEntity);
+			condutorRetorno = condutorEntityMapper.toCondutor(condutorEntity);
+		}
 
-		// condutorEntityMapper.updateCondutorEntityFromCondutor(condutor,
-		// condutorEntity);
-
-		// var condutorEntity =
-		// condutorRepository.save(condutorEntityMapper.toCondutorEntity(condutor));
-
-		return condutorEntityMapper.toCondutor(condutorEntity);
+		return condutorRetorno;
 	}
 
 }

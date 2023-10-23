@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public final class Condutor extends PessoaFisica {
 
 	private String id;
+
 	private String numeroHabilitacao;
 
 	public Condutor() {
@@ -35,4 +36,5 @@ public final class Condutor extends PessoaFisica {
 		this.id = id;
 		return this;
 	}
+
 }

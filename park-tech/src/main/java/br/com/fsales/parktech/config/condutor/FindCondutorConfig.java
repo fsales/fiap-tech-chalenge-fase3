@@ -1,7 +1,7 @@
 package br.com.fsales.parktech.config.condutor;
 
-import br.com.fsales.parktech.adapters.out.condutor.FindCondutorAdapter;
 import br.com.fsales.parktech.application.core.usecase.condutor.FindCondutorUseCase;
+import br.com.fsales.parktech.application.ports.out.FindCondutorOutputPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Configuration;
 public class FindCondutorConfig {
 
 	/**
-	 * @param findCondutorAdapter
+	 * @param findCondutorOutputPort
 	 * @return
 	 */
 	@Bean
-	public FindCondutorUseCase findCondutorUseCase(FindCondutorAdapter findCondutorAdapter) {
-		return new FindCondutorUseCase(findCondutorAdapter);
+	public FindCondutorUseCase findCondutorUseCase(FindCondutorOutputPort findCondutorOutputPort) {
+		return new FindCondutorUseCase(findCondutorOutputPort);
 	}
 
 }

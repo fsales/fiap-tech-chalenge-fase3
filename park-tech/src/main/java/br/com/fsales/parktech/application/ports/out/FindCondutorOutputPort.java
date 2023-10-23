@@ -12,4 +12,5 @@ public interface FindCondutorOutputPort {
 	 * @return
 	 */
 	Page<Condutor> consultaPaginada(final Condutor condutor, final int pageNumber, final int pageSize);
+
 }

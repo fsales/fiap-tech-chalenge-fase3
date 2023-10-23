@@ -11,7 +11,7 @@ public sealed abstract class PessoaFisica extends Pessoa permits Condutor {
 	}
 
 	public PessoaFisica(String nome, LocalDate dataNascimento, Contato contato, Endereco endereco, String cpf) {
-		super(nome,dataNascimento , contato, endereco);
+		super(nome, dataNascimento, contato, endereco);
 		this.cpf = cpf;
 	}
 
@@ -25,4 +25,3 @@ public sealed abstract class PessoaFisica extends Pessoa permits Condutor {
 	}
 
 }
-
