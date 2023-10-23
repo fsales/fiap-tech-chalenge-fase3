@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      uri: ${PARK_TECH_MONGODB_URI}
+      database: ${PARK_TECH_MONGODB_DATABASE}
+
+logging:
+  pattern:
+    console: "%d{ABSOLUTE_MICROS} [%-5level] [%t] %c{1} - %msg%n"
+
+  level:
+    br:
+      com:
+        fsales: debug
