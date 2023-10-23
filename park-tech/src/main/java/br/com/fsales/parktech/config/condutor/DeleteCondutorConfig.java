@@ -14,5 +14,4 @@ public class DeleteCondutorConfig {
 			FindCondutorByIdOutputPort findCondutorByIdOutputPort) {
 		return new DeleteCondutorUseCase(deleteCondutorOutputPort, findCondutorByIdOutputPort);
 	}
-
 }

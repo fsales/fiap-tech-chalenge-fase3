@@ -21,6 +21,15 @@ spring:
   profiles:
     active: ${PARK_TECH_PROFILE_ENVIRONMENT:}
 
+
+springdoc:
+  show-actuator: true
+  api-docs:
+    groups:
+      enabled: true
+
+
+
 logging:
   pattern:
     console: "%d{ABSOLUTE_MICROS} [%-5level] [%t] %c{1} - %msg%n"
