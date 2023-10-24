@@ -3,7 +3,7 @@ package br.com.fsales.parktech.adapters.out.condutor;
 import br.com.fsales.parktech.adapters.out.repository.CondutorRepository;
 import br.com.fsales.parktech.application.core.domain.Condutor;
 import br.com.fsales.parktech.application.core.domain.paginacao.Page;
-import br.com.fsales.parktech.application.ports.out.FindCondutorOutputPort;
+import br.com.fsales.parktech.application.ports.out.condutor.FindCondutorOutputPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

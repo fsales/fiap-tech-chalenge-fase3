@@ -6,11 +6,11 @@ import br.com.fsales.parktech.adapters.in.controller.condutor.request.CondutorRe
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.DadosAtualizarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.ListarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.response.CondutorResponse;
-import br.com.fsales.parktech.application.ports.in.DeleteCondutorInputPort;
-import br.com.fsales.parktech.application.ports.in.FindCondutorByIdInputPort;
-import br.com.fsales.parktech.application.ports.in.FindCondutorInputPort;
-import br.com.fsales.parktech.application.ports.in.InsertCondutorInputPort;
-import br.com.fsales.parktech.application.ports.in.UpdateCondutorInputPort;
+import br.com.fsales.parktech.application.ports.in.condutor.DeleteCondutorInputPort;
+import br.com.fsales.parktech.application.ports.in.condutor.FindCondutorByIdInputPort;
+import br.com.fsales.parktech.application.ports.in.condutor.FindCondutorInputPort;
+import br.com.fsales.parktech.application.ports.in.condutor.InsertCondutorInputPort;
+import br.com.fsales.parktech.application.ports.in.condutor.UpdateCondutorInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

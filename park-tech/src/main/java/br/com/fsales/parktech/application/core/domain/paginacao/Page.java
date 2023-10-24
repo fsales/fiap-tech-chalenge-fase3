@@ -1,10 +1,10 @@
 package br.com.fsales.parktech.application.core.domain.paginacao;
 
+import br.com.fsales.parktech.application.core.domain.funcionalinterface.Mapper;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import br.com.fsales.parktech.application.core.domain.funcionalinterface.Mapper;
 
 public record Page<T>(List<T> list, long totalElements) {
 

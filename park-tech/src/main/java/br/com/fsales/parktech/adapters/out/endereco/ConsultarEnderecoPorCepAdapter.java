@@ -3,7 +3,7 @@ package br.com.fsales.parktech.adapters.out.endereco;
 import br.com.fsales.parktech.adapters.out.client.ConsultarEnderecoPorCepClient;
 import br.com.fsales.parktech.adapters.out.repository.mapper.EnderecoResponseMapper;
 import br.com.fsales.parktech.application.core.domain.Endereco;
-import br.com.fsales.parktech.application.ports.out.ConsultarEnderecoPorCepOutputPort;
+import br.com.fsales.parktech.application.ports.out.condutor.ConsultarEnderecoPorCepOutputPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

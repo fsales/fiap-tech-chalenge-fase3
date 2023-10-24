@@ -1,14 +1,14 @@
 package br.com.fsales.parktech.application.core.usecase.condutor;
 
-import br.com.fsales.parktech.application.ports.in.DeleteCondutorInputPort;
-import br.com.fsales.parktech.application.ports.out.DeleteCondutorOutputPort;
-import br.com.fsales.parktech.application.ports.out.FindCondutorByIdOutputPort;
+import br.com.fsales.parktech.application.ports.in.condutor.DeleteCondutorInputPort;
+import br.com.fsales.parktech.application.ports.out.condutor.DeleteCondutorOutputPort;
+import br.com.fsales.parktech.application.ports.out.condutor.FindCondutorByIdOutputPort;
 
 public class DeleteCondutorUseCase implements DeleteCondutorInputPort {
 
 	private final DeleteCondutorOutputPort deleteCondutorOutputPort;
 
-	private FindCondutorByIdOutputPort findCondutorByIdOutputPort;
+	private final FindCondutorByIdOutputPort findCondutorByIdOutputPort;
 
 	public DeleteCondutorUseCase(DeleteCondutorOutputPort deleteCondutorOutputPort,
 			FindCondutorByIdOutputPort findCondutorByIdOutputPort) {

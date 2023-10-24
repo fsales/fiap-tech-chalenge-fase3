@@ -1,8 +1,8 @@
 package br.com.fsales.parktech.application.core.usecase.condutor;
 
 import br.com.fsales.parktech.application.core.domain.Condutor;
-import br.com.fsales.parktech.application.ports.in.FindCondutorByIdInputPort;
-import br.com.fsales.parktech.application.ports.out.FindCondutorByIdOutputPort;
+import br.com.fsales.parktech.application.ports.in.condutor.FindCondutorByIdInputPort;
+import br.com.fsales.parktech.application.ports.out.condutor.FindCondutorByIdOutputPort;
 
 public class FindCondutorByIdUseCase implements FindCondutorByIdInputPort {
 

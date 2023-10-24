@@ -1,9 +1,9 @@
 package br.com.fsales.parktech.application.core.usecase.condutor;
 
 import br.com.fsales.parktech.application.core.domain.Condutor;
-import br.com.fsales.parktech.application.ports.in.InsertCondutorInputPort;
-import br.com.fsales.parktech.application.ports.out.ConsultarEnderecoPorCepOutputPort;
-import br.com.fsales.parktech.application.ports.out.InsertCondutorOutputPort;
+import br.com.fsales.parktech.application.ports.in.condutor.InsertCondutorInputPort;
+import br.com.fsales.parktech.application.ports.out.condutor.ConsultarEnderecoPorCepOutputPort;
+import br.com.fsales.parktech.application.ports.out.condutor.InsertCondutorOutputPort;
 
 public class InsertCondutorUseCase implements InsertCondutorInputPort {
 
