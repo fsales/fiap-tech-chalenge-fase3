@@ -1,9 +1,9 @@
 package br.com.fsales.parktech.adapters.out.repository.entity;
 
-import java.time.LocalDate;
-
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.mongodb.core.index.Indexed;
+
+import java.time.LocalDate;
 
 public sealed abstract class PessoaFisicaEntity extends PessoaEntity permits CondutorEntity {
 

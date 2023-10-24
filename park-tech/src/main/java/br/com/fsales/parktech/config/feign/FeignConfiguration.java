@@ -1,11 +1,11 @@
 package br.com.fsales.parktech.config.feign;
 
-import java.util.concurrent.TimeUnit;
-
 import feign.Retryer;
 import org.springframework.cloud.openfeign.FeignClientsConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+
+import java.util.concurrent.TimeUnit;
 
 @Import(FeignClientsConfiguration.class)
 public class FeignConfiguration {
