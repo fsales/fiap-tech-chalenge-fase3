@@ -16,58 +16,58 @@ import org.mapstruct.factory.Mappers;
 @DecoratedWith(CondutorEntityMapperDecorator.class)
 public interface CondutorEntityMapper {
 
-	CondutorEntityMapper INSTANCE = Mappers.getMapper(CondutorEntityMapper.class);
+    CondutorEntityMapper INSTANCE = Mappers.getMapper(CondutorEntityMapper.class);
 
-	/**
-	 * @param condutor
-	 * @return
-	 */
-	CondutorEntity toCondutorEntity(Condutor condutor);
+    /**
+     * @param condutor
+     * @return
+     */
+    CondutorEntity toCondutorEntity(Condutor condutor);
 
-	/**
-	 * @param condutorEntity
-	 * @return
-	 */
-	Condutor toCondutor(CondutorEntity condutorEntity);
+    /**
+     * @param condutorEntity
+     * @return
+     */
+    Condutor toCondutor(CondutorEntity condutorEntity);
 
-	/**
-	 * @param condutor
-	 * @param condutorEntity
-	 */
-	void updateCondutorEntityFromCondutor(Condutor condutor, @MappingTarget CondutorEntity condutorEntity);
+    /**
+     * @param condutor
+     * @param condutorEntity
+     */
+    void updateCondutorEntityFromCondutor(Condutor condutor, @MappingTarget CondutorEntity condutorEntity);
 
-	/**
-	 * @param condutor
-	 * @return
-	 */
-	@ObjectFactory
-	default CondutorEntity createCondutorEntity(Condutor condutor) {
+    /**
+     * @param condutor
+     * @return
+     */
+    @ObjectFactory
+    default CondutorEntity createCondutorEntity(Condutor condutor) {
 
-		var contatoEntity = new ContatoEntity(condutor.contato().email(), condutor.contato().telefone());
-		var enderecoEntity = new EnderecoEntity(condutor.endereco().rua(), condutor.endereco().logradouro(),
-				condutor.endereco().numero(), condutor.endereco().complemento(), condutor.endereco().bairro(),
-				condutor.endereco().cidade(), condutor.endereco().cep(), condutor.endereco().estado(),
-				condutor.endereco().uf());
+        var contatoEntity = new ContatoEntity(condutor.contato().email(), condutor.contato().telefone());
+        var enderecoEntity = new EnderecoEntity(condutor.endereco().rua(), condutor.endereco().logradouro(),
+                condutor.endereco().numero(), condutor.endereco().complemento(), condutor.endereco().bairro(),
+                condutor.endereco().cidade(), condutor.endereco().cep(), condutor.endereco().estado(),
+                condutor.endereco().uf());
 
-		return new CondutorEntity(condutor.id(), condutor.nome(), condutor.getDataNascimento(), contatoEntity,
-				enderecoEntity, condutor.cpf(), condutor.numeroHabilitacao());
-	}
+        return new CondutorEntity(condutor.id(), condutor.nome(), condutor.getDataNascimento(), contatoEntity,
+                enderecoEntity, condutor.cpf(), condutor.numeroHabilitacao());
+    }
 
-	/**
-	 * @param condutorEntity
-	 * @return
-	 */
-	@ObjectFactory
-	default Condutor createCondutor(CondutorEntity condutorEntity) {
+    /**
+     * @param condutorEntity
+     * @return
+     */
+    @ObjectFactory
+    default Condutor createCondutor(CondutorEntity condutorEntity) {
 
-		var contato = new Contato(condutorEntity.contato().email(), condutorEntity.contato().telefone());
-		var endereco = new Endereco(condutorEntity.endereco().rua(), condutorEntity.endereco().logradouro(),
-				condutorEntity.endereco().numero(), condutorEntity.endereco().complemento(),
-				condutorEntity.endereco().bairro(), condutorEntity.endereco().cidade(), condutorEntity.endereco().cep(),
-				condutorEntity.endereco().uf());
+        var contato = new Contato(condutorEntity.contato().email(), condutorEntity.contato().telefone());
+        var endereco = new Endereco(condutorEntity.endereco().rua(), condutorEntity.endereco().logradouro(),
+                condutorEntity.endereco().numero(), condutorEntity.endereco().complemento(),
+                condutorEntity.endereco().bairro(), condutorEntity.endereco().cidade(), condutorEntity.endereco().cep(),
+                condutorEntity.endereco().uf());
 
-		return new Condutor(condutorEntity.id(), condutorEntity.nome(), condutorEntity.getDataNascimento(), contato,
-				endereco, condutorEntity.cpf(), condutorEntity.numeroHabilitacao());
-	}
+        return new Condutor(condutorEntity.id(), condutorEntity.nome(), condutorEntity.getDataNascimento(), contato,
+                endereco, condutorEntity.cpf(), condutorEntity.numeroHabilitacao());
+    }
 
 }

@@ -14,15 +14,15 @@ import java.util.Optional;
 @Component
 public class FindCondutorByIdAdapter implements FindCondutorByIdOutputPort {
 
-	private final CondutorRepository condutorRepository;
+    private final CondutorRepository condutorRepository;
 
-	private final CondutorEntityMapper condutorEntityMapper;
+    private final CondutorEntityMapper condutorEntityMapper;
 
-	@Override
-	public Optional<Condutor> find(String id) {
-		var condutorEntity = condutorRepository.findById(id);
+    @Override
+    public Optional<Condutor> find(String id) {
+        var condutorEntity = condutorRepository.findById(id);
 
-		return condutorEntity.map(condutorEntityMapper::toCondutor);
-	}
+        return condutorEntity.map(condutorEntityMapper::toCondutor);
+    }
 
 }

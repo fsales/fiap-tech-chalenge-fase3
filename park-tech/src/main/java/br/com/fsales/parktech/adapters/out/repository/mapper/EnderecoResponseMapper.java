@@ -9,9 +9,9 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface EnderecoResponseMapper {
 
-	EnderecoResponseMapper INSTANCE = Mappers.getMapper(EnderecoResponseMapper.class);
+    EnderecoResponseMapper INSTANCE = Mappers.getMapper(EnderecoResponseMapper.class);
 
-	@Mapping(target = "cidade", source = "localidade")
-	Endereco toEndereco(EnderecoResponse enderecoResponse);
+    @Mapping(target = "cidade", source = "localidade")
+    Endereco toEndereco(EnderecoResponse enderecoResponse);
 
 }

@@ -14,15 +14,15 @@ import java.util.Optional;
 @Component
 public class FindVeiculoByIdAdapter implements FindVeiculoByIdOutputPort {
 
-	private final VeiculoRepository veiculoRepository;
+    private final VeiculoRepository veiculoRepository;
 
-	private final VeiculoEntityMapper veiculoEntityMapper;
+    private final VeiculoEntityMapper veiculoEntityMapper;
 
-	@Override
-	public Optional<Veiculo> find(String id) {
-		var veiculoEntity = veiculoRepository.findById(id);
+    @Override
+    public Optional<Veiculo> find(String id) {
+        var veiculoEntity = veiculoRepository.findById(id);
 
-		return veiculoEntity.map(veiculoEntityMapper::toVeiculo);
-	}
+        return veiculoEntity.map(veiculoEntityMapper::toVeiculo);
+    }
 
 }

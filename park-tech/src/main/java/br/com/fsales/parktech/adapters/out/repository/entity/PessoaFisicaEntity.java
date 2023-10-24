@@ -5,32 +5,32 @@ import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.time.LocalDate;
 
-public sealed abstract class PessoaFisicaEntity extends PessoaEntity permits CondutorEntity {
+public abstract sealed class PessoaFisicaEntity extends PessoaEntity permits CondutorEntity {
 
-	@Indexed(unique = true)
-	@NotBlank
-	protected String cpf;
+    @Indexed(unique = true)
+    @NotBlank
+    protected String cpf;
 
-	@NotBlank
-	protected LocalDate dataNascimento;
+    @NotBlank
+    protected LocalDate dataNascimento;
 
-	public PessoaFisicaEntity() {
-		super();
-	}
+    public PessoaFisicaEntity() {
+        super();
+    }
 
-	public PessoaFisicaEntity(String nome, LocalDate dataNascimento, ContatoEntity contatoEntity,
-			EnderecoEntity enderecoEntity, String cpf) {
-		super(nome, contatoEntity, enderecoEntity);
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-	}
+    public PessoaFisicaEntity(String nome, LocalDate dataNascimento, ContatoEntity contatoEntity,
+                              EnderecoEntity enderecoEntity, String cpf) {
+        super(nome, contatoEntity, enderecoEntity);
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+    }
 
-	public abstract String cpf();
+    public abstract String cpf();
 
-	public abstract PessoaFisicaEntity setCpf(String cpf);
+    public abstract PessoaFisicaEntity setCpf(String cpf);
 
-	public abstract LocalDate getDataNascimento();
+    public abstract LocalDate getDataNascimento();
 
-	public abstract PessoaFisicaEntity setDataNascimento(LocalDate dataNascimento);
+    public abstract PessoaFisicaEntity setDataNascimento(LocalDate dataNascimento);
 
 }

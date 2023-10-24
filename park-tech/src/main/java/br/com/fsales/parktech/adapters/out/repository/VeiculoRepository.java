@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VeiculoRepository
-		extends MongoRepository<VeiculoEntity, String>, VeiculoRepositoryCustom<VeiculoEntity> {
+        extends MongoRepository<VeiculoEntity, String>, VeiculoRepositoryCustom<VeiculoEntity> {
 
 }

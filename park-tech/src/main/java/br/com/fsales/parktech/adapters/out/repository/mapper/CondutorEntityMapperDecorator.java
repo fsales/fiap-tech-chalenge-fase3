@@ -8,22 +8,22 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public abstract class CondutorEntityMapperDecorator implements CondutorEntityMapper {
 
-	@Override
-	public void updateCondutorEntityFromCondutor(Condutor condutor, @MappingTarget CondutorEntity condutorEntity) {
-		var endereco = condutor.endereco();
-		var contato = condutor.contato();
+    @Override
+    public void updateCondutorEntityFromCondutor(Condutor condutor, @MappingTarget CondutorEntity condutorEntity) {
+        var endereco = condutor.endereco();
+        var contato = condutor.contato();
 
-		condutorEntity.endereco()
-			.setCep(endereco.cep())
-			.setRua(endereco.rua())
-			.setLogradouro(endereco.logradouro())
-			.setNumero(endereco.numero())
-			.setComplemento(endereco.complemento())
-			.setBairro(endereco.bairro())
-			.setCidade(endereco.cidade())
-			.setUf(endereco.uf());
+        condutorEntity.endereco()
+                .setCep(endereco.cep())
+                .setRua(endereco.rua())
+                .setLogradouro(endereco.logradouro())
+                .setNumero(endereco.numero())
+                .setComplemento(endereco.complemento())
+                .setBairro(endereco.bairro())
+                .setCidade(endereco.cidade())
+                .setUf(endereco.uf());
 
-		condutorEntity.contato().setEmail(contato.email()).setTelefone(contato.telefone());
-	}
+        condutorEntity.contato().setEmail(contato.email()).setTelefone(contato.telefone());
+    }
 
 }

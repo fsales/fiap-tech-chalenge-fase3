@@ -17,141 +17,141 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "condutores")
-@CompoundIndexes({ @CompoundIndex(name = "nome_cpf", def = "{'nome': 1, 'cpf': 1}") })
+@CompoundIndexes({@CompoundIndex(name = "nome_cpf", def = "{'nome': 1, 'cpf': 1}")})
 public final class CondutorEntity extends PessoaFisicaEntity {
 
-	@Id
-	private String id;
+    @Id
+    private String id;
 
-	@Size(min = 10, max = 11)
-	@Pattern(regexp = "[0-9]+")
-	@Indexed(unique = true)
-	private String numeroHabilitacao;
+    @Size(min = 10, max = 11)
+    @Pattern(regexp = "[0-9]+")
+    @Indexed(unique = true)
+    private String numeroHabilitacao;
 
-	@DBRef
-	private List<VeiculoEntity> veiculos;
+    @DBRef
+    private final List<VeiculoEntity> veiculos;
 
-	@CreatedDate
-	private LocalDateTime createdDate;
+    @CreatedDate
+    private LocalDateTime createdDate;
 
-	@LastModifiedDate
-	private LocalDateTime lastModifiedDate;
+    @LastModifiedDate
+    private LocalDateTime lastModifiedDate;
 
-	public CondutorEntity() {
-		super();
-		this.veiculos = new ArrayList<>();
-	}
+    public CondutorEntity() {
+        super();
+        this.veiculos = new ArrayList<>();
+    }
 
-	public CondutorEntity(String id, String nome, LocalDate dataNascimento, ContatoEntity contatoEntity,
-			EnderecoEntity enderecoEntity, String cpf, String numeroHabilitacao) {
-		super(nome, dataNascimento, contatoEntity, enderecoEntity, cpf);
-		this.id = id;
-		this.numeroHabilitacao = numeroHabilitacao;
-		this.veiculos = new ArrayList<>();
+    public CondutorEntity(String id, String nome, LocalDate dataNascimento, ContatoEntity contatoEntity,
+                          EnderecoEntity enderecoEntity, String cpf, String numeroHabilitacao) {
+        super(nome, dataNascimento, contatoEntity, enderecoEntity, cpf);
+        this.id = id;
+        this.numeroHabilitacao = numeroHabilitacao;
+        this.veiculos = new ArrayList<>();
 
-	}
+    }
 
-	public CondutorEntity(String nome, LocalDate dataNascimento, ContatoEntity contatoEntity,
-			EnderecoEntity enderecoEntity, String cpf, String numeroHabilitacao) {
-		super(nome, dataNascimento, contatoEntity, enderecoEntity, cpf);
-		this.numeroHabilitacao = numeroHabilitacao;
-		this.veiculos = new ArrayList<>();
-	}
+    public CondutorEntity(String nome, LocalDate dataNascimento, ContatoEntity contatoEntity,
+                          EnderecoEntity enderecoEntity, String cpf, String numeroHabilitacao) {
+        super(nome, dataNascimento, contatoEntity, enderecoEntity, cpf);
+        this.numeroHabilitacao = numeroHabilitacao;
+        this.veiculos = new ArrayList<>();
+    }
 
-	public String id() {
-		return id;
-	}
+    public String id() {
+        return id;
+    }
 
-	public CondutorEntity setId(String id) {
-		this.id = id;
-		return this;
-	}
+    public CondutorEntity setId(String id) {
+        this.id = id;
+        return this;
+    }
 
-	public String numeroHabilitacao() {
-		return numeroHabilitacao;
-	}
+    public String numeroHabilitacao() {
+        return numeroHabilitacao;
+    }
 
-	public CondutorEntity setNumeroHabilitacao(String numeroHabilitacao) {
-		this.numeroHabilitacao = numeroHabilitacao;
-		return this;
-	}
+    public CondutorEntity setNumeroHabilitacao(String numeroHabilitacao) {
+        this.numeroHabilitacao = numeroHabilitacao;
+        return this;
+    }
 
-	public LocalDateTime createdDate() {
-		return createdDate;
-	}
+    public LocalDateTime createdDate() {
+        return createdDate;
+    }
 
-	public CondutorEntity setCreatedDate(LocalDateTime createdDate) {
-		this.createdDate = createdDate;
-		return this;
-	}
+    public CondutorEntity setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+        return this;
+    }
 
-	public LocalDateTime lastModifiedDate() {
-		return lastModifiedDate;
-	}
+    public LocalDateTime lastModifiedDate() {
+        return lastModifiedDate;
+    }
 
-	public CondutorEntity setLastModifiedDate(LocalDateTime lastModifiedDate) {
-		this.lastModifiedDate = lastModifiedDate;
-		return this;
-	}
+    public CondutorEntity setLastModifiedDate(LocalDateTime lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+        return this;
+    }
 
-	@Override
-	public String nome() {
-		return nome;
-	}
+    @Override
+    public String nome() {
+        return nome;
+    }
 
-	@Override
-	public CondutorEntity setNome(String nome) {
-		this.nome = nome;
-		return this;
-	}
+    @Override
+    public CondutorEntity setNome(String nome) {
+        this.nome = nome;
+        return this;
+    }
 
-	@Override
-	public ContatoEntity contato() {
-		return contatoEntity;
-	}
+    @Override
+    public ContatoEntity contato() {
+        return contatoEntity;
+    }
 
-	@Override
-	public CondutorEntity setContato(ContatoEntity contatoEntity) {
-		this.contatoEntity = contatoEntity;
-		return this;
-	}
+    @Override
+    public CondutorEntity setContato(ContatoEntity contatoEntity) {
+        this.contatoEntity = contatoEntity;
+        return this;
+    }
 
-	@Override
-	public EnderecoEntity endereco() {
-		return enderecoEntity;
-	}
+    @Override
+    public EnderecoEntity endereco() {
+        return enderecoEntity;
+    }
 
-	@Override
-	public CondutorEntity setEndereco(EnderecoEntity enderecoEntity) {
-		this.enderecoEntity = enderecoEntity;
-		return this;
-	}
+    @Override
+    public CondutorEntity setEndereco(EnderecoEntity enderecoEntity) {
+        this.enderecoEntity = enderecoEntity;
+        return this;
+    }
 
-	@Override
-	public String cpf() {
-		return cpf;
-	}
+    @Override
+    public String cpf() {
+        return cpf;
+    }
 
-	@Override
-	public CondutorEntity setCpf(String cpf) {
-		this.cpf = cpf;
-		return this;
-	}
+    @Override
+    public CondutorEntity setCpf(String cpf) {
+        this.cpf = cpf;
+        return this;
+    }
 
-	public List<VeiculoEntity> veiculos() {
+    public List<VeiculoEntity> veiculos() {
 
-		return veiculos;
-	}
+        return veiculos;
+    }
 
-	@Override
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
+    @Override
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
 
-	@Override
-	public CondutorEntity setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-		return this;
-	}
+    @Override
+    public CondutorEntity setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+        return this;
+    }
 
 }

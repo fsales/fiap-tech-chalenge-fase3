@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class FindVeiculoAdapter implements FindVeiculoOutputPort {
 
-	private final VeiculoRepository veiculoRepository;
+    private final VeiculoRepository veiculoRepository;
 
-	@Override
-	public Page<Veiculo> consultaPaginada(Veiculo veiculo, int pageNumber, int pageSize) {
+    @Override
+    public Page<Veiculo> consultaPaginada(Veiculo veiculo, int pageNumber, int pageSize) {
 
-		return veiculoRepository.consultaPaginada(veiculo, pageNumber, pageSize);
+        return veiculoRepository.consultaPaginada(veiculo, pageNumber, pageSize);
 
-	}
+    }
 
 }

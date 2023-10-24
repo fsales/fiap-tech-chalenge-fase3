@@ -12,18 +12,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class InsertCondutorAdapter implements InsertCondutorOutputPort {
 
-	private final CondutorRepository condutorRepository;
+    private final CondutorRepository condutorRepository;
 
-	private final CondutorEntityMapper condutorEntityMapper;
+    private final CondutorEntityMapper condutorEntityMapper;
 
-	@Override
-	public Condutor insert(Condutor condutor) {
+    @Override
+    public Condutor insert(Condutor condutor) {
 
-		var condutorEntity = condutorEntityMapper.toCondutorEntity(condutor);
+        var condutorEntity = condutorEntityMapper.toCondutorEntity(condutor);
 
-		condutorEntity = condutorRepository.save(condutorEntity);
+        condutorEntity = condutorRepository.save(condutorEntity);
 
-		return condutorEntityMapper.toCondutor(condutorEntity);
-	}
+        return condutorEntityMapper.toCondutor(condutorEntity);
+    }
 
 }

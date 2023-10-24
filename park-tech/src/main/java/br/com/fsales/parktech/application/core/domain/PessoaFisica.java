@@ -2,7 +2,7 @@ package br.com.fsales.parktech.application.core.domain;
 
 import java.time.LocalDate;
 
-public sealed abstract class PessoaFisica extends Pessoa permits Condutor {
+public abstract sealed class PessoaFisica extends Pessoa permits Condutor {
 
 	protected String cpf;
 
