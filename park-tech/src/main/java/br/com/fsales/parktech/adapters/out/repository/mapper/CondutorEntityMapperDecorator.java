@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
-public abstract class CondutorEntityDecorator implements CondutorEntityMapper {
+public abstract class CondutorEntityMapperDecorator implements CondutorEntityMapper {
 
 	@Override
 	public void updateCondutorEntityFromCondutor(Condutor condutor, @MappingTarget CondutorEntity condutorEntity) {

@@ -1,5 +1,6 @@
 package br.com.fsales.parktech.adapters.in.controller.condutor;
 
+import br.com.fsales.parktech.adapters.in.controller.ParktechResource;
 import br.com.fsales.parktech.adapters.in.controller.condutor.mapper.CondutorMapper;
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.CondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.DadosAtualizarCondutorRequest;
@@ -30,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/condutores")
+@RequestMapping(ParktechResource.CONDUTOR)
 
 @RequiredArgsConstructor
 @Log4j2
@@ -51,6 +52,7 @@ public class CondutorController {
 	@PostMapping
 	public ResponseEntity<CondutorResponse> cadastrar(@RequestBody @Valid CondutorRequest condutorRequest,
 			UriComponentsBuilder uriComponentsBuilder) {
+
 		log.debug("Salvando dados do condutor: {}", condutorRequest);
 
 		var condutor = condutorMapper.toCondutor(condutorRequest);

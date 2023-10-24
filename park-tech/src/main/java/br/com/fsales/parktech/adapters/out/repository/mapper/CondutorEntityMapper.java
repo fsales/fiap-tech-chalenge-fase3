@@ -13,7 +13,7 @@ import org.mapstruct.ObjectFactory;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-@DecoratedWith(CondutorEntityDecorator.class)
+@DecoratedWith(CondutorEntityMapperDecorator.class)
 public interface CondutorEntityMapper {
 
 	CondutorEntityMapper INSTANCE = Mappers.getMapper(CondutorEntityMapper.class);

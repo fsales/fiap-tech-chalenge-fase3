@@ -2,6 +2,8 @@ package br.com.fsales.parktech.adapters.out.repository.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -11,6 +13,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "condutores")
@@ -25,6 +28,9 @@ public final class CondutorEntity extends PessoaFisicaEntity {
 	@Indexed(unique = true)
 	private String numeroHabilitacao;
 
+	@DBRef
+	private List<VeiculoEntity> veiculos;
+
 	@CreatedDate
 	private LocalDateTime createdDate;
 
@@ -33,6 +39,7 @@ public final class CondutorEntity extends PessoaFisicaEntity {
 
 	public CondutorEntity() {
 		super();
+		this.veiculos = new ArrayList<>();
 	}
 
 	public CondutorEntity(String id, String nome, LocalDate dataNascimento, ContatoEntity contatoEntity,
@@ -40,12 +47,15 @@ public final class CondutorEntity extends PessoaFisicaEntity {
 		super(nome, dataNascimento, contatoEntity, enderecoEntity, cpf);
 		this.id = id;
 		this.numeroHabilitacao = numeroHabilitacao;
+		this.veiculos = new ArrayList<>();
+
 	}
 
 	public CondutorEntity(String nome, LocalDate dataNascimento, ContatoEntity contatoEntity,
 			EnderecoEntity enderecoEntity, String cpf, String numeroHabilitacao) {
 		super(nome, dataNascimento, contatoEntity, enderecoEntity, cpf);
 		this.numeroHabilitacao = numeroHabilitacao;
+		this.veiculos = new ArrayList<>();
 	}
 
 	public String id() {
@@ -126,6 +136,11 @@ public final class CondutorEntity extends PessoaFisicaEntity {
 	public CondutorEntity setCpf(String cpf) {
 		this.cpf = cpf;
 		return this;
+	}
+
+	public List<VeiculoEntity> veiculos() {
+
+		return veiculos;
 	}
 
 	@Override

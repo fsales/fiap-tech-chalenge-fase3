@@ -1,6 +1,7 @@
 package br.com.fsales.parktech.adapters.out.repository.impl;
 
 import br.com.fsales.parktech.adapters.out.repository.CondutorRepositoryCustom;
+import br.com.fsales.parktech.adapters.out.repository.PageRepositoryCustom;
 import br.com.fsales.parktech.adapters.out.repository.entity.CondutorEntity;
 import br.com.fsales.parktech.adapters.out.repository.mapper.CondutorEntityMapper;
 import br.com.fsales.parktech.application.core.domain.Condutor;
@@ -14,7 +15,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 
 @RequiredArgsConstructor
-public class CondutorRepositoryCustomImpl implements CondutorRepositoryCustom<CondutorEntity> {
+public class CondutorRepositoryCustomImpl
+		implements CondutorRepositoryCustom<CondutorEntity>, PageRepositoryCustom<CondutorEntity> {
 
 	// https://docs.spring.io/spring-data/mongodb/reference/repositories/custom-implementations.html
 	// https://mhewedy.github.io/spring-data-jpa-mongodb-expressions/
