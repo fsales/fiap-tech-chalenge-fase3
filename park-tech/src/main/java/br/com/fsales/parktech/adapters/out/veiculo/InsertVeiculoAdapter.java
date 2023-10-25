@@ -12,18 +12,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class InsertVeiculoAdapter implements InsertVeiculoOutputPort {
 
-    private final VeiculoRepository veiculoiRepository;
+	private final VeiculoRepository veiculoiRepository;
 
-    private final VeiculoEntityMapper veiculoEntityMapper;
+	private final VeiculoEntityMapper veiculoEntityMapper;
 
-    @Override
-    public Veiculo insert(Veiculo veiculo) {
+	@Override
+	public Veiculo insert(Veiculo veiculo) {
 
-        var veiculoEntity = veiculoEntityMapper.toVeiculoEntity(veiculo);
+		var veiculoEntity = veiculoEntityMapper.toVeiculoEntity(veiculo);
 
-        veiculoEntity = veiculoiRepository.save(veiculoEntity);
+		veiculoEntity = veiculoiRepository.save(veiculoEntity);
 
-        return veiculoEntityMapper.toVeiculo(veiculoEntity);
-    }
+		return veiculoEntityMapper.toVeiculo(veiculoEntity);
+	}
 
 }

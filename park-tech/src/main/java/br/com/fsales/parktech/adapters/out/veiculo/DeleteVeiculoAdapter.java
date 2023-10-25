@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class DeleteVeiculoAdapter implements DeleteVeiculoOutputPort {
 
-    private final VeiculoRepository veiculoRepository;
+	private final VeiculoRepository veiculoRepository;
 
-    /**
-     * @param id
-     */
-    @Override
-    public void delete(String id) {
+	/**
+	 * @param id
+	 */
+	@Override
+	public void delete(String id) {
 
-        veiculoRepository.deleteById(id);
-    }
+		veiculoRepository.deleteById(id);
+	}
 
 }

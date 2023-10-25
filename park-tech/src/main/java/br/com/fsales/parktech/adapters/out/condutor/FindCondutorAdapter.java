@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class FindCondutorAdapter implements FindCondutorOutputPort {
 
-    private final CondutorRepository condutorRepository;
+	private final CondutorRepository condutorRepository;
 
-    @Override
-    public Page<Condutor> consultaPaginada(Condutor condutor, int pageNumber, int pageSize) {
+	@Override
+	public Page<Condutor> consultaPaginada(Condutor condutor, int pageNumber, int pageSize) {
 
-        return condutorRepository.consultaPaginada(condutor, pageNumber, pageSize);
+		return condutorRepository.consultaPaginada(condutor, pageNumber, pageSize);
 
-    }
+	}
 
 }

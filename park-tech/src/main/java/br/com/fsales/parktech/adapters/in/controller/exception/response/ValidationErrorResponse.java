@@ -1,9 +1,9 @@
 package br.com.fsales.parktech.adapters.in.controller.exception.response;
 
-import lombok.Value;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.Value;
 
 @Value
 public class ValidationErrorResponse {

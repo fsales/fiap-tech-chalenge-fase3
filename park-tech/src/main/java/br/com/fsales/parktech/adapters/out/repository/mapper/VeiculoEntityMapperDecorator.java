@@ -1,34 +1,58 @@
 package br.com.fsales.parktech.adapters.out.repository.mapper;
 
-import br.com.fsales.parktech.adapters.out.repository.entity.CondutorEntity;
-import br.com.fsales.parktech.adapters.out.repository.entity.ContatoEntity;
-import br.com.fsales.parktech.adapters.out.repository.entity.EnderecoEntity;
-import br.com.fsales.parktech.adapters.out.repository.entity.VeiculoEntity;
-import br.com.fsales.parktech.application.core.domain.Condutor;
-import br.com.fsales.parktech.application.core.domain.Contato;
-import br.com.fsales.parktech.application.core.domain.Endereco;
-import br.com.fsales.parktech.application.core.domain.Veiculo;
-import org.mapstruct.Mapper;
+//@Mapper(componentModel = "spring")
+public abstract class VeiculoEntityMapperDecorator /* implements VeiculoEntityMapper */ {
 
-@Mapper(componentModel = "spring")
-public abstract class VeiculoEntityMapperDecorator implements VeiculoEntityMapper {
-
-
-    public void updateVeiculoEntityFromVeiculo(Veiculo veiculo, VeiculoEntity veiculoEntity) {
-        var condutor = veiculoEntity.condutor();
-        veiculoEntity.setMarca(veiculo.marca()).setModelo(veiculo.modelo()).setPlaca(veiculo.placa()).setRenavam(veiculo.renavam());
-    }
-
-    public CondutorEntity condutorToCondutorEntity(Condutor condutor) {
-
-
-        return CondutorEntityMapperDecorator.criarObjetoCondutorEntity(condutor);
-    }
-
-
-    public Condutor createCondutor(CondutorEntity condutorEntity) {
-
-        return CondutorEntityMapperDecorator.criarObjetoConduto(condutorEntity);
-    }
+	// @Autowired
+	// @Qualifier("veiculoEntityMapperImpl_")
+	// private VeiculoEntityMapper delegate;
+	//
+	// @Override
+	// public void updateVeiculoEntityFromVeiculo(Veiculo veiculo, VeiculoEntity
+	// veiculoEntity) {
+	// var condutor = veiculoEntity.getCondutor();
+	// veiculoEntity.setMarca(veiculo.marca());
+	// veiculoEntity.setModelo(veiculo.modelo());
+	// veiculoEntity.setPlaca(veiculo.placa());
+	// veiculoEntity.setRenavam(veiculo.renavam());
+	// }
+	//
+	// @Override
+	// public CondutorEntity condutorToCondutorEntity(Condutor condutor) {
+	//
+	// return CondutorEntityMapperDecorator.criarObjetoCondutorEntity(condutor);
+	// }
+	//
+	// @Override
+	// public Condutor condutorEntityToCondutor(CondutorEntity condutorEntity) {
+	//
+	// return CondutorEntityMapperDecorator.criarObjetoConduto(condutorEntity);
+	// }
+	//
+	// @Override
+	// public VeiculoEntity toVeiculoEntity(Veiculo veiculo) {
+	// var veiculoEntity = delegate.toVeiculoEntity(veiculo);
+	// veiculoEntity.setModelo(veiculo.modelo());
+	// veiculoEntity.setPlaca(veiculo.placa());
+	// veiculoEntity.setRenavam(veiculo.renavam());
+	// veiculoEntity.setMarca(veiculo.marca());
+	// veiculoEntity.setId(veiculo.id());
+	// veiculoEntity.setCondutor(condutorToCondutorEntity(veiculo.condutor()));
+	//
+	// return veiculoEntity;
+	// }
+	//
+	// @Override
+	// public Veiculo toVeiculo(VeiculoEntity veiculoEntity) {
+	// var veiculo = delegate.toVeiculo(veiculoEntity);
+	//
+	//// veiculo.setModelo(veiculoEntity.getModelo());
+	//// veiculo.setPlaca(veiculoEntity.getPlaca());
+	//// veiculo.setRenavam(veiculoEntity.getRenavam());
+	//// veiculo.setMarca(veiculoEntity.getMarca());
+	//// veiculo.setId(veiculoEntity.getId());
+	//// veiculo.setCondutor(condutorEntityToCondutor(veiculoEntity.getCondutor()));
+	// return veiculo;
+	// }
 
 }

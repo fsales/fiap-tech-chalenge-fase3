@@ -19,11 +19,11 @@ public class InsertCondutorUseCase implements InsertCondutorInputPort {
 
 	@Override
 	public Condutor insert(final Condutor condutor) {
-		var endereco = consultarEnderecoPorCepOutputPort.consultaPorCep(condutor.endereco().cep());
+		var endereco = consultarEnderecoPorCepOutputPort.consultaPorCep(condutor.getEndereco().getCep());
 		if (endereco == null)
 			throw new IllegalArgumentException("CEP inexistente.");
 
-		condutor.endereco().setCidade(endereco.cidade()).setUf(endereco.uf());
+		condutor.getEndereco().setCidade(endereco.getCidade()).setUf(endereco.getUf());
 
 		return insertCondutorOutputPort.insert(condutor);
 	}

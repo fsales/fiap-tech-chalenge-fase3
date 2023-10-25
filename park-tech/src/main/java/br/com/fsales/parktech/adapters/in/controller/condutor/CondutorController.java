@@ -6,7 +6,11 @@ import br.com.fsales.parktech.adapters.in.controller.condutor.request.CondutorRe
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.DadosAtualizarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.ListarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.response.CondutorResponse;
-import br.com.fsales.parktech.application.ports.in.condutor.*;
+import br.com.fsales.parktech.application.ports.in.condutor.DeleteCondutorInputPort;
+import br.com.fsales.parktech.application.ports.in.condutor.FindCondutorByIdInputPort;
+import br.com.fsales.parktech.application.ports.in.condutor.FindCondutorInputPort;
+import br.com.fsales.parktech.application.ports.in.condutor.InsertCondutorInputPort;
+import br.com.fsales.parktech.application.ports.in.condutor.UpdateCondutorInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -16,7 +20,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -48,7 +59,9 @@ public class CondutorController {
 
 		var condutorResponse = condutorMapper.toCondutorResponse(insertCondutorInputPort.insert(condutor));
 
-		var uri = uriComponentsBuilder.path("/condutores/{id}").buildAndExpand(condutorResponse.id()).toUri();
+		var uri = uriComponentsBuilder.path(String.format("%s/{id}", ParktechResource.CONDUTOR))
+			.buildAndExpand(condutorResponse.id())
+			.toUri();
 
 		return ResponseEntity.created(uri).body(condutorResponse);
 	}

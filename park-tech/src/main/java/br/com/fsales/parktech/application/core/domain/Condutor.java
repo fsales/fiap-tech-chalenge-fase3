@@ -19,7 +19,16 @@ public final class Condutor extends PessoaFisica {
 		this.numeroHabilitacao = numeroHabilitacao;
 	}
 
-	public String numeroHabilitacao() {
+	public String getId() {
+		return id;
+	}
+
+	public Condutor setId(String id) {
+		this.id = id;
+		return this;
+	}
+
+	public String getNumeroHabilitacao() {
 		return numeroHabilitacao;
 	}
 
@@ -28,12 +37,93 @@ public final class Condutor extends PessoaFisica {
 		return this;
 	}
 
-	public String id() {
-		return id;
+	/**
+	 * @return
+	 */
+	@Override
+	public String getCpf() {
+		return cpf;
 	}
 
-	public Condutor setId(String id) {
-		this.id = id;
+	/**
+	 * @param cpf
+	 * @return
+	 */
+	@Override
+	public Condutor setCpf(String cpf) {
+		this.cpf = cpf;
+		return this;
+	}
+
+	/**
+	 * @return
+	 */
+	@Override
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	/**
+	 * @param dataNascimento
+	 * @return
+	 */
+	@Override
+	public Condutor setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+		return this;
+	}
+
+	/**
+	 * @return
+	 */
+	@Override
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome
+	 * @return
+	 */
+	@Override
+	public Pessoa setNome(String nome) {
+		this.nome = nome;
+		return this;
+	}
+
+	/**
+	 * @return
+	 */
+	@Override
+	public Contato getContato() {
+		return contato;
+	}
+
+	/**
+	 * @param contato
+	 * @return
+	 */
+	@Override
+	public Condutor setContato(Contato contato) {
+		this.contato = contato;
+		return this;
+	}
+
+	/**
+	 * @return
+	 */
+	@Override
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	/**
+	 * @param endereco
+	 * @return
+	 */
+	@Override
+	public Condutor setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 		return this;
 	}
 

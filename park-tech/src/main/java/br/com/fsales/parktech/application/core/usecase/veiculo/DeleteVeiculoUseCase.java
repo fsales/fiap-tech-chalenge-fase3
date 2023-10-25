@@ -6,22 +6,24 @@ import br.com.fsales.parktech.application.ports.out.veiculo.FindVeiculoByIdOutpu
 
 public class DeleteVeiculoUseCase implements DeleteVeiculoInputPort {
 
-    private final DeleteVeiculoOutputPort deleteVeiculoOutputPort;
+	private final DeleteVeiculoOutputPort deleteVeiculoOutputPort;
 
-    private final FindVeiculoByIdOutputPort findVeiculoByIdOutputPort;
+	private final FindVeiculoByIdOutputPort findVeiculoByIdOutputPort;
 
-    public DeleteVeiculoUseCase(DeleteVeiculoOutputPort deleteVeiculoOutputPort, FindVeiculoByIdOutputPort findVeiculoByIdOutputPort) {
-        this.deleteVeiculoOutputPort = deleteVeiculoOutputPort;
-        this.findVeiculoByIdOutputPort = findVeiculoByIdOutputPort;
-    }
+	public DeleteVeiculoUseCase(DeleteVeiculoOutputPort deleteVeiculoOutputPort,
+			FindVeiculoByIdOutputPort findVeiculoByIdOutputPort) {
+		this.deleteVeiculoOutputPort = deleteVeiculoOutputPort;
+		this.findVeiculoByIdOutputPort = findVeiculoByIdOutputPort;
+	}
 
-    /**
-     * @param id
-     */
-    @Override
-    public void delete(String id) {
-        // faz uma consulta por id e caso não exista irá lança uma mensagem de erro
-        findVeiculoByIdOutputPort.find(id);
-        deleteVeiculoOutputPort.delete(id);
-    }
+	/**
+	 * @param id
+	 */
+	@Override
+	public void delete(String id) {
+		// faz uma consulta por id e caso não exista irá lança uma mensagem de erro
+		findVeiculoByIdOutputPort.find(id);
+		deleteVeiculoOutputPort.delete(id);
+	}
+
 }

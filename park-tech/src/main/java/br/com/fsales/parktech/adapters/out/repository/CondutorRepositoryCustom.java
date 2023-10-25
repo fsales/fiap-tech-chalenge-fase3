@@ -5,12 +5,12 @@ import br.com.fsales.parktech.application.core.domain.paginacao.Page;
 
 public interface CondutorRepositoryCustom<CondutorEntity> {
 
-    /**
-     * @param condutor
-     * @param pageNumber
-     * @param pageSize
-     * @return
-     */
-    Page<Condutor> consultaPaginada(Condutor condutor, int pageNumber, int pageSize);
+	/**
+	 * @param condutor
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	Page<Condutor> consultaPaginada(Condutor condutor, int pageNumber, int pageSize);
 
 }

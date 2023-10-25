@@ -4,100 +4,108 @@ import java.time.LocalDateTime;
 
 public class Veiculo {
 
-    private String id;
-    private String modelo;
-    private String marca;
-    private  String placa;
-    private String renavam;
+	private String id;
 
-    private Condutor condutor;
-    private LocalDateTime createdDate;
-    private LocalDateTime lastModifiedDate;
+	private String modelo;
 
-    public Veiculo() {
-        super();
-    }
+	private String marca;
 
-    public Veiculo(String id, String modelo, String marca, String placa, String renavam, Condutor condutor, LocalDateTime createdDate, LocalDateTime lastModifiedDate) {
-        this.id = id;
-        this.modelo = modelo;
-        this.marca = marca;
-        this.placa = placa;
-        this.renavam = renavam;
-        this.condutor = condutor;
-        this.createdDate = createdDate;
-        this.lastModifiedDate = lastModifiedDate;
-    }
+	private String placa;
 
-    public String id() {
-        return id;
-    }
+	private String renavam;
 
-    public Veiculo setId(String id) {
-        this.id = id;
-        return this;
-    }
+	private Condutor condutor;
 
-    public String modelo() {
-        return modelo;
-    }
+	private LocalDateTime createdDate;
 
-    public Veiculo setModelo(String modelo) {
-        this.modelo = modelo;
-        return this;
-    }
+	private LocalDateTime lastModifiedDate;
 
-    public String marca() {
-        return marca;
-    }
+	public Veiculo() {
+		super();
+	}
 
-    public Veiculo setMarca(String marca) {
-        this.marca = marca;
-        return this;
-    }
+	public Veiculo(String id, String modelo, String marca, String placa, String renavam, Condutor condutor,
+			LocalDateTime createdDate, LocalDateTime lastModifiedDate) {
+		this.id = id;
+		this.modelo = modelo;
+		this.marca = marca;
+		this.placa = placa;
+		this.renavam = renavam;
+		this.condutor = condutor;
+		this.createdDate = createdDate;
+		this.lastModifiedDate = lastModifiedDate;
+	}
 
-    public String placa() {
-        return placa;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public Veiculo setPlaca(String placa) {
-        this.placa = placa;
-        return this;
-    }
+	public Veiculo setId(String id) {
+		this.id = id;
+		return this;
+	}
 
-    public String renavam() {
-        return renavam;
-    }
+	public String getModelo() {
+		return modelo;
+	}
 
-    public Veiculo setRenavam(String renavam) {
-        this.renavam = renavam;
-        return this;
-    }
+	public Veiculo setModelo(String modelo) {
+		this.modelo = modelo;
+		return this;
+	}
 
-    public Condutor condutor() {
-        return condutor;
-    }
+	public String getMarca() {
+		return marca;
+	}
 
-    public Veiculo setCondutor(Condutor condutor) {
-        this.condutor = condutor;
-        return this;
-    }
+	public Veiculo setMarca(String marca) {
+		this.marca = marca;
+		return this;
+	}
 
-    public LocalDateTime createdDate() {
-        return createdDate;
-    }
+	public String getPlaca() {
+		return placa;
+	}
 
-    public Veiculo setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
-        return this;
-    }
+	public Veiculo setPlaca(String placa) {
+		this.placa = placa;
+		return this;
+	}
 
-    public LocalDateTime lastModifiedDate() {
-        return lastModifiedDate;
-    }
+	public String getRenavam() {
+		return renavam;
+	}
 
-    public Veiculo setLastModifiedDate(LocalDateTime lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-        return this;
-    }
+	public Veiculo setRenavam(String renavam) {
+		this.renavam = renavam;
+		return this;
+	}
+
+	public Condutor getCondutor() {
+		return condutor;
+	}
+
+	public Veiculo setCondutor(Condutor condutor) {
+		this.condutor = condutor;
+		return this;
+	}
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public Veiculo setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+		return this;
+	}
+
+	public LocalDateTime getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+	public Veiculo setLastModifiedDate(LocalDateTime lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+		return this;
+	}
+
 }

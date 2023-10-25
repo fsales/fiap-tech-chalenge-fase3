@@ -1,10 +1,14 @@
 package br.com.fsales.parktech.adapters.in.controller.condutor.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.*;
-import org.hibernate.validator.constraints.br.CPF;
-
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 
 public record CondutorRequest(@NotBlank String nome,
 
@@ -28,8 +32,7 @@ public record CondutorRequest(@NotBlank String nome,
 
 			@NotBlank String complemento,
 
-			@NotBlank String bairro,
-			@NotBlank @Pattern(regexp = "[0-9]{8}",
+			@NotBlank String bairro, @NotBlank @Pattern(regexp = "[0-9]{8}",
 					message = "O CEP deve conter somente número com 8 posições") String cep) {
 	}
 

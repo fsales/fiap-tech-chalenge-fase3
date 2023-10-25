@@ -11,14 +11,15 @@ public class UpdateVeiculoUseCase implements UpdateVeiculoInputPort {
 
 	private final FindVeiculoByIdOutputPort findVeiculoByIdOutputPort;
 
-	public UpdateVeiculoUseCase(UpdateVeiculoOutputPort updateVeiculoOutputPort, FindVeiculoByIdOutputPort findVeiculoByIdOutputPort) {
+	public UpdateVeiculoUseCase(UpdateVeiculoOutputPort updateVeiculoOutputPort,
+			FindVeiculoByIdOutputPort findVeiculoByIdOutputPort) {
 		this.updateVeiculoOutputPort = updateVeiculoOutputPort;
 		this.findVeiculoByIdOutputPort = findVeiculoByIdOutputPort;
 	}
 
 	@Override
 	public Veiculo update(Veiculo veiculo) {
-		findVeiculoByIdOutputPort.find(veiculo.id())
+		findVeiculoByIdOutputPort.find(veiculo.getId())
 			.orElseThrow(() -> new RuntimeException("Condutor não encontrado."));
 
 		return updateVeiculoOutputPort.update(veiculo);

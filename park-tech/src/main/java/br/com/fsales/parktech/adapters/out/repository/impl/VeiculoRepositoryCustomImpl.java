@@ -7,14 +7,15 @@ import br.com.fsales.parktech.application.core.domain.paginacao.Page;
 
 public class VeiculoRepositoryCustomImpl implements VeiculoRepositoryCustom<VeiculoEntity> {
 
-    /**
-     * @param veiculo
-     * @param pageNumber
-     * @param pageSize
-     * @return
-     */
-    @Override
-    public Page<Veiculo> consultaPaginada(Veiculo veiculo, int pageNumber, int pageSize) {
-        return null;
-    }
+	/**
+	 * @param veiculo
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	@Override
+	public Page<Veiculo> consultaPaginada(Veiculo veiculo, int pageNumber, int pageSize) {
+		return null;
+	}
+
 }

@@ -13,19 +13,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class UpdateVeiculoAdapter implements UpdateVeiculoOutputPort {
 
-    private final VeiculoRepository veiculoRepository;
+	private final VeiculoRepository veiculoRepository;
 
-    private final VeiculoEntityMapper veiculoEntityMapper;
+	private final VeiculoEntityMapper veiculoEntityMapper;
 
-    /**
-     * @param veiculo
-     * @return
-     */
-    @Override
-    @Transactional
-    public Veiculo update(Veiculo veiculo) {
-        Veiculo veiculoRetorno = null;
-		var veiculoEntityOptional = veiculoRepository.findById(veiculo.id());
+	/**
+	 * @param veiculo
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public Veiculo update(Veiculo veiculo) {
+		Veiculo veiculoRetorno = null;
+		var veiculoEntityOptional = veiculoRepository.findById(veiculo.getId());
 
 		if (veiculoEntityOptional.isPresent()) {
 			var condutorEntity = veiculoEntityOptional.get();
@@ -34,7 +34,7 @@ public class UpdateVeiculoAdapter implements UpdateVeiculoOutputPort {
 			veiculoRetorno = veiculoEntityMapper.toVeiculo(condutorEntity);
 		}
 
-        return veiculoRetorno;
-    }
+		return veiculoRetorno;
+	}
 
 }

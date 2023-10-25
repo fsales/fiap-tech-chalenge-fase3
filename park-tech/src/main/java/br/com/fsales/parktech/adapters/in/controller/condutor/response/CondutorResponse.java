@@ -1,8 +1,8 @@
 package br.com.fsales.parktech.adapters.in.controller.condutor.response;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public record CondutorResponse(
 

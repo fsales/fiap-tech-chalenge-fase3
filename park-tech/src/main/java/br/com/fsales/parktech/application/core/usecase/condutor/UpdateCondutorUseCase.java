@@ -24,14 +24,14 @@ public class UpdateCondutorUseCase implements UpdateCondutorInputPort {
 
 	@Override
 	public Condutor update(Condutor condutor) {
-		findCondutorByIdOutputPort.find(condutor.id())
+		findCondutorByIdOutputPort.find(condutor.getId())
 			.orElseThrow(() -> new RuntimeException("Condutor não encontrado."));
 
-		var endereco = consultarEnderecoPorCepOutputPort.consultaPorCep(condutor.endereco().cep());
+		var endereco = consultarEnderecoPorCepOutputPort.consultaPorCep(condutor.getEndereco().getCep());
 		if (endereco == null)
 			throw new IllegalArgumentException("CEP inexistente.");
 
-		condutor.endereco().setCidade(endereco.cidade()).setUf(endereco.uf());
+		condutor.getEndereco().setCidade(endereco.getCidade()).setUf(endereco.getUf());
 
 		return updateCondutorOutputPort.update(condutor);
 	}

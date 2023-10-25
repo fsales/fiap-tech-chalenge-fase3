@@ -4,10 +4,10 @@ import br.com.fsales.parktech.application.core.domain.Veiculo;
 
 public interface InsertVeiculoInputPort {
 
-    /**
-     * @param veiculo
-     * @return
-     */
-    Veiculo insert(final Veiculo veiculo);
+	/**
+	 * @param veiculo
+	 * @return
+	 */
+	Veiculo insert(final Veiculo veiculo);
 
 }

@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class DeleteCondutorAdapter implements DeleteCondutorOutputPort {
 
-    private final CondutorRepository condutorRepository;
+	private final CondutorRepository condutorRepository;
 
-    /**
-     * @param id
-     */
-    @Override
-    public void delete(String id) {
+	/**
+	 * @param id
+	 */
+	@Override
+	public void delete(String id) {
 
-        condutorRepository.deleteById(id);
-    }
+		condutorRepository.deleteById(id);
+	}
 
 }

@@ -13,28 +13,28 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class UpdateCondutorAdapter implements UpdateCondutorOutputPort {
 
-    private final CondutorRepository condutorRepository;
+	private final CondutorRepository condutorRepository;
 
-    private final CondutorEntityMapper condutorEntityMapper;
+	private final CondutorEntityMapper condutorEntityMapper;
 
-    /**
-     * @param condutor
-     * @return
-     */
-    @Override
-    @Transactional
-    public Condutor update(Condutor condutor) {
-        Condutor condutorRetorno = new Condutor();
-        var condutorEntityOptional = condutorRepository.findById(condutor.id());
+	/**
+	 * @param condutor
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public Condutor update(Condutor condutor) {
+		Condutor condutorRetorno = new Condutor();
+		var condutorEntityOptional = condutorRepository.findById(condutor.getId());
 
-        if (condutorEntityOptional.isPresent()) {
-            var condutorEntity = condutorEntityOptional.get();
-            condutorEntityMapper.updateCondutorEntityFromCondutor(condutor, condutorEntity);
-            condutorRepository.save(condutorEntity);
-            condutorRetorno = condutorEntityMapper.toCondutor(condutorEntity);
-        }
+		if (condutorEntityOptional.isPresent()) {
+			var condutorEntity = condutorEntityOptional.get();
+			condutorEntityMapper.updateCondutorEntityFromCondutor(condutor, condutorEntity);
+			condutorRepository.save(condutorEntity);
+			condutorRetorno = condutorEntityMapper.toCondutor(condutorEntity);
+		}
 
-        return condutorRetorno;
-    }
+		return condutorRetorno;
+	}
 
 }

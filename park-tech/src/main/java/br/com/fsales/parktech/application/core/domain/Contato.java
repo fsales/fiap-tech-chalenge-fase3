@@ -15,7 +15,7 @@ public class Contato {
 		this.telefone = telefone;
 	}
 
-	public String email() {
+	public String getEmail() {
 		return email;
 	}
 
@@ -24,7 +24,7 @@ public class Contato {
 		return this;
 	}
 
-	public String telefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
@@ -32,5 +32,4 @@ public class Contato {
 		this.telefone = telefone;
 		return this;
 	}
-
 }

@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConsultarEnderecoPorCepAdapter implements ConsultarEnderecoPorCepOutputPort {
 
-    private final ConsultarEnderecoPorCepClient consultarEnderecoPorCepClient;
+	private final ConsultarEnderecoPorCepClient consultarEnderecoPorCepClient;
 
-    private final EnderecoResponseMapper enderecoResponseMapper;
+	private final EnderecoResponseMapper enderecoResponseMapper;
 
-    @Override
-    public Endereco consultaPorCep(String cep) {
-        var enderecoResponse = consultarEnderecoPorCepClient.consultaPorCep(cep);
-        return enderecoResponseMapper.toEndereco(enderecoResponse);
-    }
+	@Override
+	public Endereco consultaPorCep(String cep) {
+		var enderecoResponse = consultarEnderecoPorCepClient.consultaPorCep(cep);
+		return enderecoResponseMapper.toEndereco(enderecoResponse);
+	}
 
 }

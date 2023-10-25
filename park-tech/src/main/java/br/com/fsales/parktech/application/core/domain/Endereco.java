@@ -36,7 +36,7 @@ public class Endereco {
 		this.uf = uf;
 	}
 
-	public String rua() {
+	public String getRua() {
 		return rua;
 	}
 
@@ -45,7 +45,7 @@ public class Endereco {
 		return this;
 	}
 
-	public String logradouro() {
+	public String getLogradouro() {
 		return logradouro;
 	}
 
@@ -54,7 +54,7 @@ public class Endereco {
 		return this;
 	}
 
-	public Integer numero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
@@ -63,7 +63,7 @@ public class Endereco {
 		return this;
 	}
 
-	public String complemento() {
+	public String getComplemento() {
 		return complemento;
 	}
 
@@ -72,7 +72,7 @@ public class Endereco {
 		return this;
 	}
 
-	public String bairro() {
+	public String getBairro() {
 		return bairro;
 	}
 
@@ -81,7 +81,7 @@ public class Endereco {
 		return this;
 	}
 
-	public String cidade() {
+	public String getCidade() {
 		return cidade;
 	}
 
@@ -90,7 +90,7 @@ public class Endereco {
 		return this;
 	}
 
-	public String cep() {
+	public String getCep() {
 		return cep;
 	}
 
@@ -99,12 +99,7 @@ public class Endereco {
 		return this;
 	}
 
-	public String estado() {
-		var estadoEnum = EstadoEnum.getEnum(uf);
-		return estadoEnum == null ? "" : estadoEnum.capital();
-	}
-
-	public String uf() {
+	public String getUf() {
 		return uf;
 	}
 
@@ -112,5 +107,15 @@ public class Endereco {
 		this.uf = uf;
 		return this;
 	}
+
+	/**
+	 * Retorna o nome do estado
+	 * @return
+	 */
+	public String getEstado() {
+		var estadoEnum = EstadoEnum.getEnum(uf);
+		return estadoEnum == null ? "" : estadoEnum.capital();
+	}
+
 
 }

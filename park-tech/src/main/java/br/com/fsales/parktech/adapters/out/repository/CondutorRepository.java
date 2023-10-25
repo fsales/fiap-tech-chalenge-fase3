@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CondutorRepository
-        extends MongoRepository<CondutorEntity, String>, CondutorRepositoryCustom<CondutorEntity> {
+		extends MongoRepository<CondutorEntity, String>, CondutorRepositoryCustom<CondutorEntity> {
 
 }

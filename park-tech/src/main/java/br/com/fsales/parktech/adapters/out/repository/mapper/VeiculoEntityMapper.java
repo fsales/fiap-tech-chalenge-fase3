@@ -4,31 +4,28 @@ import br.com.fsales.parktech.adapters.out.repository.entity.CondutorEntity;
 import br.com.fsales.parktech.adapters.out.repository.entity.VeiculoEntity;
 import br.com.fsales.parktech.application.core.domain.Condutor;
 import br.com.fsales.parktech.application.core.domain.Veiculo;
-import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.ObjectFactory;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-@DecoratedWith(VeiculoEntityMapperDecorator.class)
+// @DecoratedWith(VeiculoEntityMapperDecorator.class)
 public interface VeiculoEntityMapper {
 
-    VeiculoEntityMapper INSTANCE = Mappers.getMapper(VeiculoEntityMapper.class);
+	VeiculoEntityMapper INSTANCE = Mappers.getMapper(VeiculoEntityMapper.class);
 
-    Veiculo toVeiculo(VeiculoEntity veiculoEntity);
+	Veiculo toVeiculo(VeiculoEntity veiculoEntity);
 
-    VeiculoEntity toVeiculoEntity(Veiculo veiculo);
+	VeiculoEntity toVeiculoEntity(Veiculo veiculo);
 
+	void updateVeiculoEntityFromVeiculo(Veiculo veiculo, @MappingTarget VeiculoEntity veiculoEntity);
 
-    void updateVeiculoEntityFromVeiculo(Veiculo veiculo, @MappingTarget VeiculoEntity veiculoEntity);
+	CondutorEntity condutorToCondutorEntity(Condutor condutor);
 
+	/**
+	 * @param condutorEntity
+	 * @return
+	 */
+	Condutor condutorEntityToCondutor(CondutorEntity condutorEntity);
 
-    CondutorEntity condutorToCondutorEntity(Condutor condutor);
-
-    /**
-     * @param condutorEntity
-     * @return
-     */
-    Condutor createCondutor(CondutorEntity condutorEntity);
 }

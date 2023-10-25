@@ -16,40 +16,40 @@ import org.springframework.data.mongodb.core.query.TextCriteria;
 
 @RequiredArgsConstructor
 public class CondutorRepositoryCustomImpl
-        implements CondutorRepositoryCustom<CondutorEntity>, PageRepositoryCustom<CondutorEntity> {
+		implements CondutorRepositoryCustom<CondutorEntity>, PageRepositoryCustom<CondutorEntity> {
 
-    // https://docs.spring.io/spring-data/mongodb/reference/repositories/custom-implementations.html
-    // https://mhewedy.github.io/spring-data-jpa-mongodb-expressions/
+	// https://docs.spring.io/spring-data/mongodb/reference/repositories/custom-implementations.html
+	// https://mhewedy.github.io/spring-data-jpa-mongodb-expressions/
 
-    private final MongoTemplate mongoTemplate;
+	private final MongoTemplate mongoTemplate;
 
-    private final CondutorEntityMapper condutorEntityMapper;
+	private final CondutorEntityMapper condutorEntityMapper;
 
-    private static void montarFiltroConsultaPaginada(Condutor condutor, Query query, Criteria criteria) {
-        if (StringUtils.isNotBlank(condutor.nome())) {
-            TextCriteria textCriteria = TextCriteria.forDefaultLanguage().matchingPhrase(condutor.nome());
+	private static void montarFiltroConsultaPaginada(Condutor condutor, Query query, Criteria criteria) {
+		if (StringUtils.isNotBlank(condutor.getNome())) {
+			TextCriteria textCriteria = TextCriteria.forDefaultLanguage().matchingPhrase(condutor.getNome());
 
-            query.addCriteria(textCriteria);
-        }
+			query.addCriteria(textCriteria);
+		}
 
-        if (StringUtils.isNotBlank(condutor.cpf()))
-            criteria.and("cpf").is(condutor.cpf());
+		if (StringUtils.isNotBlank(condutor.getCpf()))
+			criteria.and("cpf").is(condutor.getCpf());
 
-        if (StringUtils.isNotBlank(condutor.numeroHabilitacao()))
-            criteria.and("numeroHabilitacao").is(condutor.numeroHabilitacao());
-    }
+		if (StringUtils.isNotBlank(condutor.getNumeroHabilitacao()))
+			criteria.and("numeroHabilitacao").is(condutor.getNumeroHabilitacao());
+	}
 
-    @Override
-    public Page<Condutor> consultaPaginada(Condutor condutor, int pageNumber, int pageSize) {
-        var pageable = PageRequest.of(pageNumber, pageSize);
-        var criteria = new Criteria();
-        var query = new Query(criteria);
+	@Override
+	public Page<Condutor> consultaPaginada(Condutor condutor, int pageNumber, int pageSize) {
+		var pageable = PageRequest.of(pageNumber, pageSize);
+		var criteria = new Criteria();
+		var query = new Query(criteria);
 
-        montarFiltroConsultaPaginada(condutor, query, criteria);
+		montarFiltroConsultaPaginada(condutor, query, criteria);
 
-        var dados = consultaDocumentosPaginado(query, pageable, mongoTemplate, CondutorEntity.class);
+		var dados = consultaDocumentosPaginado(query, pageable, mongoTemplate, CondutorEntity.class);
 
-        return dados.map(condutorEntityMapper::toCondutor);
-    }
+		return dados.map(condutorEntityMapper::toCondutor);
+	}
 
 }
