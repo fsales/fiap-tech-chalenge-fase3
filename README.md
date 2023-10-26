@@ -103,13 +103,18 @@ para utilização nos fluxos de trabalho em GitHub Actions. GitHub Actions só p
 
     1. relação dos secrets que devem ser configurados no repositório:
 
-       1. Repositório Github:
-          1. GIT_TOKEN 
-          2. GIT_EMAIL
+       a. Repositório Github:
+          * GIT_TOKEN 
+          * GIT_EMAIL
 
-       2. DockerHub
-          1. DOCKERHUB_USERNAME
-          2. DOCKERHUB_TOKEN
+       b. DockerHub
+          * DOCKERHUB_USERNAME
+          * DOCKERHUB_TOKEN
+
+       c. Park-tech
+          * PARK_TECH_PROFILE_ENVIRONMENT
+          * PARK_TECH_MONGODB_URI
+          * PARK_TECH_MONGODB_DATABASE
 
 ## Arquitetura
 
