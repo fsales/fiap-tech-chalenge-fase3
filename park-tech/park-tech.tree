@@ -1,184 +1,156 @@
-├── .dockerignore
-├── .gitignore
-├── .mvn
-│  └── wrapper
-│    ├── maven-wrapper.jar
-│    └── maven-wrapper.properties
-├── checkstyle.xml
-├── Dockerfile
-├── mvnw
-├── mvnw.cmd
-├── pom.xml
+ 
 ├── src
-│  ├── main
-│  │  ├── java
-│  │  │  └── br
-│  │  │    └── com
-│  │  │      └── fsales
-│  │  │        └── parktech
-│  │  │          ├── adapters
-│  │  │          │  ├── in
-│  │  │          │  │  └── controller
-│  │  │          │  │    ├── condutor
-│  │  │          │  │    │  ├── CondutorController.java
-│  │  │          │  │    │  ├── mapper
-│  │  │          │  │    │  │  └── CondutorMapper.java
-│  │  │          │  │    │  ├── request
-│  │  │          │  │    │  │  ├── CondutorRequest.java
-│  │  │          │  │    │  │  ├── DadosAtualizarCondutorRequest.java
-│  │  │          │  │    │  │  └── ListarCondutorRequest.java
-│  │  │          │  │    │  └── response
-│  │  │          │  │    │    └── CondutorResponse.java
-│  │  │          │  │    ├── exception
-│  │  │          │  │    │  ├── ParkTechControlerExceptionHandler.java
-│  │  │          │  │    │  └── response
-│  │  │          │  │    │    ├── ValidationErrorResponse.java
-│  │  │          │  │    │    └── ViolationResponse.java
-│  │  │          │  │    ├── ParktechResource.java
-│  │  │          │  │    └── veiculo
-│  │  │          │  │      ├── mapper
-│  │  │          │  │      │  └── VeiculoMapper.java
-│  │  │          │  │      ├── request
-│  │  │          │  │      │  ├── DadosAtualizarVeiculoRequest.java
-│  │  │          │  │      │  ├── VeiculoFiltroConsultaPaginadaRequest.java
-│  │  │          │  │      │  └── VeiculoRequest.java
-│  │  │          │  │      ├── response
-│  │  │          │  │      │  └── VeiculoResponse.java
-│  │  │          │  │      └── VeiculoController.java
-│  │  │          │  └── out
-│  │  │          │    ├── client
-│  │  │          │    │  ├── ConsultarEnderecoPorCepClient.java
-│  │  │          │    │  └── response
-│  │  │          │    │    └── EnderecoResponse.java
-│  │  │          │    ├── condutor
-│  │  │          │    │  ├── DeleteCondutorAdapter.java
-│  │  │          │    │  ├── FindCondutorAdapter.java
-│  │  │          │    │  ├── FindCondutorByIdAdapter.java
-│  │  │          │    │  ├── InsertCondutorAdapter.java
-│  │  │          │    │  └── UpdateCondutorAdapter.java
-│  │  │          │    ├── endereco
-│  │  │          │    │  └── ConsultarEnderecoPorCepAdapter.java
-│  │  │          │    ├── repository
-│  │  │          │    │  ├── CondutorRepository.java
-│  │  │          │    │  ├── CondutorRepositoryCustom.java
-│  │  │          │    │  ├── entity
-│  │  │          │    │  │  ├── CondutorEntity.java
-│  │  │          │    │  │  ├── ContatoEntity.java
-│  │  │          │    │  │  ├── EnderecoEntity.java
-│  │  │          │    │  │  ├── PessoaEntity.java
-│  │  │          │    │  │  ├── PessoaFisicaEntity.java
-│  │  │          │    │  │  └── VeiculoEntity.java
-│  │  │          │    │  ├── impl
-│  │  │          │    │  │  ├── CondutorRepositoryCustomImpl.java
-│  │  │          │    │  │  └── VeiculoRepositoryCustomImpl.java
-│  │  │          │    │  ├── mapper
-│  │  │          │    │  │  ├── CondutorEntityMapper.java
-│  │  │          │    │  │  ├── EnderecoResponseMapper.java
-│  │  │          │    │  │  └── VeiculoEntityMapper.java
-│  │  │          │    │  ├── PageRepositoryCustom.java
-│  │  │          │    │  ├── VeiculoRepository.java
-│  │  │          │    │  └── VeiculoRepositoryCustom.java
-│  │  │          │    └── veiculo
-│  │  │          │      ├── DeleteVeiculoAdapter.java
-│  │  │          │      ├── FindVeiculoAdapter.java
-│  │  │          │      ├── FindVeiculoByIdAdapter.java
-│  │  │          │      ├── InsertVeiculoAdapter.java
-│  │  │          │      └── UpdateVeiculoAdapter.java
-│  │  │          ├── application
-│  │  │          │  ├── core
-│  │  │          │  │  ├── domain
-│  │  │          │  │  │  ├── Condutor.java
-│  │  │          │  │  │  ├── Contato.java
-│  │  │          │  │  │  ├── Endereco.java
-│  │  │          │  │  │  ├── enumeration
-│  │  │          │  │  │  │  └── EstadoEnum.java
-│  │  │          │  │  │  ├── funcionalinterface
-│  │  │          │  │  │  │  └── Mapper.java
-│  │  │          │  │  │  ├── paginacao
-│  │  │          │  │  │  │  └── Page.java
-│  │  │          │  │  │  ├── Pessoa.java
-│  │  │          │  │  │  ├── PessoaFisica.java
-│  │  │          │  │  │  ├── Veiculo.java
-│  │  │          │  │  │  └── VeiculoFiltroConsultaPaginada.java
-│  │  │          │  │  └── usecase
-│  │  │          │  │    ├── condutor
-│  │  │          │  │    │  ├── DeleteCondutorUseCase.java
-│  │  │          │  │    │  ├── FindCondutorByIdUseCase.java
-│  │  │          │  │    │  ├── FindCondutorUseCase.java
-│  │  │          │  │    │  ├── InsertCondutorUseCase.java
-│  │  │          │  │    │  └── UpdateCondutorUseCase.java
-│  │  │          │  │    └── veiculo
-│  │  │          │  │      ├── DeleteVeiculoUseCase.java
-│  │  │          │  │      ├── FindVeiculoByIdUseCase.java
-│  │  │          │  │      ├── FindVeiculoUseCase.java
-│  │  │          │  │      ├── InsertVeiculoUseCase.java
-│  │  │          │  │      └── UpdateVeiculoUseCase.java
-│  │  │          │  └── ports
-│  │  │          │    ├── in
-│  │  │          │    │  ├── condutor
-│  │  │          │    │  │  ├── DeleteCondutorInputPort.java
-│  │  │          │    │  │  ├── FindCondutorByIdInputPort.java
-│  │  │          │    │  │  ├── FindCondutorInputPort.java
-│  │  │          │    │  │  ├── InsertCondutorInputPort.java
-│  │  │          │    │  │  └── UpdateCondutorInputPort.java
-│  │  │          │    │  └── veiculo
-│  │  │          │    │    ├── DeleteVeiculoInputPort.java
-│  │  │          │    │    ├── FindVeiculoByIdInputPort.java
-│  │  │          │    │    ├── FindVeiculoInputPort.java
-│  │  │          │    │    ├── InsertVeiculoInputPort.java
-│  │  │          │    │    └── UpdateVeiculoInputPort.java
-│  │  │          │    └── out
-│  │  │          │      ├── condutor
-│  │  │          │      │  ├── ConsultarEnderecoPorCepOutputPort.java
-│  │  │          │      │  ├── DeleteCondutorOutputPort.java
-│  │  │          │      │  ├── FindCondutorByIdOutputPort.java
-│  │  │          │      │  ├── FindCondutorOutputPort.java
-│  │  │          │      │  ├── InsertCondutorOutputPort.java
-│  │  │          │      │  └── UpdateCondutorOutputPort.java
-│  │  │          │      └── veiculo
-│  │  │          │        ├── DeleteVeiculoOutputPort.java
-│  │  │          │        ├── FindVeiculoByIdOutputPort.java
-│  │  │          │        ├── FindVeiculoOutputPort.java
-│  │  │          │        ├── InsertVeiculoOutputPort.java
-│  │  │          │        └── UpdateVeiculoOutputPort.java
-│  │  │          ├── config
-│  │  │          │  ├── condutor
-│  │  │          │  │  ├── DeleteCondutorConfig.java
-│  │  │          │  │  ├── FindCondutorByIdConfig.java
-│  │  │          │  │  ├── FindCondutorConfig.java
-│  │  │          │  │  ├── InsertCondutorConfig.java
-│  │  │          │  │  └── UpdateCondutorConfig.java
-│  │  │          │  ├── feign
-│  │  │          │  │  └── FeignConfiguration.java
-│  │  │          │  ├── GroupedOpenApiConfig.java
-│  │  │          │  └── veiculo
-│  │  │          │    ├── DeleteVeiculoConfig.java
-│  │  │          │    ├── FindVeiculoByIdConfig.java
-│  │  │          │    ├── FindVeiculoConfig.java
-│  │  │          │    ├── InsertVeiculoConfig.java
-│  │  │          │    └── UpdateVeiculoConfig.java
-│  │  │          ├── infrastructure
-│  │  │          │  ├── configuration
-│  │  │          │  │  ├── OpenAPIConfiguration.java
-│  │  │          │  │  └── SwaggerConfigProperties.java
-│  │  │          │  └── properties
-│  │  │          │    └── ParktechProperties.java
-│  │  │          └── ParkTechApplication.java
-│  │  └── resources
-│  │    ├── application-cloud-atlas.yaml
-│  │    ├── application-dev.yaml
-│  │    ├── application.yaml
-│  │    └── banner.txt
-│  └── test
-│    └── java
-│      └── br
-│        └── com
-│          └── fsales
-│            └── parktech
-│              └── ParkTechApplicationTests.java
-└── target
-  └── classes
-    ├── application-cloud-atlas.yaml
-    ├── application-dev.yaml
-    ├── application.yaml
-    └── banner.txt
+  └── main
+    └── java
+      └── br
+        └── com
+          └── fsales
+            └── parktech
+              ├── adapters
+              │  ├── in
+              │  │  └── controller
+              │  │    ├── condutor
+              │  │    │  ├── CondutorController.java
+              │  │    │  ├── mapper
+              │  │    │  │  └── CondutorMapper.java
+              │  │    │  ├── request
+              │  │    │  │  ├── CondutorRequest.java
+              │  │    │  │  ├── DadosAtualizarCondutorRequest.java
+              │  │    │  │  └── ListarCondutorRequest.java
+              │  │    │  └── response
+              │  │    │    └── CondutorResponse.java
+              │  │    ├── exception
+              │  │    │  ├── ParkTechControlerExceptionHandler.java
+              │  │    │  └── response
+              │  │    │    ├── ValidationErrorResponse.java
+              │  │    │    └── ViolationResponse.java
+              │  │    ├── ParktechResource.java
+              │  │    └── veiculo
+              │  │      ├── mapper
+              │  │      │  └── VeiculoMapper.java
+              │  │      ├── request
+              │  │      │  ├── DadosAtualizarVeiculoRequest.java
+              │  │      │  ├── VeiculoFiltroConsultaPaginadaRequest.java
+              │  │      │  └── VeiculoRequest.java
+              │  │      ├── response
+              │  │      │  └── VeiculoResponse.java
+              │  │      └── VeiculoController.java
+              │  └── out
+              │    ├── client
+              │    │  ├── ConsultarEnderecoPorCepClient.java
+              │    │  └── response
+              │    │    └── EnderecoResponse.java
+              │    ├── condutor
+              │    │  ├── DeleteCondutorAdapter.java
+              │    │  ├── FindCondutorAdapter.java
+              │    │  ├── FindCondutorByIdAdapter.java
+              │    │  ├── InsertCondutorAdapter.java
+              │    │  └── UpdateCondutorAdapter.java
+              │    ├── endereco
+              │    │  └── ConsultarEnderecoPorCepAdapter.java
+              │    ├── repository
+              │    │  ├── CondutorRepository.java
+              │    │  ├── CondutorRepositoryCustom.java
+              │    │  ├── entity
+              │    │  │  ├── CondutorEntity.java
+              │    │  │  ├── ContatoEntity.java
+              │    │  │  ├── EnderecoEntity.java
+              │    │  │  ├── PessoaEntity.java
+              │    │  │  ├── PessoaFisicaEntity.java
+              │    │  │  └── VeiculoEntity.java
+              │    │  ├── impl
+              │    │  │  ├── CondutorRepositoryCustomImpl.java
+              │    │  │  └── VeiculoRepositoryCustomImpl.java
+              │    │  ├── mapper
+              │    │  │  ├── CondutorEntityMapper.java
+              │    │  │  ├── EnderecoResponseMapper.java
+              │    │  │  └── VeiculoEntityMapper.java
+              │    │  ├── PageRepositoryCustom.java
+              │    │  ├── VeiculoRepository.java
+              │    │  └── VeiculoRepositoryCustom.java
+              │    └── veiculo
+              │      ├── DeleteVeiculoAdapter.java
+              │      ├── FindVeiculoAdapter.java
+              │      ├── FindVeiculoByIdAdapter.java
+              │      ├── InsertVeiculoAdapter.java
+              │      └── UpdateVeiculoAdapter.java
+              ├── application
+              │  ├── core
+              │  │  ├── domain
+              │  │  │  ├── Condutor.java
+              │  │  │  ├── Contato.java
+              │  │  │  ├── Endereco.java
+              │  │  │  ├── enumeration
+              │  │  │  │  └── EstadoEnum.java
+              │  │  │  ├── funcionalinterface
+              │  │  │  │  └── Mapper.java
+              │  │  │  ├── paginacao
+              │  │  │  │  └── Page.java
+              │  │  │  ├── Pessoa.java
+              │  │  │  ├── PessoaFisica.java
+              │  │  │  ├── Veiculo.java
+              │  │  │  └── VeiculoFiltroConsultaPaginada.java
+              │  │  └── usecase
+              │  │    ├── condutor
+              │  │    │  ├── DeleteCondutorUseCase.java
+              │  │    │  ├── FindCondutorByIdUseCase.java
+              │  │    │  ├── FindCondutorUseCase.java
+              │  │    │  ├── InsertCondutorUseCase.java
+              │  │    │  └── UpdateCondutorUseCase.java
+              │  │    └── veiculo
+              │  │      ├── DeleteVeiculoUseCase.java
+              │  │      ├── FindVeiculoByIdUseCase.java
+              │  │      ├── FindVeiculoUseCase.java
+              │  │      ├── InsertVeiculoUseCase.java
+              │  │      └── UpdateVeiculoUseCase.java
+              │  └── ports
+              │    ├── in
+              │    │  ├── condutor
+              │    │  │  ├── DeleteCondutorInputPort.java
+              │    │  │  ├── FindCondutorByIdInputPort.java
+              │    │  │  ├── FindCondutorInputPort.java
+              │    │  │  ├── InsertCondutorInputPort.java
+              │    │  │  └── UpdateCondutorInputPort.java
+              │    │  └── veiculo
+              │    │    ├── DeleteVeiculoInputPort.java
+              │    │    ├── FindVeiculoByIdInputPort.java
+              │    │    ├── FindVeiculoInputPort.java
+              │    │    ├── InsertVeiculoInputPort.java
+              │    │    └── UpdateVeiculoInputPort.java
+              │    └── out
+              │      ├── condutor
+              │      │  ├── ConsultarEnderecoPorCepOutputPort.java
+              │      │  ├── DeleteCondutorOutputPort.java
+              │      │  ├── FindCondutorByIdOutputPort.java
+              │      │  ├── FindCondutorOutputPort.java
+              │      │  ├── InsertCondutorOutputPort.java
+              │      │  └── UpdateCondutorOutputPort.java
+              │      └── veiculo
+              │        ├── DeleteVeiculoOutputPort.java
+              │        ├── FindVeiculoByIdOutputPort.java
+              │        ├── FindVeiculoOutputPort.java
+              │        ├── InsertVeiculoOutputPort.java
+              │        └── UpdateVeiculoOutputPort.java
+              ├── config
+              │  ├── condutor
+              │  │  ├── DeleteCondutorConfig.java
+              │  │  ├── FindCondutorByIdConfig.java
+              │  │  ├── FindCondutorConfig.java
+              │  │  ├── InsertCondutorConfig.java
+              │  │  └── UpdateCondutorConfig.java
+              │  ├── feign
+              │  │  └── FeignConfiguration.java
+              │  ├── GroupedOpenApiConfig.java
+              │  └── veiculo
+              │    ├── DeleteVeiculoConfig.java
+              │    ├── FindVeiculoByIdConfig.java
+              │    ├── FindVeiculoConfig.java
+              │    ├── InsertVeiculoConfig.java
+              │    └── UpdateVeiculoConfig.java
+              ├── infrastructure
+              │  ├── configuration
+              │  │  ├── OpenAPIConfiguration.java
+              │  │  └── SwaggerConfigProperties.java
+              │  └── properties
+              │    └── ParktechProperties.java
+              └── ParkTechApplication.java
