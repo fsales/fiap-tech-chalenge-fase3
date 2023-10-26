@@ -12,6 +12,10 @@
  <img src="https://img.shields.io/static/v1?label=Tipo&message=Tech%20Chalenge&color=8257E5&labelColor=000000" alt="Tech Chalenge" />
 </p>
 
+# :bookmark_tabs: Tech Chalenge
+
+> Tech Challenge para avaliação da Fase III da Pós Graduação em Arquitetura e Desenvolvimento Java.
+
 - [:bookmark\_tabs: Tech Chalenge](#bookmark_tabs-tech-chalenge)
   - [🛠️ Linguagem e ferramentas](#️-linguagem-e-ferramentas)
   - [🏫 Dados Acadêmicos](#-dados-acadêmicos)
@@ -23,9 +27,9 @@
     - [Github Action](#github-action)
       - [Secrets](#secrets)
   - [Referência](#referência)
-# :bookmark_tabs: Tech Chalenge
 
-> Tech Challenge para avaliação da Fase III da Pós Graduação em Arquitetura e Desenvolvimento Java.
+
+
 
 ## 🛠️ Linguagem e ferramentas
 
