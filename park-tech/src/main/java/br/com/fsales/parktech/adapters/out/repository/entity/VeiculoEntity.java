@@ -16,6 +16,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -34,6 +36,7 @@ public class VeiculoEntity {
 	private String id;
 
 	@NotEmpty
+	@TextIndexed(weight = 5)
 	private String modelo;
 
 	@NotEmpty
@@ -41,11 +44,13 @@ public class VeiculoEntity {
 
 	@NotEmpty
 	@Pattern(regexp = "^[A-Z0-9]{7}$")
+	@Indexed(unique = true)
 	private String placa;
 
 	@NotEmpty
 	@Size(min = 10, max = 10)
 	@Pattern(regexp = "^\\d{10}$", message = "Formato de Renavam inválido. Utilize XXXXXXXXXX.")
+	@Indexed(unique = true)
 	private String renavam;
 
 	@NotNull
