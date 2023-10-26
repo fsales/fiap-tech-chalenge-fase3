@@ -115,9 +115,9 @@ para utilização nos fluxos de trabalho em GitHub Actions. GitHub Actions só p
 
 > O desenvolvimento deste projeto está fundamentado na Arquitetura Hexagonal[^3], onde a principal preocupação reside em
 > aplicar corretamente os
-> conceitos de portas e adaptadores, estando integralmente alinhado com o princípio de inversão de dependências.
+> conceitos de portas e adaptadores, estando integralmente alinhado com o princípio de inversão de dependências.<br>
 > É crucial observar que os casos de uso, interfaces (portas) e domínios não devem apresentar dependências externas,
-> incluindo aquelas relacionadas ao framework utilizado.
+> incluindo aquelas relacionadas ao framework utilizado.<br>
 > A proposta é assegurar que a lógica de negócios esteja completamente isolada desses fatores externos, garantindo assim
 > sua integridade e independência.
 
