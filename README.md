@@ -26,6 +26,7 @@
   - [CI/CD](#cicd)
     - [Github Action](#github-action)
       - [Secrets](#secrets)
+  - [Arquitetura](#arquitetura)
   - [Referência](#referência)
 
 
@@ -35,9 +36,23 @@
 
 [![logo java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=kofi&logoColor=white)](#)
 
-[![logo spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)](#)
+[![logo mongodb](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](#)
 
- [![logo git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)](#) [![logo github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](#)
+[![logo spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)](#)
+[![logo spring-boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)](#)
+
+[![logo git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)](#)
+[![logo github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](#)
+
+[![logo AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)](#)
+[![logo docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)](#)
+
+[![logo eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)](#)
+[![logo intellij](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)](#)
+
+[![logo swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)](#)
+[![logo postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)](#)
+[![logo curl  ](https://img.shields.io/badge/curl-093754.svg?style=for-the-badge&logo=curl-idea&logoColor=white)](#)
 
 ## 🏫 Dados Acadêmicos
 
@@ -96,7 +111,18 @@ para utilização nos fluxos de trabalho em GitHub Actions. GitHub Actions só p
           1. DOCKERHUB_USERNAME
           2. DOCKERHUB_TOKEN
 
+## Arquitetura
+
+> O desenvolvimento deste projeto está fundamentado na Arquitetura Hexagonal[^3], onde a principal preocupação reside em
+> aplicar corretamente os
+> conceitos de portas e adaptadores, estando integralmente alinhado com o princípio de inversão de dependências. É crucial
+> observar que os casos de uso, interfaces (portas) e
+> domínios não devem apresentar dependências externas, incluindo aquelas relacionadas ao framework utilizado.
+> A proposta é assegurar que a lógica de negócios esteja completamente isolada desses fatores externos, garantindo assim
+> sua integridade e independência.
+
 ## Referência
 
 [^1]: [CI/CD](<https://www.redhat.com/pt-br/topics/devops/what-is-ci-cd#:~:text=CI%2FCD%20%C3%A9%20a%20abrevia%C3%A7%C3%A3o,de%20builds%20e%20testes%20automatizados.>).
 [^2]: [GitHub Actions](<https://docs.github.com/pt/actions/learn-github-actions/understanding-github-actions>).
+[^3]: [Alistair in the "Hexagone" 1/3](https://www.youtube.com/watch?v=th4AgBcrEHA).
