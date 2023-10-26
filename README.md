@@ -6,7 +6,6 @@
 [![Create release](https://github.com/fsales/fiap-tech-chalenge-fase3/actions/workflows/create-release.yml/badge.svg)](https://github.com/fsales/fiap-tech-chalenge-fase3/actions/workflows/create-release.yml)
 [![Publish Image Registry - Branch Develop](https://github.com/fsales/fiap-tech-chalenge-fase3/actions/workflows/git-flow-publish-image-develop.yml/badge.svg)](https://github.com/fsales/fiap-tech-chalenge-fase3/actions/workflows/git-flow-publish-image-develop.yml)
 
-
 <p align="center">
  <img src="https://img.shields.io/static/v1?label=GitHub&message=@fsales&color=8257E5&labelColor=000000" alt="@fsales" />
  <img src="https://img.shields.io/static/v1?label=Tipo&message=Tech%20Chalenge&color=8257E5&labelColor=000000" alt="Tech Chalenge" />
@@ -23,36 +22,36 @@
     - [🧑🏻‍🎓Curso](#curso)
     - [Aluno](#aluno)
   - [Ferramentas](#ferramentas)
+  - [Arquitetura Hexagonal](#arquitetura-hexagonal)
+    - [Adapters](#adapters)
+    - [Domain](#domain)
+    - [Consideração](#consideração)
   - [CI/CD](#cicd)
     - [Github Action](#github-action)
       - [Secrets](#secrets)
-  - [Arquitetura](#arquitetura)
   - [Referência](#referência)
-
-
-
 
 ## 🛠️ Linguagem e ferramentas
 
 [![logo java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=kofi&logoColor=white)](#)
 
-[![logo mongodb](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](#)
+[![logo mongodb](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 
-[![logo spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)](#)
-[![logo spring-boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)](#)
+[![logo spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)](https://spring.io/)
+[![logo spring-boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)](https://spring.io/projects/spring-boot)
 
-[![logo git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)](#)
-[![logo github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](#)
+[![logo git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/)
+[![logo github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com)
 
-[![logo AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)](#)
-[![logo docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)](#)
+[![logo AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
+[![logo docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
 
-[![logo eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)](#)
-[![logo intellij](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)](#)
+[![logo eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)](https://www.eclipse.org/)
+[![logo intellij](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)](https://www.jetbrains.com/pt-br/idea/)
 
-[![logo swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)](#)
-[![logo postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)](#)
-[![logo curl  ](https://img.shields.io/badge/curl-093754.svg?style=for-the-badge&logo=curl-idea&logoColor=white)](#)
+[![logo swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)](https://swagger.io/)
+[![logo postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)](https://www.postman.com/)
+[![logo curl](https://img.shields.io/badge/curl-093754.svg?style=for-the-badge&logo=curl-idea&logoColor=white)](https://curl.se/)
 
 ## 🏫 Dados Acadêmicos
 
@@ -74,60 +73,237 @@ Pós-Graduação em Arquitetura e Desenvolvimento Java
 
 ## Ferramentas
 
-- [IntelliJ IDEA](https://www.jetbrains.com/pt-br/idea/)
-- [Postman](https://www.postman.com/)
 - [Chrome](https://www.google.pt/intl/pt-PT/chrome/?brand=FKPE&gclid=EAIaIQobChMI8cT_xsr1_wIVA2GRCh0hxwthEAAYASAAEgK0h_D_BwE&gclsrc=aw.ds)
-- [Git](https://git-scm.com/)
-- [Github](https://github.com)
-- [Docker](https://docker.com)
+
+## Arquitetura Hexagonal
+
+A arquitetura hexagonal, proposta por Alistair Cockburn em seu artigo [Hexagonal Architecture](http://wiki.c2.com/?HexagonalArchitecture=)[^1], inicialmente chamada de Ports And Adapters, é uma proposta arquitetural em camadas que visa proteger a lógica de negócios do sistema. A inovação dessa abordagem está na compreensão de Cockburn de que não há uma grande diferença entre como a interface do usuário e o banco de dados interagem com o aplicativo; ambos são elementos externos que podem ser substituídos a qualquer momento.
+
+Para mitigar a dependência direta desses fatores externos (como interface de usuário, bancos de dados, integrações e filas), Cockburn introduz o conceito de "portas", que são interfaces aplicando o princípio de inversão de dependência. Estas são interfaces que a lógica de negócio conhece. Além disso, ele propõe os "adaptadores", que são as implementações dessas portas, lidando com as dependências externas.
+
+Essencialmente, a arquitetura hexagonal é um padrão que separa a lógica de negócios do sistema das preocupações técnicas, como a interação com o usuário ou o acesso ao banco de dados. Ela se baseia na ideia de que uma aplicação é composta por "portas" de entrada e saída, que possibilitam a comunicação com o mundo exterior, e "adaptadores", que convertem essas informações em um formato compreensível para a aplicação e vice-versa.
+
+<details>
+  <summary>Organização do Projeto</summary>
+
+```
+├── src
+  └── main
+    └── java
+      └── br
+        └── com
+          └── fsales
+            └── parktech
+              ├── adapters
+              │  ├── in
+              │  │  └── controller
+              │  │    ├── condutor
+              │  │    │  ├── CondutorController.java
+              │  │    │  ├── mapper
+              │  │    │  │  └── CondutorMapper.java
+              │  │    │  ├── request
+              │  │    │  │  ├── CondutorRequest.java
+              │  │    │  │  ├── DadosAtualizarCondutorRequest.java
+              │  │    │  │  └── ListarCondutorRequest.java
+              │  │    │  └── response
+              │  │    │    └── CondutorResponse.java
+              │  │    ├── exception
+              │  │    │  ├── ParkTechControlerExceptionHandler.java
+              │  │    │  └── response
+              │  │    │    ├── ValidationErrorResponse.java
+              │  │    │    └── ViolationResponse.java
+              │  │    ├── ParktechResource.java
+              │  │    └── veiculo
+              │  │      ├── mapper
+              │  │      │  └── VeiculoMapper.java
+              │  │      ├── request
+              │  │      │  ├── DadosAtualizarVeiculoRequest.java
+              │  │      │  ├── VeiculoFiltroConsultaPaginadaRequest.java
+              │  │      │  └── VeiculoRequest.java
+              │  │      ├── response
+              │  │      │  └── VeiculoResponse.java
+              │  │      └── VeiculoController.java
+              │  └── out
+              │    ├── client
+              │    │  ├── ConsultarEnderecoPorCepClient.java
+              │    │  └── response
+              │    │    └── EnderecoResponse.java
+              │    ├── condutor
+              │    │  ├── DeleteCondutorAdapter.java
+              │    │  ├── FindCondutorAdapter.java
+              │    │  ├── FindCondutorByIdAdapter.java
+              │    │  ├── InsertCondutorAdapter.java
+              │    │  └── UpdateCondutorAdapter.java
+              │    ├── endereco
+              │    │  └── ConsultarEnderecoPorCepAdapter.java
+              │    ├── repository
+              │    │  ├── CondutorRepository.java
+              │    │  ├── CondutorRepositoryCustom.java
+              │    │  ├── entity
+              │    │  │  ├── CondutorEntity.java
+              │    │  │  ├── ContatoEntity.java
+              │    │  │  ├── EnderecoEntity.java
+              │    │  │  ├── PessoaEntity.java
+              │    │  │  ├── PessoaFisicaEntity.java
+              │    │  │  └── VeiculoEntity.java
+              │    │  ├── impl
+              │    │  │  ├── CondutorRepositoryCustomImpl.java
+              │    │  │  └── VeiculoRepositoryCustomImpl.java
+              │    │  ├── mapper
+              │    │  │  ├── CondutorEntityMapper.java
+              │    │  │  ├── EnderecoResponseMapper.java
+              │    │  │  └── VeiculoEntityMapper.java
+              │    │  ├── PageRepositoryCustom.java
+              │    │  ├── VeiculoRepository.java
+              │    │  └── VeiculoRepositoryCustom.java
+              │    └── veiculo
+              │      ├── DeleteVeiculoAdapter.java
+              │      ├── FindVeiculoAdapter.java
+              │      ├── FindVeiculoByIdAdapter.java
+              │      ├── InsertVeiculoAdapter.java
+              │      └── UpdateVeiculoAdapter.java
+              ├── application
+              │  ├── core
+              │  │  ├── domain
+              │  │  │  ├── Condutor.java
+              │  │  │  ├── Contato.java
+              │  │  │  ├── Endereco.java
+              │  │  │  ├── enumeration
+              │  │  │  │  └── EstadoEnum.java
+              │  │  │  ├── funcionalinterface
+              │  │  │  │  └── Mapper.java
+              │  │  │  ├── paginacao
+              │  │  │  │  └── Page.java
+              │  │  │  ├── Pessoa.java
+              │  │  │  ├── PessoaFisica.java
+              │  │  │  ├── Veiculo.java
+              │  │  │  └── VeiculoFiltroConsultaPaginada.java
+              │  │  └── usecase
+              │  │    ├── condutor
+              │  │    │  ├── DeleteCondutorUseCase.java
+              │  │    │  ├── FindCondutorByIdUseCase.java
+              │  │    │  ├── FindCondutorUseCase.java
+              │  │    │  ├── InsertCondutorUseCase.java
+              │  │    │  └── UpdateCondutorUseCase.java
+              │  │    └── veiculo
+              │  │      ├── DeleteVeiculoUseCase.java
+              │  │      ├── FindVeiculoByIdUseCase.java
+              │  │      ├── FindVeiculoUseCase.java
+              │  │      ├── InsertVeiculoUseCase.java
+              │  │      └── UpdateVeiculoUseCase.java
+              │  └── ports
+              │    ├── in
+              │    │  ├── condutor
+              │    │  │  ├── DeleteCondutorInputPort.java
+              │    │  │  ├── FindCondutorByIdInputPort.java
+              │    │  │  ├── FindCondutorInputPort.java
+              │    │  │  ├── InsertCondutorInputPort.java
+              │    │  │  └── UpdateCondutorInputPort.java
+              │    │  └── veiculo
+              │    │    ├── DeleteVeiculoInputPort.java
+              │    │    ├── FindVeiculoByIdInputPort.java
+              │    │    ├── FindVeiculoInputPort.java
+              │    │    ├── InsertVeiculoInputPort.java
+              │    │    └── UpdateVeiculoInputPort.java
+              │    └── out
+              │      ├── condutor
+              │      │  ├── ConsultarEnderecoPorCepOutputPort.java
+              │      │  ├── DeleteCondutorOutputPort.java
+              │      │  ├── FindCondutorByIdOutputPort.java
+              │      │  ├── FindCondutorOutputPort.java
+              │      │  ├── InsertCondutorOutputPort.java
+              │      │  └── UpdateCondutorOutputPort.java
+              │      └── veiculo
+              │        ├── DeleteVeiculoOutputPort.java
+              │        ├── FindVeiculoByIdOutputPort.java
+              │        ├── FindVeiculoOutputPort.java
+              │        ├── InsertVeiculoOutputPort.java
+              │        └── UpdateVeiculoOutputPort.java
+              ├── config
+              │  ├── condutor
+              │  │  ├── DeleteCondutorConfig.java
+              │  │  ├── FindCondutorByIdConfig.java
+              │  │  ├── FindCondutorConfig.java
+              │  │  ├── InsertCondutorConfig.java
+              │  │  └── UpdateCondutorConfig.java
+              │  ├── feign
+              │  │  └── FeignConfiguration.java
+              │  ├── GroupedOpenApiConfig.java
+              │  └── veiculo
+              │    ├── DeleteVeiculoConfig.java
+              │    ├── FindVeiculoByIdConfig.java
+              │    ├── FindVeiculoConfig.java
+              │    ├── InsertVeiculoConfig.java
+              │    └── UpdateVeiculoConfig.java
+              ├── infrastructure
+              │  ├── configuration
+              │  │  ├── OpenAPIConfiguration.java
+              │  │  └── SwaggerConfigProperties.java
+              │  └── properties
+              │    └── ParktechProperties.java
+              └── ParkTechApplication.java
+```
+
+</details>
+
+#### Adapters
+
+Adaptadores na arquitetura hexagonal são componentes que traduzem dados e chamadas entre a aplicação e sistemas externos. Por exemplo, um adaptador pode converter dados do formato interno da aplicação para um formato compreendido por um banco de dados externo, permitindo que a lógica de negócios permaneça independente da implementação específica do banco de dados.
+
+Esses adaptadores são a implementação das dependências externas, como a interface do usuário/entrada e a infraestrutura/saída.
+
+- adapter/inbound: Nesta parte, encontram-se todos os controladores responsáveis pela entrada de dados na aplicação.
+
+- adapter/outbound: Aqui estão todas as integrações externas, como repositórios e integrações de API, que cuidam da saída de dados da aplicação.
+
+#### Domain
+
+O "domain" (domínio) na arquitetura hexagonal representa a parte central da aplicação, onde são implementadas as regras de negócios fundamentais. Nesta camada, a lógica específica da aplicação é encapsulada de forma independente de qualquer tecnologia ou detalhes de implementação externos, como interfaces de usuário ou bancos de dados.
+
+Neste contexto, as classes no domínio não possuem dependências externas, incluindo dependências de estrutura. A estrutura do domínio pode ser organizada da seguinte forma:
+
+- domain/domain: Aqui estão todas as entidades e objetos do domínio, sem nenhuma dependência externa.
+
+- domain/ports/inbound: Nesta parte, são definidas as interfaces que representam os casos de uso da aplicação.
+
+- domain/ports/outbound: Esta seção contém as interfaces que representam os serviços externos utilizados pela aplicação. Importante notar que aqui não há nenhuma nomenclatura ligada a tecnologias específicas.
+
+- domain/usecase: Nesta área, ocorre a implementação concreta dos casos de uso da aplicação.
+
+### Consideração
+
+> O desenvolvimento deste projeto está fundamentado na Arquitetura Hexagonal[^3], onde a principal preocupação reside em aplicar corretamente os conceitos de portas e adaptadores, estando integralmente alinhado com o princípio de inversão de dependências.
+> É crucial observar que os casos de uso, interfaces (portas) e domínios não devem apresentar dependências externas, incluindo aquelas relacionadas ao framework utilizado.
+> A proposta é assegurar que a lógica de negócios esteja completamente isolada desses fatores externos, garantindo assim sua integridade e independência.
 
 ## CI/CD
 
-
-  CI/CD é a abreviação de Continuous Integration/Continuous Delivery, traduzindo para o português: integração e entrega contínuas. 
-Trata-se de uma prática de desenvolvimento de software que visa tornar a integração de código mais eficiente por meio de builds e testes automatizados. [^1]
-    
+CI/CD é a abreviação de Continuous Integration/Continuous Delivery, traduzindo para o português: integração e entrega contínuas. Trata-se de uma prática de desenvolvimento de software que visa tornar a integração de código mais eficiente por meio de builds e testes automatizados. [^2]
 
 ### Github Action
 
-
-  GitHub Actions é uma plataforma de integração contínua e entrega contínua (CI/CD) que permite automatizar a sua compilação, testar e pipeline de implantação.
-É possível criar fluxos de trabalho que criam e testam cada pull request no seu repositório, ou implantar pull requests mesclados em produção.[^2]
-    
+GitHub Actions é uma plataforma de integração contínua e entrega contínua (CI/CD) que permite automatizar sua compilação, testes e pipeline de implantação. É possível criar fluxos de trabalho que compilarão e testarão cada solicitação de pull em seu repositório ou implantarão solicitações de pull mescladas em produção. [^3]
 
 #### Secrets
 
+Secrets são variáveis que você cria em uma organização, repositório ou ambiente de repositório. Os Secrets que você cria estão disponíveis para utilização nos fluxos de trabalho em GitHub Actions. GitHub Actions só poderá ler um Secret se você incluí-lo explicitamente em um fluxo de trabalho.
 
- Secrets são variáveis que você cria em uma organização, repositório ou ambiente de repositório. Os Secrets que você cria estão disponíveis 
-para utilização nos fluxos de trabalho em GitHub Actions. GitHub Actions só poderá ler um Secrets se você incluí-lo explicitamente em um fluxo de trabalho.
-
-    1. relação dos secrets que devem ser configurados no repositório:
-
-       a. Repositório Github:
-          * GIT_TOKEN 
-          * GIT_EMAIL
-
-       b. DockerHub
-          * DOCKERHUB_USERNAME
-          * DOCKERHUB_TOKEN
-
-       c. Park-tech
-          * PARK_TECH_PROFILE_ENVIRONMENT
-          * PARK_TECH_MONGODB_URI
-          * PARK_TECH_MONGODB_DATABASE
-
-## Arquitetura
-
-> O desenvolvimento deste projeto está fundamentado na Arquitetura Hexagonal[^3], onde a principal preocupação reside em
-> aplicar corretamente os
-> conceitos de portas e adaptadores, estando integralmente alinhado com o princípio de inversão de dependências.<br>
-> É crucial observar que os casos de uso, interfaces (portas) e domínios não devem apresentar dependências externas,
-> incluindo aquelas relacionadas ao framework utilizado.<br>
-> A proposta é assegurar que a lógica de negócios esteja completamente isolada desses fatores externos, garantindo assim
-> sua integridade e independência.
+1. Lista dos secrets que devem ser configurados no repositório:
+   - Repositório Github:
+      - GIT_TOKEN
+      - GIT_EMAIL
+   - DockerHub:
+     - DOCKERHUB_USERNAME
+     - DOCKERHUB_TOKEN
+   - Park-Tech:
+     - PARK_TECH_PROFILE_ENVIRONMENT
+     - PARK_TECH_MONGODB_URI
+     - PARK_TECH_MONGODB_DATABASE
 
 ## Referência
 
-[^1]: [CI/CD](<https://www.redhat.com/pt-br/topics/devops/what-is-ci-cd#:~:text=CI%2FCD%20%C3%A9%20a%20abrevia%C3%A7%C3%A3o,de%20builds%20e%20testes%20automatizados.>).
-[^2]: [GitHub Actions](<https://docs.github.com/pt/actions/learn-github-actions/understanding-github-actions>).
-[^3]: [Alistair in the "Hexagone" 1/3](https://www.youtube.com/watch?v=th4AgBcrEHA).
+[^1]: [Alistair in the "Hexagone" 1/3](https://www.youtube.com/watch?v=th4AgBcrEHA).
+
+[^2]: [CI/CD](<https://www.redhat.com/pt-br/topics/devops/what-is-ci-cd#:~:text=CI%2FCD%20%C3%A9%20a%20abrevia%C3%A7%C3%A3o,de%20builds%20e%20testes%20automatizados.>).
+
+[^3]: [GitHub Actions](<https://docs.github.com/pt/actions/learn-github-actions/understanding-github-actions>).
