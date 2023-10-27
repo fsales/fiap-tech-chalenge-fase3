@@ -7,7 +7,7 @@ on:
     branches:
       - 'feature/**'
     paths:
-      - park-tech/**
+      - 'park-tech/**'
 
 env:
 
