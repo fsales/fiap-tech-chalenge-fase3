@@ -29,6 +29,7 @@
     - [Consideração](#consideração)
   - [CI/CD](#cicd)
     - [Github Action](#github-action)
+      - [Pipeline CI/CD](#pipeline-cicd)
       - [Secrets](#secrets)
   - [Referência](#referência)
 
@@ -98,35 +99,35 @@ Antes de começar, você precisará ter as seguintes ferramentas instaladas em s
   - Bash
   - Outros
 
-- Clonar repositório
+- **Clonar repositório.**
   git [https://github.com/fsales/fiap-tech-chalenge-fase3.git](https://github.com/fsales/fiap-tech-chalenge-fase3.git).
 
 ```sh
 $ git clone  https://github.com/fsales/fiap-tech-chalenge-fase3.git  fiap-tech-chalenge-fase3
 ```
 
-- Acessar o diretório `fiap-tech-chalenge-fase3/park-tech`
+- **Acessar o diretório** `fiap-tech-chalenge-fase3/park-tech`.
 
 ```sh
 $ cd  /fiap-tech-chalenge-fase3/park-tech
 ```
 
-- Construir o projeto utilizando o maven.
+- **Construir o projeto utilizando o maven.**
 
 ```sh
 ./mvnw clean package
 ```
 
-- Inicie o serviço do Docker.
+- **Inicie o serviço do Docker.**
 
-- Acesse o diretório `/fiap-tech-challenge-fase3/docker-parktech-dev`. Nesse diretório, você encontrará o
-  arquivo `docker-compose.yaml` com as definições do `MongoDB` e do cliente `Mongo Express`.
+- **Acesse o diretório `/fiap-tech-challenge-fase3/docker-parktech-dev`. Nesse diretório, você encontrará o
+  arquivo `docker-compose.yaml` com as definições do `MongoDB` e do cliente `Mongo Express`.**
 
 ```sh
 $ cd  /fiap-tech-chalenge-fase3/docker-parktech-dev
 ```
 
-- Inicie o container utilizando o Docker Compose.
+- **Inicie o container utilizando o Docker Compose.**
 
 ```sh
 $ docker-compose -f docker-compose.yml up
@@ -137,8 +138,8 @@ $ docker-compose -f docker-compose.yml up
 > automaticamente os `contêineres` que estão definidos no arquivo `docker-compose.yaml` localizado no
 > diretório `/fiap-tech-challenge-fase3/docker-parktech-dev`.
 
-- Importar o projeto `fiap-tech-chalenge-fase3/park-tech` na sua IDE de desenvolvimento.
-- Configure as variáveis de ambiente na IDE de desenvolvimento.
+- **Importar o projeto `fiap-tech-chalenge-fase3/park-tech` na sua IDE de desenvolvimento.**
+- **Configure as variáveis de ambiente na IDE de desenvolvimento.**
   - Variáveis:
     - PARK_TECH_MONGODB_DATABASE:
 
@@ -338,9 +339,10 @@ Adaptadores na arquitetura hexagonal são componentes que traduzem dados e chama
 
 Esses adaptadores são a implementação das dependências externas, como a interface do usuário/entrada e a infraestrutura/saída.
 
-- adapter/inbound: Nesta parte, encontram-se todos os controladores responsáveis pela entrada de dados na aplicação.
+- **adapter/inbound:** Nesta parte, encontram-se todos os controladores responsáveis pela entrada de dados na aplicação.
 
-- adapter/outbound: Aqui estão todas as integrações externas, como repositórios e integrações de API, que cuidam da saída de dados da aplicação.
+- **adapter/outbound:** Aqui estão todas as integrações externas, como repositórios e integrações de API, que cuidam da
+  saída de dados da aplicação.
 
 #### Domain
 
@@ -348,11 +350,12 @@ O "domain" (domínio) na arquitetura hexagonal representa a parte central da apl
 
 Neste contexto, as classes no domínio não possuem dependências externas, incluindo dependências de estrutura. A estrutura do domínio pode ser organizada da seguinte forma:
 
-- domain/domain: Aqui estão todas as entidades e objetos do domínio, sem nenhuma dependência externa.
+- **domain/domain:** Aqui estão todas as entidades e objetos do domínio, sem nenhuma dependência externa.
 
-- domain/ports/inbound: Nesta parte, são definidas as interfaces que representam os casos de uso da aplicação.
+- **domain/ports/inbound:** Nesta parte, são definidas as interfaces que representam os casos de uso da aplicação.
 
-- domain/ports/outbound: Esta seção contém as interfaces que representam os serviços externos utilizados pela aplicação. Importante notar que aqui não há nenhuma nomenclatura ligada a tecnologias específicas.
+- **domain/ports/outbound:** Esta seção contém as interfaces que representam os serviços externos utilizados pela
+  aplicação. Importante notar que aqui não há nenhuma nomenclatura ligada a tecnologias específicas.
 
 - domain/usecase: Nesta área, ocorre a implementação concreta dos casos de uso da aplicação.
 
@@ -370,18 +373,37 @@ CI/CD é a abreviação de Continuous Integration/Continuous Delivery, traduzind
 
 GitHub Actions é uma plataforma de integração contínua e entrega contínua (CI/CD) que permite automatizar sua compilação, testes e pipeline de implantação. É possível criar fluxos de trabalho que compilarão e testarão cada solicitação de pull em seu repositório ou implantarão solicitações de pull mescladas em produção. [^3]
 
+#### Pipeline CI/CD
+
+1. **Publicação da Imagem no Docker Hub - Branch Develop [^4].**
+
+  - No início do desenvolvimento, é criada uma branch `feature/w.x.y.z` a partir da branch `develop`.
+  - Ao finalizar o desenvolvimento, é aberto um `Pull Request` da branch `feature/w.x.y.z` para `develop`.
+  - Quando esse `PR` for `mesclado`, o fluxo de trabalho `git-flow-publish-image-develop.yaml` do GitHub Actions será
+    acionado, gerando a imagem `Docker` e publicando-a no `Docker Hub`.
+
+2. **Criação da Release - Branch Main [^4].**
+
+  - Quando a validação das funcionalidades for realizada, é criada uma branch `release/w.x.y.z` a partir da
+    branch `develop`.
+  - Após mesclar esse `PR`, o fluxo de trabalho `create-release.yaml` do GitHub Actions será acionado, gerando a
+    imagem `Docker` e publicando-a no `Docker Hub`, além de criar automaticamente uma `tag` de versão `w.x.y.z`.
+
+3. **Endereço do Docker Hub:**
+  - [https://hub.docker.com/repository/docker/fosales/park-tech/general](https://hub.docker.com/repository/docker/fosales/park-tech/general)
+
 #### Secrets
 
 Secrets são variáveis que você cria em uma organização, repositório ou ambiente de repositório. Os Secrets que você cria estão disponíveis para utilização nos fluxos de trabalho em GitHub Actions. GitHub Actions só poderá ler um Secret se você incluí-lo explicitamente em um fluxo de trabalho.
 
-1. Lista dos secrets que devem ser configurados no repositório:
-   - Repositório Github:
+1. **Lista dos secrets que devem ser configurados no repositório:**
+  - **Repositório Github:**
       - GIT_TOKEN
       - GIT_EMAIL
-   - DockerHub:
+  - **DockerHub:***
      - DOCKERHUB_USERNAME
      - DOCKERHUB_TOKEN
-   - Park-Tech:
+  - **Park-Tech:**
      - PARK_TECH_PROFILE_ENVIRONMENT
      - PARK_TECH_MONGODB_URI
      - PARK_TECH_MONGODB_DATABASE
@@ -391,3 +413,4 @@ Secrets são variáveis que você cria em uma organização, repositório ou amb
 [^1]: [Alistair in the "Hexagone" 1/3](https://www.youtube.com/watch?v=th4AgBcrEHA).
 [^2]: [CI/CD](<https://www.redhat.com/pt-br/topics/devops/what-is-ci-cd#:~:text=CI%2FCD%20%C3%A9%20a%20abrevia%C3%A7%C3%A3o,de%20builds%20e%20testes%20automatizados.>).
 [^3]: [GitHub Actions](<https://docs.github.com/pt/actions/learn-github-actions/understanding-github-actions>).
+[^4]: [Git Flow - Alura](https://www.alura.com.br/artigos/git-flow-o-que-e-como-quando-utilizar)

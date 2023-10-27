@@ -1,7 +1,7 @@
 name: Publish Image Registry - Branch Develop
 
 on:
-  push:
+  pull_request:
     branches:
       - develop
     paths:
@@ -27,6 +27,7 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
 
   publish-image-registry:
+    if: contains(github.head_ref, 'feature/') && contains(github.base_ref, 'develop') && github.event.action == 'closed' && github.event.pull_request.merged == true
     needs: [github-context]
 
     name: Publish image docker registry
