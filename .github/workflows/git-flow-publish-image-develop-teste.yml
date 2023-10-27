@@ -64,6 +64,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set execute permissions for mvnw
+        run: chmod +x mvnw
+
       - name: Set Release version env variable
         run: |
           echo "IMAGE_TAG=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout).${{github.run_number}}" >> $GITHUB_ENV
