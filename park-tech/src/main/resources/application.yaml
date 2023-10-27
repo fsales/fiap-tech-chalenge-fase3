@@ -62,7 +62,7 @@ server:
 application:
   title: '@project.name@'
   version: '@project.version@'
-
+  teste: teste
   swagger:
     application:
       name: '@project.name@'
