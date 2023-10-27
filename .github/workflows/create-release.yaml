@@ -12,18 +12,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  github-context:
-    name: job-context
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+  #  github-context:
+  #    name: job-context
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - name: Dump GitHub context
+  #        env:
+  #          GITHUB_CONTEXT: ${{ toJSON(github) }}
+  #        run: echo "$GITHUB_CONTEXT"
 
   test:
-    if: contains(github.head_ref, 'release/') && contains(github.base_ref, 'main') && github.event.action == 'closed' && github.event.pull_request.merged == true
-    needs: [github-context]
+    if: contains(github.head_ref, 'release-') && contains(github.base_ref, 'main') && github.event.action == 'closed' && github.event.pull_request.merged == true
+    #    needs: [github-context]
 
     name: test
     runs-on: ubuntu-latest
