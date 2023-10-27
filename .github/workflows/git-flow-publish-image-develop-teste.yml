@@ -2,8 +2,10 @@ name: Publish Image Registry - Branch develop-teste
 
 on:
   pull_request:
+    types:
+      - closed
     branches:
-      - develop-teste
+      - 'feature/**'
     paths:
       - park-tech/**
 
