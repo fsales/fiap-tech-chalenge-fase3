@@ -390,7 +390,8 @@ GitHub Actions é uma plataforma de integração contínua e entrega contínua (
     imagem `Docker` e publicando-a no `Docker Hub`, além de criar automaticamente uma `tag` de versão `w.x.y.z`.
 
 3. **Endereço do Docker Hub:**
-  - [https://hub.docker.com/repository/docker/fosales/park-tech/general](https://hub.docker.com/repository/docker/fosales/park-tech/general)
+
+- [https://hub.docker.com/r/fosales/park-tech](https://hub.docker.com/r/fosales/park-tech)
 
 #### Secrets
 
