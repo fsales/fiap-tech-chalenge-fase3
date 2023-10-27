@@ -12,18 +12,23 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  github-context:
-    name: job-context
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+#  github-context:
+#    name: job-context
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Dump GitHub context
+#        env:
+#          GITHUB_CONTEXT: ${{ toJSON(github) }}
+#        run: echo "$GITHUB_CONTEXT"
 
   test:
-    if: contains(github.head_ref, 'release/') && contains(github.base_ref, 'main') && github.event.action == 'closed' && github.event.pull_request.merged == true
-    needs: [github-context]
+    if: |
+      github.event_name == 'pull_request' &&
+      contains(github.event.pull_request.base.ref, 'main') &&
+      contains(github.event.pull_request.head.ref, 'release/') &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.merged == true
+#    needs: [github-context]
 
     name: test
     runs-on: ubuntu-latest
@@ -176,7 +181,12 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
   tag:
     needs: [ new-version ]
-    if: contains(github.head_ref, 'release-') && contains(github.base_ref, 'main') && github.event.action == 'closed' && github.event.pull_request.merged == true
+    if: |
+      github.event_name == 'pull_request' &&
+      contains(github.event.pull_request.base.ref, 'main') &&
+      contains(github.event.pull_request.head.ref, 'release/') &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.tag.outputs.tag }}

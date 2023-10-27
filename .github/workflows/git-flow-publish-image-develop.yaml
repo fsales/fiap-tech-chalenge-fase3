@@ -37,6 +37,7 @@ jobs:
       github.event_name == 'pull_request' &&
       contains(github.event.pull_request.base.ref, 'develop') &&
       contains(github.event.pull_request.head.ref, 'feature/') &&
+      github.event.action == 'closed' &&
       github.event.pull_request.merged == true
 
     #    needs: [github-context]
