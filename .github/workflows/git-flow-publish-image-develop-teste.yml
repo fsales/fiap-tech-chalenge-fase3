@@ -4,10 +4,8 @@ on:
   pull_request:
     types:
       - closed
-    branches:
-      - 'feature/**'
     paths:
-      - park-tech/**
+      - 'park-tech/**'
 
 env:
 
@@ -19,19 +17,29 @@ concurrency:
 
 jobs:
 
-  github-context:
-    if: contains(github.head_ref, 'feature/') &&  contains(github.base_ref, 'develop-teste') && github.event.action == 'closed' && github.event.pull_request.merged == true
-    name: job-context
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+  #  github-context:
+  #    if: |
+  #      github.event_name == 'pull_request' &&
+  #      contains(github.event.pull_request.base.ref, 'develop-teste') &&
+  #      contains(github.event.pull_request.head.ref, 'feature/') &&
+  #      github.event.pull_request.merged == true
+  #
+  #    name: job-context
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - name: Dump GitHub context
+  #        env:
+  #          GITHUB_CONTEXT: ${{ toJSON(github) }}
+  #        run: echo "$GITHUB_CONTEXT"
 
   publish-image-registry:
-    if: contains(github.head_ref, 'feature/') &&  contains(github.base_ref, 'develop-teste') && github.event.action == 'closed' && github.event.pull_request.merged == true
-    needs: [github-context]
+    if: |
+      github.event_name == 'pull_request' &&
+      contains(github.event.pull_request.base.ref, 'develop-teste') &&
+      contains(github.event.pull_request.head.ref, 'feature/') &&
+      github.event.pull_request.merged == true
+
+    #    needs: [github-context]
 
     name: Publish image docker registry
     runs-on: ubuntu-latest

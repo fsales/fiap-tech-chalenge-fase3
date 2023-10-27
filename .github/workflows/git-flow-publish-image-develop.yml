@@ -17,17 +17,17 @@ concurrency:
 
 jobs:
 
-  github-context:
-    name: job-context
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+#  github-context:
+#    name: job-context
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Dump GitHub context
+#        env:
+#          GITHUB_CONTEXT: ${{ toJSON(github) }}
+#        run: echo "$GITHUB_CONTEXT"
 
   publish-image-registry:
-    needs: [github-context]
+#    needs: [github-context]
 
     name: Publish image docker registry
     runs-on: ubuntu-latest
