@@ -21,7 +21,8 @@
     - [🏬 Instituição](#-instituição)
     - [🧑🏻‍🎓Curso](#curso)
     - [Aluno](#aluno)
-  - [Ferramentas](#ferramentas)
+  - [Pré-requisitos](#pré-requisitos)
+  - [Como Executar](#como-executar)
   - [Arquitetura Hexagonal](#arquitetura-hexagonal)
     - [Adapters](#adapters)
     - [Domain](#domain)
@@ -49,9 +50,10 @@
 [![logo eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)](https://www.eclipse.org/)
 [![logo intellij](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)](https://www.jetbrains.com/pt-br/idea/)
 
-[![logo swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)](https://swagger.io/)
-[![logo postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)](https://www.postman.com/)
 [![logo curl](https://img.shields.io/badge/curl-093754.svg?style=for-the-badge&logo=curl-idea&logoColor=white)](https://curl.se/)
+[![logo Google-chrome](https://img.shields.io/badge/Google_chrome-4285F4?style=for-the-badge&logo=Google-chrome&logoColor=white)](https://www.google.pt/intl/pt-PT/chrome/?brand=FHFK&gclid=CjwKCAjwnOipBhBQEiwACyGLuu4mCvDZcz9NfyfYpBcLdbDQXuIG2WbyC85RYuP3SLSiNGUcNE9hyRoCXxkQAvD_BwE&gclsrc=aw.ds)
+[![logo postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)](https://www.postman.com/)
+[![logo swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)](https://swagger.io/)
 
 ## 🏫 Dados Acadêmicos
 
@@ -71,9 +73,93 @@ Pós-Graduação em Arquitetura e Desenvolvimento Java
 [![Linkedin Badge](https://img.shields.io/badge/-Fábio%20Sales-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/fabio-oliveira-sales/)](https://www.linkedin.com/in/fabio-oliveira-sales/)
 [![Gmail Badge](https://img.shields.io/badge/-fabio.oliveira.sales@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:fabio.oliveira.sales@gmail.com)](mailto:fabio.oliveira.sales@gmail.com)
 
-## Ferramentas
+## Pré-requisitos
 
-- [Chrome](https://www.google.pt/intl/pt-PT/chrome/?brand=FKPE&gclid=EAIaIQobChMI8cT_xsr1_wIVA2GRCh0hxwthEAAYASAAEgK0h_D_BwE&gclsrc=aw.ds)
+Antes de começar, você precisará ter as seguintes ferramentas instaladas em sua máquina:
+
+- Java 17
+- Git
+- Docker
+- IDE de desenvolvimento:
+  - Eclipse
+  - IntelliJ IDEA
+  - VSCode
+  - Outras
+- Navegador:
+  - Google Chrome
+  - Outro
+- Postman, CURL ou utilize o Swagger
+
+## Como Executar
+
+- Abrir o terminal
+  - Git Bash
+  - CMD
+  - Bash
+  - Outros
+
+- Clonar repositório
+  git [https://github.com/fsales/fiap-tech-chalenge-fase3.git](https://github.com/fsales/fiap-tech-chalenge-fase3.git).
+
+```sh
+$ git clone  https://github.com/fsales/fiap-tech-chalenge-fase3.git  fiap-tech-chalenge-fase3
+```
+
+- Acessar o diretório `fiap-tech-chalenge-fase3/park-tech`
+
+```sh
+$ cd  /fiap-tech-chalenge-fase3/park-tech
+```
+
+- Construir o projeto utilizando o maven.
+
+```sh
+./mvnw clean package
+```
+
+- Inicie o serviço do Docker.
+
+- Acesse o diretório `/fiap-tech-challenge-fase3/docker-parktech-dev`. Nesse diretório, você encontrará o
+  arquivo `docker-compose.yaml` com as definições do `MongoDB` e do cliente `Mongo Express`.
+
+```sh
+$ cd  /fiap-tech-chalenge-fase3/docker-parktech-dev
+```
+
+- Inicie o container utilizando o Docker Compose.
+
+```sh
+$ docker-compose -f docker-compose.yml up
+```
+
+> Caso a variável de ambiente `PARK_TECH_PROFILE_ENVIRONMENT` esteja definida com o valor `dev`, o plugin
+> do [Spring Boot Docker Compose](https://spring.io/blog/2023/06/21/docker-compose-support-in-spring-boot-3-1) iniciará
+> automaticamente os `contêineres` que estão definidos no arquivo `docker-compose.yaml` localizado no
+> diretório `/fiap-tech-challenge-fase3/docker-parktech-dev`.
+
+- Importar o projeto `fiap-tech-chalenge-fase3/park-tech` na sua IDE de desenvolvimento.
+- Configure as variáveis de ambiente na IDE de desenvolvimento.
+  - Variáveis:
+    - PARK_TECH_MONGODB_DATABASE:
+
+      Nome do Banco de Dados utilizado pela aplicação.
+
+    - PARK_TECH_MONGODB_URI:
+
+      URI de conexão ao seu banco de dados MongoDB.
+
+    - PARK_TECH_PROFILE_ENVIRONMENT:
+
+      Perfis de aplicativos usando a propriedade spring.profiles.active no arquivo application.yml. Isso permite que
+      você defina diferentes configurações e comportamentos para diferentes ambientes (por exemplo, desenvolvimento,
+      produção, teste).
+
+      - Valores possíveis para a variável `PARK_TECH_PROFILE_ENVIRONMENT`:
+        - dev
+        - cloud-atlas
+
+> O usuário e senha do `MongoDB` foram definidos no `docker-compose.yaml` e podem ser consultados no
+> arquivo `fiap-tech-challenge-fase3/docker-parktech-dev/mongo-config/.env-mongodb`.
 
 ## Arquitetura Hexagonal
 

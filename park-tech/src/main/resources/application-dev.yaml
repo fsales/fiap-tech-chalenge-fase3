@@ -5,13 +5,9 @@ spring:
 
   data:
     mongodb:
-      host: ${PARK_TECH_MONGODB_HOST:"localhost"}
-      port: ${PARK_TECH_MONGODB_PORT:27017}
-      database: ${PARK_TECH_MONGODB_DATABASE:parktech}
-      username: ${PARK_TECH_MONGODB_USERNAME:parktech}
-      password: ${PARK_TECH_MONGODB_PASSWORD:parktech}
+      uri: ${PARK_TECH_MONGODB_URI}
+      database: ${PARK_TECH_MONGODB_DATABASE}
       authentication-database : ${PARK_TECH_MONGODB_AUTHENTICATION_DATABASE:admin}
-
 
   docker:
     compose:
