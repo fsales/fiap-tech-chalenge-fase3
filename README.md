@@ -31,6 +31,8 @@
     - [Github Action](#github-action)
       - [Pipeline CI/CD](#pipeline-cicd)
       - [Secrets](#secrets)
+  - [Park Tech - Sistema de Gestão de Estacinamentos](#park-tech---sistema-de-gestão-de-estacinamentos)
+    - [Integração com Serviços](#integração-com-serviços)
   - [Referência](#referência)
 
 ## 🛠️ Linguagem e ferramentas
@@ -408,6 +410,16 @@ Secrets são variáveis que você cria em uma organização, repositório ou amb
      - PARK_TECH_PROFILE_ENVIRONMENT
      - PARK_TECH_MONGODB_URI
      - PARK_TECH_MONGODB_DATABASE
+
+## Park Tech - Sistema de Gestão de Estacinamentos
+
+O sistema Park Tech é responsável por gerenciar o tempo de estacionamento dos veículos, calcular os valores devidos e
+armazenar essas informações para fins de fiscalização.
+
+### Integração com Serviços
+
+- ViaCEP
+  > O [ViaCEP](https://viacep.com.br/) é um serviço para consulta gratuita de código postais de endereçamento do Brasil.
 
 ## Referência
 

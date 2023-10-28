@@ -1,6 +1,7 @@
 spring:
   data:
     mongodb:
+      auto-index-creation: true
       uri: ${PARK_TECH_MONGODB_URI}
       database: ${PARK_TECH_MONGODB_DATABASE}
 
