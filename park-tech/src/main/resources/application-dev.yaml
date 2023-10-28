@@ -8,12 +8,12 @@ spring:
       auto-index-creation: true
       uri: ${PARK_TECH_MONGODB_URI}
       database: ${PARK_TECH_MONGODB_DATABASE}
-      authentication-database : ${PARK_TECH_MONGODB_AUTHENTICATION_DATABASE:admin}
+  #      authentication-database : ${PARK_TECH_MONGODB_AUTHENTICATION_DATABASE:admin}
 
   docker:
     compose:
       enabled: ${PARK_TECH_SPRING_DOCKER_COMPOSE_ENABLE:true}
-      file: docker-parktech-dev/docker-compose.yaml
+      file: docker-compose/docker-compose-mongodb.yaml
 
 
 logging:
