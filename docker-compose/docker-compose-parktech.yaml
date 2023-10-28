@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  paktech-app:
+    container_name: paktech
+    image: fosales/park-tech:latest
+    depends_on:
+      - paktech-mongo
+    restart: always
+    ports:
+      - 8080:8080
+    env_file:
+      - parktech-config/.env-parktech
+    networks:
+      - spring-docker-compose-parktech
+
+  paktech-mongo:
+    container_name: paktech_mongodb
+    build:
+      context: .
+      dockerfile: mongo-config/Dockerfile
+    restart: always
+    ports:
+      - 27017:27017
+    env_file:
+      - mongo-config/.env-mongodb
+    networks:
+      - spring-docker-compose-parktech
+
+networks:
+  spring-docker-compose-parktech:

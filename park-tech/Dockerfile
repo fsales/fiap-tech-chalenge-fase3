@@ -24,7 +24,7 @@ EXPOSE 8080
 ENTRYPOINT ["java","-cp","app:app/lib/*","br.com.fsales.parktech.ParkTechApplication"]
 
 
-#mkdir target/extracted
-#java -Djarmode=layertools -jar target/*.jar extract --destination target/extracted
-#docker build -t fosales/parktech:latest -t fosales/park-tech:0.0.1-SNAPSHOT .
+# mkdir target/extracted
+# java -Djarmode=layertools -jar target/*.jar extract --destination target/extracted
+# docker build -t fosales/park-tech:latest -t fosales/park-tech:0.0.1-SNAPSHOT .
 # docker  build -f ./park-tech/Dockerfile -t fosales/park-tech:latest ./park-tech/
