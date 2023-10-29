@@ -129,7 +129,7 @@ $ docker-compose -f ./docker-compose/docker-compose-parktech.yaml down -v
 
 * As configurações do Park Tech está definido no arquivo:
 
-    - [.env-parktech](`/fiap-tech-challenge-fase3/docker-compose/parktech-config/.env-parktech`)
+    - [.env-parktech](/fiap-tech-challenge-fase3/docker-compose/parktech-config/.env-parktech)
 
 > A variável de ambiente `PARK_TECH_SPRING_DOCKER_COMPOSE_ENABLE` deve ser configurado com o valor **false**
 
@@ -166,8 +166,8 @@ $ docker-compose -f ./docker-compose/docker-compose-mongodb.yaml down -v
 
 * As configurações do MongoDB e Mongo Express estão definidos no arquivo:
 
-    - [.env-mongodb](`/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongodb`)
-    - [.env-mongoexpress](`/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongoexpress`)
+    - [.env-mongodb](/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongodb)
+    - [.env-mongoexpress](/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongoexpress)
 
 > Caso a variável de ambiente `PARK_TECH_PROFILE_ENVIRONMENT` esteja definida com o valor `dev`, o plugin
 > do [Spring Boot Docker Compose](https://spring.io/blog/2023/06/21/docker-compose-support-in-spring-boot-3-1) iniciará
