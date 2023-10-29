@@ -12,7 +12,7 @@
 	<artifactId>park-tech</artifactId>
 	<version>0.0.1</version>
 	<name>park-tech</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Tech Challenge da Fase III - Sistema de Gerenciamento de Estacinamentos</description>
 	<properties>
 		<encoding>UTF-8</encoding>
 		<java.version>17</java.version>
