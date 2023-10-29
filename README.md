@@ -110,7 +110,7 @@ $ git clone  https://github.com/fsales/fiap-tech-chalenge-fase3.git  fiap-tech-c
 
 ### Executar imagem Docker do Park Tech
 
-> No diretório `/fiap-tech-challenge-fase3/docker-compose` você encontrará o
+> No diretório [`/fiap-tech-challenge-fase3/docker-compose`](/docker-compose/) você encontrará o
 > arquivo [`docker-compose-parktech.yaml`](/docker-compose/docker-compose-parktech.yaml) com as definições da aplicação
 > Park Tech.
 
@@ -150,7 +150,7 @@ $ cd  /fiap-tech-chalenge-fase3/park-tech
 
 3. **MongoDB utilizando o Docker.**
 
-> No diretório `/fiap-tech-challenge-fase3/docker-compose` você encontrará o
+> No diretório [`/fiap-tech-challenge-fase3/docker-compose`](/docker-compose/) você encontrará o
 > arquivo [`docker-compose-mongodb.yaml`](/docker-compose/docker-compose-mongodb.yaml) com as definições do `MongoDB` e
 > do cliente `Mongo Express`.
 
@@ -173,8 +173,9 @@ $ docker-compose -f ./docker-compose/docker-compose-mongodb.yaml down -v
 
 > Caso a variável de ambiente `PARK_TECH_PROFILE_ENVIRONMENT` esteja definida com o valor `dev`, o plugin
 > do [Spring Boot Docker Compose](https://spring.io/blog/2023/06/21/docker-compose-support-in-spring-boot-3-1) iniciará
-> automaticamente os `contêineres` que estão definidos no arquivo `docker-compose-mongodb.yaml` localizado no
-> diretório `/fiap-tech-challenge-fase3/docker-compose`.
+> automaticamente os `contêineres` que estão definidos no
+> arquivo [`docker-compose-mongodb.yaml`](/docker-compose/docker-compose-mongodb.yaml) localizado no
+> diretório [`/fiap-tech-challenge-fase3/docker-compose`](/docker-compose/).
 
 4. **Importar o projeto `fiap-tech-chalenge-fase3/park-tech` na sua IDE de desenvolvimento.**
 
