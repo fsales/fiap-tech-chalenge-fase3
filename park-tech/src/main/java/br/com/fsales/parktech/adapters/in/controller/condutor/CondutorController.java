@@ -6,14 +6,21 @@ import br.com.fsales.parktech.adapters.in.controller.condutor.request.CondutorRe
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.DadosAtualizarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.request.ListarCondutorRequest;
 import br.com.fsales.parktech.adapters.in.controller.condutor.response.CondutorResponse;
+import br.com.fsales.parktech.adapters.in.controller.exception.response.ViolationResponse;
 import br.com.fsales.parktech.application.ports.in.condutor.DeleteCondutorInputPort;
 import br.com.fsales.parktech.application.ports.in.condutor.FindCondutorByIdInputPort;
 import br.com.fsales.parktech.application.ports.in.condutor.FindCondutorInputPort;
 import br.com.fsales.parktech.application.ports.in.condutor.InsertCondutorInputPort;
 import br.com.fsales.parktech.application.ports.in.condutor.UpdateCondutorInputPort;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +36,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
+@Tag(name = Swagger.API_CONDUTOR_TAG_NAME, description = Swagger.API_CONDUTOR_TAG_DESCRIPTION)
 
 @RestController
 @RequestMapping(ParktechResource.CONDUTOR)
@@ -49,6 +58,16 @@ public class CondutorController {
 
 	private final CondutorMapper condutorMapper;
 
+	@Operation(summary = Swagger.API_CONDUTOR_OPERATION_SUMMARY_CADASTRAR,
+			responses = {
+					@ApiResponse(responseCode = "201", description = "Registro criado",
+							content = @Content(mediaType = "application/json",
+									schema = @Schema(implementation = CondutorResponse.class))),
+					@ApiResponse(responseCode = "500", description = "Bad Request",
+							content = @Content(mediaType = "*/*",
+									schema = @Schema(implementation = ViolationResponse.class))) },
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true,
+					content = @Content(schema = @Schema(implementation = CondutorRequest.class))))
 	@PostMapping
 	public ResponseEntity<CondutorResponse> cadastrar(@RequestBody @Valid CondutorRequest condutorRequest,
 			UriComponentsBuilder uriComponentsBuilder) {
@@ -66,6 +85,16 @@ public class CondutorController {
 		return ResponseEntity.created(uri).body(condutorResponse);
 	}
 
+	@Operation(summary = Swagger.API_CONDUTOR_OPERATION_SUMMARY_ATUALIZAR,
+			responses = {
+					@ApiResponse(responseCode = "200", description = "Registro atualizado",
+							content = @Content(mediaType = "application/json",
+									schema = @Schema(implementation = CondutorResponse.class))),
+					@ApiResponse(responseCode = "500", description = "Bad Request",
+							content = @Content(mediaType = "*/*",
+									schema = @Schema(implementation = ViolationResponse.class))) },
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true,
+					content = @Content(schema = @Schema(implementation = DadosAtualizarCondutorRequest.class))))
 	@PutMapping
 	public ResponseEntity<CondutorResponse> atualizar(
 			@Valid @RequestBody DadosAtualizarCondutorRequest condutorRequest) {
@@ -76,6 +105,13 @@ public class CondutorController {
 		return ResponseEntity.ok(condutorResponse);
 	}
 
+	@Operation(summary = Swagger.API_CONDUTOR_OPERATION_SUMMARY_EXCLUIR,
+			responses = {
+					@ApiResponse(responseCode = "204", description = "Registro excluído",
+							content = @Content(mediaType = "*/*")),
+					@ApiResponse(responseCode = "500", description = "Bad Request",
+							content = @Content(mediaType = "*/*",
+									schema = @Schema(implementation = ViolationResponse.class))) })
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id) {
 		log.debug("Deletando os dados do condutor: {}", id);
@@ -84,6 +120,14 @@ public class CondutorController {
 		return ResponseEntity.noContent().build();
 	}
 
+	@Operation(summary = Swagger.API_CONDUTOR_OPERATION_SUMMARY_DETALHAR,
+			responses = {
+					@ApiResponse(responseCode = "200", description = "Registro encontrado",
+							content = @Content(mediaType = "application/json",
+									schema = @Schema(implementation = CondutorResponse.class))),
+					@ApiResponse(responseCode = "500", description = "Bad Request",
+							content = @Content(mediaType = "*/*",
+									schema = @Schema(implementation = ViolationResponse.class))) })
 	@GetMapping("/{id}")
 	public ResponseEntity<CondutorResponse> detalhar(@PathVariable String id) {
 		log.debug("detalhar dados do condutor: {}", id);
@@ -93,6 +137,17 @@ public class CondutorController {
 		return ResponseEntity.ok(condutorMapper.toCondutorResponse(condutor));
 	}
 
+	@Operation(summary = Swagger.API_CONDUTOR_OPERATION_SUMMARY_LISTAR,
+			responses = {
+					@ApiResponse(responseCode = "200", description = "Registro encontrado",
+							content = @Content(mediaType = "application/json",
+									schema = @Schema(implementation = CondutorResponse.class))),
+					@ApiResponse(responseCode = "204", description = "Registro não encontrado",
+							content = @Content(mediaType = "*/*")),
+					@ApiResponse(responseCode = "500", description = "Bad Request",
+							content = @Content(mediaType = "*/*",
+									schema = @Schema(implementation = ViolationResponse.class))) })
+	@PageableAsQueryParam
 	@GetMapping
 	public ResponseEntity<Page<CondutorResponse>> listarTodos(ListarCondutorRequest condutorRequest,
 			@PageableDefault(sort = { "nome" }) Pageable pageable) {
