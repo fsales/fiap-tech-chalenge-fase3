@@ -129,7 +129,7 @@ $ docker-compose -f ./docker-compose/docker-compose-parktech.yaml down -v
 
 * As configurações do Park Tech está definido no arquivo:
 
-    - [.env-parktech](/fiap-tech-challenge-fase3/docker-compose/parktech-config/.env-parktech)
+    - [.env-parktech](fiap-tech-challenge-fase3/docker-compose/parktech-config/.env-parktech)
 
 > A variável de ambiente `PARK_TECH_SPRING_DOCKER_COMPOSE_ENABLE` deve ser configurado com o valor **false**
 
@@ -199,7 +199,7 @@ $ docker-compose -f ./docker-compose/docker-compose-mongodb.yaml down -v
 
 > O usuário e senha do `MongoDB` foram definidos
 > no `/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongodb` e podem ser consultados no
-> arquivo [.env-mongoexpress](`/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongoexpress`).
+> arquivo [.env-mongoexpress](/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongoexpress).
 
 ## Arquitetura Hexagonal
 
