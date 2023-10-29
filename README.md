@@ -111,7 +111,8 @@ $ git clone  https://github.com/fsales/fiap-tech-chalenge-fase3.git  fiap-tech-c
 ### Executar imagem Docker do Park Tech
 
 > No diretório `/fiap-tech-challenge-fase3/docker-compose` você encontrará o
-> arquivo `docker-compose-parktech.yaml` com as definições da aplicação Park Tech.
+> arquivo [`docker-compose-parktech.yaml`](/docker-compose/docker-compose-parktech.yaml) com as definições da aplicação
+> Park Tech.
 
 1. **Park Tech utilizando o Docker.**
 
@@ -150,7 +151,8 @@ $ cd  /fiap-tech-chalenge-fase3/park-tech
 3. **MongoDB utilizando o Docker.**
 
 > No diretório `/fiap-tech-challenge-fase3/docker-compose` você encontrará o
-> arquivo `docker-compose-mongodb.yaml` com as definições do `MongoDB` e do cliente `Mongo Express`.
+> arquivo [`docker-compose-mongodb.yaml`](/docker-compose/docker-compose-mongodb.yaml) com as definições do `MongoDB` e
+> do cliente `Mongo Express`.
 
 * Iniciar o container do MongoDB
 
