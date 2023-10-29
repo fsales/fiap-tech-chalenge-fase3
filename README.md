@@ -199,7 +199,7 @@ $ docker-compose -f ./docker-compose/docker-compose-mongodb.yaml down -v
 
 > O usuário e senha do `MongoDB` foram definidos
 > no `/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongodb` e podem ser consultados no
-> arquivo [.env-mongoexpress](/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongoexpress).
+> arquivo [.env-mongoexpress](/docker-compose/mongo-config/.env-mongoexpress).
 
 ## Arquitetura Hexagonal
 
