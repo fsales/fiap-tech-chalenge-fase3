@@ -33,6 +33,10 @@
       - [Secrets](#secrets)
   - [Park Tech - Sistema de Gestão de Estacinamentos](#park-tech---sistema-de-gestão-de-estacinamentos)
     - [Integração com Serviços](#integração-com-serviços)
+    - [:hammer: Funcionalidades do projeto](#hammer-funcionalidades-do-projeto)
+    - [Endpoints](#endpoints)
+        - [Requisição HTTP](#requisição-http)
+        - [API](#api)
   - [Referência](#referência)
 
 ## 🛠️ Linguagem e ferramentas
@@ -467,6 +471,32 @@ armazenar essas informações para fins de fiscalização.
 
 - ViaCEP
   > O [ViaCEP](https://viacep.com.br/) é um serviço para consulta gratuita de código postais de endereçamento do Brasil.
+
+### :hammer: Funcionalidades do projeto
+
+- `API de condutores`: Os condutores podem se registrar no sistema, associando seus dados pessoais, como nome, endereço
+  e informações de contato.
+- `API de veiculos`: Os condutores podem registrar no sistema vários veículos.
+
+### Endpoints
+
+Descrição dos endpoints disponíveis na aplicação Park Tech.
+
+#### Requisição HTTP
+
+> Para fazer as requisições HTTP pode ser utilizado:
+
+1. [CURL](https://curl.se/docs/manual.html)
+
+2. [Swagger](http://127.0.0.1:8080/swagger-ui/index.html)
+3. [Postman](https://www.postman.com/)
+    1. [Collections](doc/postman-collections/Fase%203%20-%20API%20Park%20Tech.postman_collection.json)
+    2. [Environment](doc/postman-collections/APi%20Park%20Tech%20-%20Dev.postman_environment.json)
+
+#### API
+
+- [API de condutores](doc/api-condutores.md)
+- [API de veiculos](doc/api-veiculos.md)
 
 ## Referência
 
