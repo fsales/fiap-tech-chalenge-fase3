@@ -23,9 +23,9 @@
     - [Aluno](#aluno)
   - [Pré-requisitos](#pré-requisitos)
   - [Como Executar](#como-executar)
+      - [Executar imagem Docker do Park Tech](#executar-imagem-docker-do-park-tech)
+      - [IDE de desenvolvimento](#ide-de-desenvolvimento)
   - [Arquitetura Hexagonal](#arquitetura-hexagonal)
-    - [Adapters](#adapters)
-    - [Domain](#domain)
     - [Consideração](#consideração)
   - [CI/CD](#cicd)
     - [Github Action](#github-action)
@@ -95,74 +95,111 @@ Antes de começar, você precisará ter as seguintes ferramentas instaladas em s
 
 ## Como Executar
 
-- Abrir o terminal
+1. Abrir o terminal
   - Git Bash
   - CMD
   - Bash
   - Outros
 
-- **Clonar repositório.**
+2. **Clonar repositório.**
   git [https://github.com/fsales/fiap-tech-chalenge-fase3.git](https://github.com/fsales/fiap-tech-chalenge-fase3.git).
 
 ```sh
 $ git clone  https://github.com/fsales/fiap-tech-chalenge-fase3.git  fiap-tech-chalenge-fase3
 ```
 
-- **Acessar o diretório** `fiap-tech-chalenge-fase3/park-tech`.
+### Executar imagem Docker do Park Tech
+
+> No diretório `/fiap-tech-challenge-fase3/docker-compose` você encontrará o
+> arquivo `docker-compose-parktech.yaml` com as definições da aplicação Park Tech.
+
+1. **Park Tech utilizando o Docker.**
+
+* Iniciar o container do Park Tech
+
+```sh
+$ docker-compose -f ./docker-compose/docker-compose-parktech.yaml up -d
+```
+
+* Parar o container do MongoDB
+
+```sh
+$ docker-compose -f ./docker-compose/docker-compose-parktech.yaml down -v
+```
+
+* As configurações do Park Tech está definido no arquivo:
+
+    - [.env-parktech](`/fiap-tech-challenge-fase3/docker-compose/parktech-config/.env-parktech`)
+
+> A variável de ambiente `PARK_TECH_SPRING_DOCKER_COMPOSE_ENABLE` deve ser configurado com o valor **false**
+
+### IDE de desenvolvimento
+
+1. **Acessar o diretório** `fiap-tech-chalenge-fase3/park-tech`.
 
 ```sh
 $ cd  /fiap-tech-chalenge-fase3/park-tech
 ```
 
-- **Construir o projeto utilizando o maven.**
+2. **Construir o projeto utilizando o maven.**
 
 ```sh
 ./mvnw clean package
 ```
 
-- **Inicie o serviço do Docker.**
+3. **MongoDB utilizando o Docker.**
 
-- **Acesse o diretório `/fiap-tech-challenge-fase3/docker-parktech-dev`. Nesse diretório, você encontrará o
-  arquivo `docker-compose.yaml` com as definições do `MongoDB` e do cliente `Mongo Express`.**
+> No diretório `/fiap-tech-challenge-fase3/docker-compose` você encontrará o
+> arquivo `docker-compose-mongodb.yaml` com as definições do `MongoDB` e do cliente `Mongo Express`.
 
-```sh
-$ cd  /fiap-tech-chalenge-fase3/docker-parktech-dev
-```
-
-- **Inicie o container utilizando o Docker Compose.**
+* Iniciar o container do MongoDB
 
 ```sh
-$ docker-compose -f docker-compose.yml up
+$ docker-compose -f ./docker-compose/docker-compose-mongodb.yaml up -d
 ```
+
+* Parar o container do MongoDB
+
+```sh
+$ docker-compose -f ./docker-compose/docker-compose-mongodb.yaml down -v
+```
+
+* As configurações do MongoDB e Mongo Express estão definidos no arquivo:
+
+    - [.env-mongodb](`/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongodb`)
+    - [.env-mongoexpress](`/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongoexpress`)
 
 > Caso a variável de ambiente `PARK_TECH_PROFILE_ENVIRONMENT` esteja definida com o valor `dev`, o plugin
 > do [Spring Boot Docker Compose](https://spring.io/blog/2023/06/21/docker-compose-support-in-spring-boot-3-1) iniciará
-> automaticamente os `contêineres` que estão definidos no arquivo `docker-compose.yaml` localizado no
-> diretório `/fiap-tech-challenge-fase3/docker-parktech-dev`.
+> automaticamente os `contêineres` que estão definidos no arquivo `docker-compose-mongodb.yaml` localizado no
+> diretório `/fiap-tech-challenge-fase3/docker-compose`.
 
-- **Importar o projeto `fiap-tech-chalenge-fase3/park-tech` na sua IDE de desenvolvimento.**
-- **Configure as variáveis de ambiente na IDE de desenvolvimento.**
-  - Variáveis:
-    - PARK_TECH_MONGODB_DATABASE:
+4. **Importar o projeto `fiap-tech-chalenge-fase3/park-tech` na sua IDE de desenvolvimento.**
 
-      Nome do Banco de Dados utilizado pela aplicação.
+5. **Configure as variáveis de ambiente na IDE de desenvolvimento.**
 
-    - PARK_TECH_MONGODB_URI:
+    - Variáveis:
+        - PARK_TECH_MONGODB_DATABASE:
 
-      URI de conexão ao seu banco de dados MongoDB.
+          Nome do Banco de Dados utilizado pela aplicação.
 
-    - PARK_TECH_PROFILE_ENVIRONMENT:
+        - PARK_TECH_MONGODB_URI:
 
-      Perfis de aplicativos usando a propriedade spring.profiles.active no arquivo application.yml. Isso permite que
-      você defina diferentes configurações e comportamentos para diferentes ambientes (por exemplo, desenvolvimento,
-      produção, teste).
+          URI de conexão ao seu banco de dados MongoDB.
 
-      - Valores possíveis para a variável `PARK_TECH_PROFILE_ENVIRONMENT`:
-        - dev
-        - cloud-atlas
+        - PARK_TECH_PROFILE_ENVIRONMENT:
 
-> O usuário e senha do `MongoDB` foram definidos no `docker-compose.yaml` e podem ser consultados no
-> arquivo `fiap-tech-challenge-fase3/docker-parktech-dev/mongo-config/.env-mongodb`.
+          Perfis de aplicativos usando a propriedade spring.profiles.active no arquivo application.yml. Isso permite que
+          você defina diferentes configurações e comportamentos para diferentes ambientes (por exemplo, desenvolvimento,
+          produção, teste).
+
+            - Valores possíveis para a variável `PARK_TECH_PROFILE_ENVIRONMENT`:
+                - dev
+                - cloud-atlas
+
+> O usuário e senha do `MongoDB` foram definidos
+> no `/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongodb` e podem ser consultados no
+> arquivo [.env-mongoexpress](`/fiap-tech-challenge-fase3/docker-compose/mongo-config/.env-mongoexpress`).
 
 ## Arquitetura Hexagonal
 
@@ -335,7 +372,8 @@ Essencialmente, a arquitetura hexagonal é um padrão que separa a lógica de ne
 
 </details>
 
-#### Adapters
+<details>
+<summary>Adapters</summary>
 
 Adaptadores na arquitetura hexagonal são componentes que traduzem dados e chamadas entre a aplicação e sistemas externos. Por exemplo, um adaptador pode converter dados do formato interno da aplicação para um formato compreendido por um banco de dados externo, permitindo que a lógica de negócios permaneça independente da implementação específica do banco de dados.
 
@@ -346,7 +384,11 @@ Esses adaptadores são a implementação das dependências externas, como a inte
 - **adapter/outbound:** Aqui estão todas as integrações externas, como repositórios e integrações de API, que cuidam da
   saída de dados da aplicação.
 
-#### Domain
+</details>
+
+<details>
+
+<summary>Domain</summary>
 
 O "domain" (domínio) na arquitetura hexagonal representa a parte central da aplicação, onde são implementadas as regras de negócios fundamentais. Nesta camada, a lógica específica da aplicação é encapsulada de forma independente de qualquer tecnologia ou detalhes de implementação externos, como interfaces de usuário ou bancos de dados.
 
@@ -360,6 +402,8 @@ Neste contexto, as classes no domínio não possuem dependências externas, incl
   aplicação. Importante notar que aqui não há nenhuma nomenclatura ligada a tecnologias específicas.
 
 - domain/usecase: Nesta área, ocorre a implementação concreta dos casos de uso da aplicação.
+
+</details>
 
 ### Consideração
 
