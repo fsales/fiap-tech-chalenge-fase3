@@ -123,7 +123,7 @@ jobs:
           git config  --local user.email ${{ secrets.GIT_EMAIL }}
           git add .
           git commit -m "[Github Action] updated version in pom.xml"
-          git push
+  #          git push
 
   Publish-image-registry:
     needs: [ new-version ]
