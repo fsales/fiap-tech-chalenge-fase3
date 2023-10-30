@@ -1,0 +1,287 @@
+{
+  "info": {
+    "_postman_id": "a43a6fcc-d637-4f49-ac9a-fc8516efdcb6",
+    "name": "Fase 3 - API Park Tech",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "2550833"
+  },
+  "item": [
+    {
+      "name": "API de cadastro de condutores",
+      "item": [
+        {
+          "name": "Cadastrar",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nome\" : \"Rafael\",\r\n  \"cpf\": \"12073188761\",\r\n  \"dataNascimento\": \"01/08/2001\",\r\n  \"numeroHabilitacao\": \"02628824471\",\r\n  \"endereco\": {\r\n      \"cep\": \"01001000\",\r\n      \"rua\": \"villa nova\",\r\n      \"logradouro\": \"Praça da Sé\",\r\n      \"numero\": 32,\r\n      \"complemento\": \"lado ímpar\",\r\n      \"bairro\": \"Sé\"\r\n\r\n  },\r\n  \"contato\": {\r\n      \"email\": \"baudilia2182@uorak.com\",\r\n      \"telefone\": \"(24)3871-7919\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/condutores",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "condutores"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id\": \"65388e8c9e71041ef831fe95\",\r\n  \"nome\" : \"Rafael Souza\",\r\n  \"cpf\": \"12073188761\",\r\n  \"dataNascimento\": \"01/08/2001\",\r\n  \"numeroHabilitacao\": \"02628824471\",\r\n  \"endereco\": {\r\n      \"cep\": \"01001000\",\r\n      \"rua\": \"villa nova 2\",\r\n      \"logradouro\": \"Praça da Sé 2\",\r\n      \"numero\": 32,\r\n      \"complemento\": \"lado ímpar 2\",\r\n      \"bairro\": \"Sé\"\r\n\r\n  },\r\n  \"contato\": {\r\n      \"email\": \"baudilia21822@uorak.com.br\",\r\n      \"telefone\": \"(61)3871-7919\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/condutores",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "condutores"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Detalhar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/condutores/65388e8c9e71041ef831fe95",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "condutores",
+                "65388e8c9e71041ef831fe95"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/condutores/65388e8c9e71041ef831fe95",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "condutores",
+                "65388e8c9e71041ef831fe95"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/condutores?nome=Rafael",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "condutores"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "10",
+                  "disabled": true
+                },
+                {
+                  "key": "nome",
+                  "value": "Rafael"
+                },
+                {
+                  "key": "cpf",
+                  "value": "81906561044",
+                  "disabled": true
+                },
+                {
+                  "key": "numeroHabilitacao",
+                  "value": "72637624477",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Api de cadastro de veiculos",
+      "item": [
+        {
+          "name": "Cadastrar",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"modelo\": \"Onix LT\",\r\n  \"marca\": \"Chevrolet\",\r\n  \"placa\": \"VSP4T88\",\r\n  \"renavam\": \"2534467890\",\r\n  \"condutor\": {\r\n      \"id\": \"653b1ba58289bd3c500c33a8\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/veiculos",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "veiculos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id\": \"6539aeb706ddb549353874c0\",\r\n  \"modelo\": \"Virtus Highline GTS\",\r\n  \"marca\": \"Volkswagen Group\",\r\n  \"placa\": \"SST4T88\",\r\n  \"renavam\": \"1234467890\",\r\n  \"condutor\": {\r\n      \"id\": \"6536d7609826445f718f38eb\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/veiculos",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "veiculos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/veiculos/65387272c614e265859b9ff5",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "veiculos",
+                "65387272c614e265859b9ff5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Detalhar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/veiculos/653876ea4bb3a15f1239046c",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "veiculos",
+                "653876ea4bb3a15f1239046c"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/veiculos?idCondutor=6536d7609826445f718f38eb",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "veiculos"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0",
+                  "disabled": true
+                },
+                {
+                  "key": "size",
+                  "value": "10",
+                  "disabled": true
+                },
+                {
+                  "key": "placa",
+                  "value": "SST4T88",
+                  "disabled": true
+                },
+                {
+                  "key": "renavam",
+                  "value": "1234467890",
+                  "disabled": true
+                },
+                {
+                  "key": "modelo",
+                  "value": "virtus",
+                  "disabled": true
+                },
+                {
+                  "key": "idCondutor",
+                  "value": "6536d7609826445f718f38eb"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
