@@ -170,7 +170,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}
-          tags: ${{needs.new-version.outputs.new-release-version}}
+          tags: |
+            latest
+            ${{needs.new-version.outputs.new-release-version}}
 
       - name: Build and push
         uses: docker/build-push-action@v5
