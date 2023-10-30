@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - develop-test
-    paths:
-      - park-tech/**
+#    paths:
+#      - park-tech/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
