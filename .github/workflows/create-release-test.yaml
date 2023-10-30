@@ -7,6 +7,9 @@ on:
 #    paths:
 #      - park-tech/**
 
+env:
+  IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/park-tech
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
