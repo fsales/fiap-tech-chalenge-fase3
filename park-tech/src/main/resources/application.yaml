@@ -64,7 +64,7 @@ application:
       name: '@project.name@'
       description: '@project.description@'
       version: '@project.version@'
-      teste: dfa
+      teste: df
 
   client:
     endereco:
