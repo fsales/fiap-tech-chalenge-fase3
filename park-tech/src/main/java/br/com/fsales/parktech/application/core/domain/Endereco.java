@@ -114,7 +114,7 @@ public class Endereco {
 	 */
 	public String getEstado() {
 		var estadoEnum = EstadoEnum.getEnum(uf);
-		return estadoEnum == null ? "" : estadoEnum.capital();
+		return estadoEnum == null ? "" : estadoEnum.nome();
 	}
 
 
