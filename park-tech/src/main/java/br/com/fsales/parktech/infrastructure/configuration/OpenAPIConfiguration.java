@@ -9,29 +9,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OpenAPIConfiguration {
 
-    private final SwaggerConfigProperties swaggerConfigProperties;
+	private final SwaggerConfigProperties swaggerConfigProperties;
 
-    public OpenAPIConfiguration(SwaggerConfigProperties swaggerConfigProperties) {
-        this.swaggerConfigProperties = swaggerConfigProperties;
-    }
+	public OpenAPIConfiguration(SwaggerConfigProperties swaggerConfigProperties) {
+		this.swaggerConfigProperties = swaggerConfigProperties;
+	}
 
-    @Bean
-    public OpenAPI customOpenAPI(
-    ) {
-        var application = swaggerConfigProperties.getApplication();
-        return new OpenAPI()
-                .components(new Components())
-                .info(
-                        new Info()
-                                .title(
-                                        application.name()
-                                )
-                                .version(
-                                        application.version()
-                                )
-                                .description(
-                                        application.description()
-                                )
-                );
-    }
+	@Bean
+	public OpenAPI customOpenAPI() {
+		var application = swaggerConfigProperties.getApplication();
+		return new OpenAPI().components(new Components())
+			.info(new Info().title(application.name())
+				.version(application.version())
+				.description(application.description()));
+	}
+
 }
