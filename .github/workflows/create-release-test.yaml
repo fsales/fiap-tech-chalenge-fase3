@@ -12,20 +12,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  #  github-context:
-  #    name: job-context
-  #    runs-on: ubuntu-latest
-  #    steps:
-  #      - name: Dump GitHub context
-  #        env:
-  #          GITHUB_CONTEXT: ${{ toJSON(github) }}
-  #        run: echo "$GITHUB_CONTEXT"
-
   test:
     if: contains(github.head_ref, 'develop-test/') && contains(github.base_ref, 'teste') && github.event.action == 'closed' && github.event.pull_request.merged == true
-    #    needs: [github-context]
-
-    name: test
+    name: Test
     runs-on: ubuntu-latest
 
     defaults:
@@ -37,7 +26,6 @@ jobs:
       packages: write
 
     steps:
-
       - name: Check out the repo
         uses: actions/checkout@v4
 
@@ -47,9 +35,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-          settings-path: ${{ github.workspace }} # location for the settings.xml file
-        # Cache and restore Maven dependencies
+          server-id: github
+          settings-path: ${{ github.workspace }}
 
       - name: Cache Maven packages
         uses: actions/cache@v3
@@ -62,10 +49,8 @@ jobs:
         run: mvn test --file pom.xml
 
   new-version:
-
     needs: [ test ]
-
-    name: new-version
+    name: New Version
     runs-on: ubuntu-latest
 
     permissions:
@@ -92,9 +77,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-          settings-path: ${{ github.workspace }} # location for the settings.xml file
-        # Cache and restore Maven dependencies
+          server-id: github
+          settings-path: ${{ github.workspace }}
 
       - name: Cache Maven packages
         uses: actions/cache@v3
@@ -109,49 +93,42 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
         run: |
           mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit --file pom.xml
-          echo "new-release-version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+          echo "new-release-version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 
       - name: Echo Number New Release
         run: |
-          echo "Relese number: ${{steps.set-release-version.outputs.new-release-version}}"
+          echo "Release number: ${{ steps.set-release-version.outputs.new-release-version }}"
 
       - name: Push Action
         run: |
-          git config  --local user.name 'github-actions'
-          git config  --local user.email ${{ secrets.GIT_EMAIL }}
+          git config --local user.name 'github-actions'
+          git config --local user.email ${{ secrets.GIT_EMAIL }}
           git add .
-          git commit -m "[Github Action] updated version in pom.xml"
+          git commit -m "[GitHub Action] updated version in pom.xml"
           git push
 
   publish-image-registry:
     needs: [ new-version ]
-
-    name: Publish image docker registry
+    name: Publish Image Docker Registry
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_TAG: ''
+      IMAGE_TAG: ${{ needs.new-version.outputs.new-release-version }}
 
-    # permissão
     permissions:
       contents: read
       packages: write
 
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         working-directory: park-tech
         shell: bash
-    steps:
 
+    steps:
       - name: "Check out the repo"
         uses: "actions/checkout@v4"
         with:
           fetch-depth: 0
-
-      - name: Echo Number New Release
-        run: |
-          echo "Relese number: ${{needs.new-version.outputs.new-release-version}}"
 
       - name: "docker login"
         uses: "docker/login-action@v2"
@@ -164,7 +141,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}
-          tags: ${{needs.new-version.outputs.new-release-version}}
+          tags: ${{ env.IMAGE_TAG }}
 
       - name: Build and push
         uses: docker/build-push-action@v5
@@ -174,27 +151,33 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
   tag:
     needs: [ new-version ]
     if: contains(github.head_ref, 'develop-test') && contains(github.base_ref, 'teste') && github.event.action == 'closed' && github.event.pull_request.merged == true
+    name: Extract Branch Tag
     runs-on: ubuntu-latest
+
     outputs:
       tag: ${{ steps.tag.outputs.tag }}
-    steps:develop
-    - name: Extract branch tag
-      id: tag
-      run: |
-        BRANCH=${{ github.head_ref }}
-        TAG="${BRANCH//release-/""}"3
-        echo $TAG
-        echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+    steps:
+      - name: Extract branch tag
+        id: tag
+        run: |
+          BRANCH=${{ github.head_ref }}
+          TAG="${BRANCH//release-/""}"3
+          echo $TAG
+          echo "tag=$TAG" >> $GITHUB_ENV
+          echo "::set-output name=tag::$TAG"
 
   release:
-    needs:
-      [ tag ]
+    needs: [ tag ]
+    name: Create Release
     runs-on: ubuntu-latest
     env:
-      TAG: ${{ needs.TAG.outputs.tag }}
+      TAG: ${{ needs.tag.outputs.tag }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
