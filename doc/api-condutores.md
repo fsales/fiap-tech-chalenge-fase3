@@ -1,5 +1,17 @@
 # API de Condutores
 
+- [API de Condutores](#api-de-condutores)
+  - [Criar Condutor](#criar-condutor)
+    - [\[POST\] /condutores](#post-condutores)
+  - [Atualizar Condutor](#atualizar-condutor)
+    - [\[PUT\] /condutores](#put-condutores)
+  - [Excluir Condutor](#excluir-condutor)
+    - [\[DELETE\] /condutores/{id}](#delete-condutoresid)
+  - [Detalhar Condutor](#detalhar-condutor)
+    - [\[GET\] /condutores/{id}](#get-condutoresid)
+  - [Listar Condutor](#listar-condutor)
+    - [\[GET\] /condutores](#get-condutores)
+
 A API de Condutores tem como objetivo permitir o registro no sistema de informações, incluindo dados pessoais como nome,
 endereço e informações de contato.
 
