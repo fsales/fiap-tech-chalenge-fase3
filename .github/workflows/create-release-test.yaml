@@ -59,11 +59,11 @@ jobs:
   #      - name: List all directory contents
   #        run: |
   #          ls -la
-  New-version:
+  new-version:
 
     needs: [ test ]
 
-    name: new-version
+    name: New Version
     runs-on: ubuntu-latest
 
     permissions:
@@ -126,7 +126,7 @@ jobs:
           git push
 
   Publish-image-registry:
-    needs: [ New-version ]
+    needs: [ new-version ]
 
     name: Publish image docker registry
     runs-on: ubuntu-latest
