@@ -1,6 +1,6 @@
 package br.com.fsales.parktech.adapters.in.controller.condutor;
 
-public final class Swagger {
+public final class CondutorSwagger {
 
 	public static final String API_CONDUTOR_TAG_NAME = "API de Condutores";
 

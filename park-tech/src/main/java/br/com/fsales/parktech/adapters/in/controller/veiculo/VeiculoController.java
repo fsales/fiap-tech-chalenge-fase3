@@ -1,6 +1,7 @@
 package br.com.fsales.parktech.adapters.in.controller.veiculo;
 
 import br.com.fsales.parktech.adapters.in.controller.ParktechResource;
+import br.com.fsales.parktech.adapters.in.controller.exception.response.ViolationResponse;
 import br.com.fsales.parktech.adapters.in.controller.veiculo.mapper.VeiculoMapper;
 import br.com.fsales.parktech.adapters.in.controller.veiculo.request.DadosAtualizarVeiculoRequest;
 import br.com.fsales.parktech.adapters.in.controller.veiculo.request.VeiculoFiltroConsultaPaginadaRequest;
@@ -11,9 +12,15 @@ import br.com.fsales.parktech.application.ports.in.veiculo.FindVeiculoByIdInputP
 import br.com.fsales.parktech.application.ports.in.veiculo.FindVeiculoInputPort;
 import br.com.fsales.parktech.application.ports.in.veiculo.InsertVeiculoInputPort;
 import br.com.fsales.parktech.application.ports.in.veiculo.UpdateVeiculoInputPort;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +36,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
+@Tag(name = VeiculoSwagger.API_VEICULO_TAG_NAME, description = VeiculoSwagger.API_VEICULO_TAG_DESCRIPTION)
 
 @RestController
 @RequestMapping(ParktechResource.VEICULO)
@@ -49,6 +58,16 @@ public class VeiculoController {
 
 	private final VeiculoMapper veiculoMapper;
 
+	@Operation(summary = VeiculoSwagger.API_VEICULO_OPERATION_SUMMARY_CADASTRAR,
+			responses = {
+					@ApiResponse(responseCode = "201", description = "Registro criado",
+							content = @Content(mediaType = "application/json",
+									schema = @Schema(implementation = VeiculoResponse.class))),
+					@ApiResponse(responseCode = "500", description = "Bad Request",
+							content = @Content(mediaType = "*/*",
+									schema = @Schema(implementation = ViolationResponse.class))) },
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true,
+					content = @Content(schema = @Schema(implementation = VeiculoRequest.class))))
 	@PostMapping
 	public ResponseEntity<VeiculoResponse> cadastrar(@RequestBody @Valid VeiculoRequest veiculoRequest,
 			UriComponentsBuilder uriComponentsBuilder) {
@@ -64,6 +83,16 @@ public class VeiculoController {
 		return ResponseEntity.created(uri).body(veiculoResponse);
 	}
 
+	@Operation(summary = VeiculoSwagger.API_VEICULO_OPERATION_SUMMARY_ATUALIZAR,
+			responses = {
+					@ApiResponse(responseCode = "200", description = "Registro atualizado",
+							content = @Content(mediaType = "application/json",
+									schema = @Schema(implementation = VeiculoResponse.class))),
+					@ApiResponse(responseCode = "500", description = "Bad Request",
+							content = @Content(mediaType = "*/*",
+									schema = @Schema(implementation = ViolationResponse.class))) },
+			requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true,
+					content = @Content(schema = @Schema(implementation = DadosAtualizarVeiculoRequest.class))))
 	@PutMapping
 	public ResponseEntity<VeiculoResponse> atualizar(@RequestBody @Valid DadosAtualizarVeiculoRequest veiculoRequest) {
 		log.debug("Alterando dados do veiculo: {}", veiculoRequest);
@@ -75,6 +104,13 @@ public class VeiculoController {
 		return ResponseEntity.ok(veiculoResponse);
 	}
 
+	@Operation(summary = VeiculoSwagger.API_VEICULO_OPERATION_SUMMARY_EXCLUIR,
+			responses = {
+					@ApiResponse(responseCode = "204", description = "Registro excluído",
+							content = @Content(mediaType = "*/*")),
+					@ApiResponse(responseCode = "500", description = "Bad Request",
+							content = @Content(mediaType = "*/*",
+									schema = @Schema(implementation = ViolationResponse.class))) })
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id) {
 		log.debug("Deletando os dados do veiculo: {}", id);
@@ -83,6 +119,14 @@ public class VeiculoController {
 		return ResponseEntity.noContent().build();
 	}
 
+	@Operation(summary = VeiculoSwagger.API_VEICULO_OPERATION_SUMMARY_DETALHAR,
+			responses = {
+					@ApiResponse(responseCode = "200", description = "Registro encontrado",
+							content = @Content(mediaType = "application/json",
+									schema = @Schema(implementation = VeiculoResponse.class))),
+					@ApiResponse(responseCode = "500", description = "Bad Request",
+							content = @Content(mediaType = "*/*",
+									schema = @Schema(implementation = ViolationResponse.class))) })
 	@GetMapping("/{id}")
 	public ResponseEntity<VeiculoResponse> detalhar(@PathVariable String id) {
 		log.debug("detalhar dados do veiculo: {}", id);
@@ -92,6 +136,17 @@ public class VeiculoController {
 		return ResponseEntity.ok(veiculoMapper.toVeiculoResponse(veiculoResponse));
 	}
 
+	@Operation(summary = VeiculoSwagger.API_VEICULO_OPERATION_SUMMARY_LISTAR,
+			responses = {
+					@ApiResponse(responseCode = "200", description = "Registro encontrado",
+							content = @Content(mediaType = "application/json",
+									schema = @Schema(implementation = VeiculoResponse.class))),
+					@ApiResponse(responseCode = "204", description = "Registro não encontrado",
+							content = @Content(mediaType = "*/*")),
+					@ApiResponse(responseCode = "500", description = "Bad Request",
+							content = @Content(mediaType = "*/*",
+									schema = @Schema(implementation = ViolationResponse.class))) })
+	@PageableAsQueryParam
 	@GetMapping
 	public ResponseEntity<Page<VeiculoResponse>> listarTodos(VeiculoFiltroConsultaPaginadaRequest veiculoRequest,
 			@PageableDefault Pageable pageable) {

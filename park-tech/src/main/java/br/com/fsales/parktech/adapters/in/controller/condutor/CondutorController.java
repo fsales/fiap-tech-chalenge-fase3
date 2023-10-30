@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@Tag(name = Swagger.API_CONDUTOR_TAG_NAME, description = Swagger.API_CONDUTOR_TAG_DESCRIPTION)
+@Tag(name = CondutorSwagger.API_CONDUTOR_TAG_NAME, description = CondutorSwagger.API_CONDUTOR_TAG_DESCRIPTION)
 
 @RestController
 @RequestMapping(ParktechResource.CONDUTOR)
@@ -58,7 +58,7 @@ public class CondutorController {
 
 	private final CondutorMapper condutorMapper;
 
-	@Operation(summary = Swagger.API_CONDUTOR_OPERATION_SUMMARY_CADASTRAR,
+	@Operation(summary = CondutorSwagger.API_CONDUTOR_OPERATION_SUMMARY_CADASTRAR,
 			responses = {
 					@ApiResponse(responseCode = "201", description = "Registro criado",
 							content = @Content(mediaType = "application/json",
@@ -85,7 +85,7 @@ public class CondutorController {
 		return ResponseEntity.created(uri).body(condutorResponse);
 	}
 
-	@Operation(summary = Swagger.API_CONDUTOR_OPERATION_SUMMARY_ATUALIZAR,
+	@Operation(summary = CondutorSwagger.API_CONDUTOR_OPERATION_SUMMARY_ATUALIZAR,
 			responses = {
 					@ApiResponse(responseCode = "200", description = "Registro atualizado",
 							content = @Content(mediaType = "application/json",
@@ -105,7 +105,7 @@ public class CondutorController {
 		return ResponseEntity.ok(condutorResponse);
 	}
 
-	@Operation(summary = Swagger.API_CONDUTOR_OPERATION_SUMMARY_EXCLUIR,
+	@Operation(summary = CondutorSwagger.API_CONDUTOR_OPERATION_SUMMARY_EXCLUIR,
 			responses = {
 					@ApiResponse(responseCode = "204", description = "Registro excluído",
 							content = @Content(mediaType = "*/*")),
@@ -120,7 +120,7 @@ public class CondutorController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@Operation(summary = Swagger.API_CONDUTOR_OPERATION_SUMMARY_DETALHAR,
+	@Operation(summary = CondutorSwagger.API_CONDUTOR_OPERATION_SUMMARY_DETALHAR,
 			responses = {
 					@ApiResponse(responseCode = "200", description = "Registro encontrado",
 							content = @Content(mediaType = "application/json",
@@ -137,7 +137,7 @@ public class CondutorController {
 		return ResponseEntity.ok(condutorMapper.toCondutorResponse(condutor));
 	}
 
-	@Operation(summary = Swagger.API_CONDUTOR_OPERATION_SUMMARY_LISTAR,
+	@Operation(summary = CondutorSwagger.API_CONDUTOR_OPERATION_SUMMARY_LISTAR,
 			responses = {
 					@ApiResponse(responseCode = "200", description = "Registro encontrado",
 							content = @Content(mediaType = "application/json",
