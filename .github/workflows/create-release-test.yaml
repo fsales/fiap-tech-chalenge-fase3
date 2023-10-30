@@ -38,6 +38,13 @@ jobs:
           server-id: github
           settings-path: ${{ github.workspace }}
 
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2-
+
       - name: "Check out the repo"
         uses: "actions/checkout@v4"
         with:
@@ -48,8 +55,69 @@ jobs:
       - name: Build with Maven
         run: ./mvnw test --file pom.xml
 
-      - name: List all directory contents
-        run: |
-          ls -la
+  #      - name: List all directory contents
+  #        run: |
+  #          ls -la
+  new-version:
 
+    needs: [ test ]
+
+    name: new-version
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    defaults:
+      run:
+        working-directory: park-tech
+        shell: bash
+
+    outputs:
+      new-release-version: ${{ steps.set-release-version.outputs.new-release-version }}
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GIT_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        id: set-up-jdk
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+          settings-path: ${{ github.workspace }} # location for the settings.xml file
+        # Cache and restore Maven dependencies
+
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2-
+
+      - name: Set Release version env variable
+        id: set-release-version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+        run: |
+          ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit --file pom.xml
+          echo "new-release-version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+
+      - name: Echo Number New Release
+        run: |
+          echo "Relese number: ${{steps.set-release-version.outputs.new-release-version}}"
+
+      - name: Push Action
+        run: |
+          git config  --local user.name 'github-actions'
+          git config  --local user.email ${{ secrets.GIT_EMAIL }}
+          git add .
+          git commit -m "[Github Action] updated version in pom.xml"
+          git push
 
