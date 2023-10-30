@@ -7,6 +7,8 @@ spring:
   data:
     mongodb:
       auto-index-creation: true
+      uri: ${PARK_TECH_MONGODB_URI}
+      database: ${PARK_TECH_MONGODB_DATABASE}
 
   docker:
     compose:
@@ -50,7 +52,7 @@ management:
 server:
   error:
     include-stacktrace: never # desabilitar stacktrace no json que e retornado em caso de erro
-  port: 8080
+  port: ${EXPOSE_PORT:8080}
 
 ##
 application:

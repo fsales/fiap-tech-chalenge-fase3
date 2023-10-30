@@ -14,15 +14,18 @@ RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 FROM eclipse-temurin:17-jdk-alpine
 VOLUME /tmp
+
+ENV EXPOSE_PORT=8080
+
 ARG DEPENDENCY=/workspace/app/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
-EXPOSE 8080
+EXPOSE $EXPOSE_PORT
 
-ENTRYPOINT ["java","-cp","app:app/lib/*","br.com.fsales.parktech.ParkTechApplication"]
-
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -cp app:app/lib/* br.com.fsales.parktech.ParkTechApplication ${0} ${@}"]
+#ENTRYPOINT ["java","-cp","app:app/lib/*","br.com.fsales.parktech.ParkTechApplication"]
 
 # mkdir target/extracted
 # java -Djarmode=layertools -jar target/*.jar extract --destination target/extracted
