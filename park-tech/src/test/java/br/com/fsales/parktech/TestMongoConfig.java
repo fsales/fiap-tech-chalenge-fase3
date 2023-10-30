@@ -3,9 +3,11 @@ package br.com.fsales.parktech;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 @Configuration
+@Profile("test")
 public class TestMongoConfig {
 
 	@Bean
