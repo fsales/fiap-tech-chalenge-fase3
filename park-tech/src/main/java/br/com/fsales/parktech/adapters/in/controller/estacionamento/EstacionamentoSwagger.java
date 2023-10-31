@@ -1,0 +1,7 @@
+package br.com.fsales.parktech.adapters.in.controller.estacionamento;
+
+public class EstacionamentoSwagger {
+    public static final String API_ESTACIONAMENTO_TAG_NAME = "API de Estacionamentos";
+
+    public static final String API_ESTACIONAMENTO_TAG_DESCRIPTION = "tem como objetivo  permite iniciar o período de estacionamento, oferecendo opções de tempo fixo ou por hora.";
+}

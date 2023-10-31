@@ -24,9 +24,15 @@ public class GroupedOpenApiConfig {
 	}
 
 	@Bean
+	public GroupedOpenApi estacionamentoOpenApi() {
+		String[] paths = { String.format("%s%s", ParktechResource.ESTACIONAMENTO, PATH_POSFIXO) };
+		return GroupedOpenApi.builder().group("estacionamentos").pathsToMatch(paths).build();
+	}
+
+
+	@Bean
 	public GroupedOpenApi veiculoOpenApi() {
 		String[] paths = { String.format("%s%s", ParktechResource.VEICULO, PATH_POSFIXO) };
 		return GroupedOpenApi.builder().group("Veiculos").pathsToMatch(paths).build();
 	}
-
 }

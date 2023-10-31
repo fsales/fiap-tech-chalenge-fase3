@@ -15,5 +15,4 @@ public final class CondutorSwagger {
 	public static final String API_CONDUTOR_OPERATION_SUMMARY_DETALHAR = "Detalhar Condutor";
 
 	public static final String API_CONDUTOR_OPERATION_SUMMARY_LISTAR = "Listar Condutor";
-
 }
