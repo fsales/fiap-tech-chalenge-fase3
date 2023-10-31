@@ -193,7 +193,7 @@ jobs:
         id: tag
         run: |
           BRANCH=${{ github.head_ref }}
-          TAG="${BRANCH//release-/""}"
+          TAG="${BRANCH//develop-test/""}"
           echo $TAG
           echo "tag=$TAG" >> $GITHUB_OUTPUT
 
