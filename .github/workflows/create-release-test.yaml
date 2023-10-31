@@ -206,6 +206,8 @@ jobs:
     needs:
       [ tag ]
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ needs.tag.outputs.tag }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -217,14 +219,14 @@ jobs:
       - name: Push tag
         uses: mathieudutour/github-tag-action@v6.1
         with:
-          custom_tag: ${{ needs.tag.outputs.tag }}
+          custom_tag: ${{ env.TAG }}
           github_token: ${{ secrets.GIT_TOKEN }}
 
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
-          name: ${{ needs.tag.outputs.tag }}
-          tag_name: ${{ needs.tag.outputs.tag }}
+          name: ${{ env.TAG }}
+          tag_name: ${{ env.TAG }}
           token: ${{ secrets.GIT_TOKEN }}
 
 
