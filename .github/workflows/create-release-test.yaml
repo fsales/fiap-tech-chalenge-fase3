@@ -128,60 +128,60 @@ jobs:
           git commit -m "[Github Action] updated version in pom.xml"
   #          git push
 
-  #  Publish-image-registry:
-  #    needs: [ new-version ]
-  #
-  #    name: Publish image docker registry
-  #    runs-on: ubuntu-latest
-  #
-  #    env:
-  #      IMAGE_TAG: ''
-  #
-  #    # permissão
-  #    permissions:
-  #      contents: read
-  #      packages: write
-  #
-  #    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-  #    defaults:
-  #      run:
-  #        working-directory: park-tech
-  #        shell: bash
-  #
-  #    steps:
-  #
-  #      - name: "Check out the repo"
-  #        uses: "actions/checkout@v4"
-  #        with:
-  #          fetch-depth: 0
-  #
-  #      - name: Echo Number New Release
-  #        run: |
-  #          echo "Relese number: ${{needs.new-version.outputs.new-release-version}}"
-  #
-  #      - name: "docker login"
-  #        uses: "docker/login-action@v2"
-  #        with:
-  #          username: ${{ secrets.DOCKERHUB_USERNAME }}
-  #          password: ${{ secrets.DOCKERHUB_TOKEN }}
-  #
-  #      - name: Extract metadata (tags, labels) for Docker
-  #        id: meta
-  #        uses: docker/metadata-action@v5
-  #        with:
-  #          images: ${{ env.IMAGE_NAME }}
-  #          tags: |
-  #            latest
-  #            ${{needs.new-version.outputs.new-release-version}}
-  #
-  #      - name: Build and push
-  #        uses: docker/build-push-action@v5
-  #        with:
-  #          context: ./park-tech
-  #          file: ./park-tech/Dockerfile
-  #          push: true
-  #          tags: ${{ steps.meta.outputs.tags }}
-  #          labels: ${{ steps.meta.outputs.labels }}
+  Publish-image-registry:
+    needs: [ new-version ]
+
+    name: Publish image docker registry
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE_TAG: ''
+
+    # permissão
+    permissions:
+      contents: read
+      packages: write
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        working-directory: park-tech
+        shell: bash
+
+    steps:
+
+      - name: "Check out the repo"
+        uses: "actions/checkout@v4"
+        with:
+          fetch-depth: 0
+
+      - name: Echo Number New Release
+        run: |
+          echo "Relese number: ${{needs.new-version.outputs.new-release-version}}"
+
+      - name: "docker login"
+        uses: "docker/login-action@v2"
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE_NAME }}
+          tags: |
+            latest
+            ${{needs.new-version.outputs.new-release-version}}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./park-tech
+          file: ./park-tech/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
   tag:
     needs: [ new-version ]
@@ -233,23 +233,6 @@ jobs:
           #            - Second Change
           draft: false
           prerelease: false
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./my-artifact.zip
-          asset_name: my-artifact.zip
-          asset_content_type: application/zip
 
-
-#      - name: Create release
-#        uses: softprops/action-gh-release@v1
-#        with:
-#          name: ${{ env.TAG }}
-#          tag_name: ${{ env.TAG }}
-#          token: ${{ secrets.GIT_TOKEN }}
 
 
