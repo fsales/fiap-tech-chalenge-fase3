@@ -187,7 +187,7 @@ jobs:
     needs: [ new-version ]
     runs-on: ubuntu-latest
     outputs:
-      tag: ${{ steps.tag.outputs.tag }}
+      tag: ${{ steps.tag.outputs.tag-number }}
     steps:
       - name: Echo Number New Release
         run: |
@@ -200,7 +200,7 @@ jobs:
           echo "tag-number=$TAG_VERSION" >> $GITHUB_OUTPUT
       - name: Debug TAG
         run: |
-          echo "TAG: ${{ env.TAG_NUMBER }}"
+          echo "TAG: ${{ env.tag-number }}"
 
   release:
     needs:
