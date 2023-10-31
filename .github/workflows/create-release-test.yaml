@@ -198,9 +198,6 @@ jobs:
           BRANCH=${{ github.head_ref }}
           TAG_VERSION="${{needs.new-version.outputs.new-release-version}}.${{github.run_number}}"
           echo "TAG=$TAG_VERSION" >> $GITHUB_OUTPUT
-      - name: Debug TAG
-        run: |
-          echo "TAG: ${{ env.TAG }}"
 
   release:
     needs:
@@ -222,11 +219,26 @@ jobs:
           custom_tag: ${{ env.TAG }}
           github_token: ${{ secrets.GIT_TOKEN }}
 
-      - name: Create release
-        uses: softprops/action-gh-release@v1
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          name: ${{ env.TAG }}
           tag_name: ${{ env.TAG }}
-          token: ${{ secrets.GIT_TOKEN }}
+          release_name: Release ${{ github.ref }} - ${{ env.TAG }}
+          #          body: |
+          #            Changes in this Release
+          #            - First Change
+          #            - Second Change
+          draft: false
+          prerelease: false
+
+#      - name: Create release
+#        uses: softprops/action-gh-release@v1
+#        with:
+#          name: ${{ env.TAG }}
+#          tag_name: ${{ env.TAG }}
+#          token: ${{ secrets.GIT_TOKEN }}
 
 
