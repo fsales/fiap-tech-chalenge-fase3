@@ -187,7 +187,7 @@ jobs:
     needs: [ new-version ]
     runs-on: ubuntu-latest
     outputs:
-      tag: ${{ steps.tag.outputs.tag-number }}
+      tag: ${{ steps.tag.outputs.tag }}
     steps:
       - name: Echo Number New Release
         run: |
@@ -197,34 +197,36 @@ jobs:
         run: |
           BRANCH=${{ github.head_ref }}
           TAG_VERSION="${{needs.new-version.outputs.new-release-version}}.${{github.run_number}}"
-          echo "tag-number=$TAG_VERSION" >> $GITHUB_OUTPUT
+          echo "TAG=$TAG_VERSION" >> $GITHUB_OUTPUT
       - name: Debug TAG
         run: |
-          echo "TAG: ${{ env.tag-number }}"
+          echo "TAG: ${{ env.TAG }}"
 
   release:
     needs:
       [ tag ]
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ needs.tag.outputs.tag }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Echo Number TAG
         run: |
-          echo "TAG number: ${{ needs.tag.outputs.tag-number  }}"
+          echo "TAG number: ${{ needs.tag.outputs.tag }}"
 
       - name: Push tag
         uses: mathieudutour/github-tag-action@v6.1
         with:
-          custom_tag: ${{ needs.tag.outputs.tag-number  }}
+          custom_tag: ${{ env.TAG }}
           github_token: ${{ secrets.GIT_TOKEN }}
 
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
-          name: ${{ needs.tag.outputs.tag-number  }}
-          tag_name: ${{ needs.tag.outputs.tag-number  }}
+          name: ${{ env.TAG }}
+          tag_name: ${{ env.TAG }}
           token: ${{ secrets.GIT_TOKEN }}
 
 
