@@ -196,7 +196,7 @@ jobs:
         id: tag
         run: |
           BRANCH=${{ github.head_ref }}
-          TAG_VERSION="${{needs.new-version.outputs.new-release-version}}.${{github.run_number}}"
+          TAG_VERSION="${BRANCH//develop-test/""}"
           echo "TAG=$TAG_VERSION" >> $GITHUB_OUTPUT
       - name: Debug TAG
         run: |
@@ -214,7 +214,7 @@ jobs:
 
       - name: Echo Number TAG
         run: |
-          echo "TAG number: ${{ needs.tag.outputs.tag }}"
+          echo "TAG number: ${{ env.TAG }}"
 
       - name: Push tag
         uses: mathieudutour/github-tag-action@v6.1
