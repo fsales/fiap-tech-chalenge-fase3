@@ -202,7 +202,7 @@ jobs:
       [ tag ]
     runs-on: ubuntu-latest
     env:
-      TAG: ${{ needs.TAG.outputs.tag }}
+      TAG: ${{ needs.tag.outputs.TAG }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
