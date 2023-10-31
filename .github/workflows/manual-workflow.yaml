@@ -1,0 +1,21 @@
+name: Manual Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar senha
+        run: |
+          if [ "${{ secrets.DEPLOY_PASSWORD }}" != "${{ github.event.inputs.password }}" ]; then
+            echo "Senha incorreta. Não é possível acionar o workflow."
+            exit 1
+          fi
+
+      - name: Checkout do repositório
+        uses: actions/checkout@v2
+
+      - name: Executar ação manual
+        run: echo "Hello, World!"
