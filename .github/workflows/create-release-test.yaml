@@ -194,8 +194,10 @@ jobs:
         run: |
           BRANCH=${{ github.head_ref }}
           TAG="${BRANCH//develop-test/""}"
-          echo $TAG
-          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "TAG=$TAG" >> $GITHUB_ENV
+      - name: Debug TAG
+        run: |
+          echo "TAG: ${{ env.TAG }}"
 
   release:
     needs:
