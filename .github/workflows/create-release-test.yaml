@@ -197,7 +197,7 @@ jobs:
         run: |
           BRANCH=${{ github.head_ref }}
           TAG_VERSION="${{needs.new-version.outputs.new-release-version}}.${{github.run_number}}"
-          echo "TAG=$TAG_VERSION" >> $GITHUB_ENV
+          echo "TAG=$TAG_VERSION" >> $GITHUB_OUTPUT
       - name: Debug TAG
         run: |
           echo "TAG: ${{ env.TAG }}"
