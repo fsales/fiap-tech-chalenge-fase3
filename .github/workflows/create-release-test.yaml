@@ -1,9 +1,9 @@
 name: Create release test
 
 on:
-  push:
-    branches:
-      - develop-test
+  pull_request:
+    types:
+      - closed
 #    paths:
 #      - park-tech/**
 
@@ -16,6 +16,11 @@ concurrency:
 
 jobs:
   test:
+    if: |
+      github.event_name == 'pull_request' &&
+      contains(github.event.pull_request.base.ref, 'teste') &&
+      contains(github.event.pull_request.head.ref, 'develop-test') &&
+      github.event.pull_request.merged == true
     name: Test
     runs-on: ubuntu-latest
 
