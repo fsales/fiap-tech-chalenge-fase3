@@ -42,6 +42,6 @@ public class EstacionamentoController {
 			.buildAndExpand(estacimentoResponse.id())
 			.toUri();
 
-		return ResponseEntity.ok("Estacionamento iniciado com sucesso.");
+		return ResponseEntity.ok("EstacionamentoEntity iniciado com sucesso.");
 	}
 }
