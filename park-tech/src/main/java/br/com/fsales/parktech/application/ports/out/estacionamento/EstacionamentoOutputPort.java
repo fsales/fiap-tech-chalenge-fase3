@@ -8,6 +8,7 @@ public interface EstacionamentoOutputPort {
 	 * @param estacionamento
 	 * @return
 	 */
-	Estacionamento iniciarEstacionamento(Estacionamento estacionamento);
+	Estacionamento iniciarEstacionamento(final Estacionamento estacionamento);
 
+	Estacionamento sairEstacionamento(final Estacionamento estacionamento);
 }

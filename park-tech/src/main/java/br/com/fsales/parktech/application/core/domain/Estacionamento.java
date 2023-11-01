@@ -1,8 +1,8 @@
 package br.com.fsales.parktech.application.core.domain;
 
-import br.com.fsales.parktech.application.core.domain.enumeration.TipoTempoEnum;
-
 import java.time.LocalDateTime;
+
+import br.com.fsales.parktech.application.core.domain.enumeration.TipoTempoEnum;
 
 public class Estacionamento {
     private String id;
@@ -11,19 +11,27 @@ public class Estacionamento {
     private LocalDateTime entrada;
     private LocalDateTime saida;
     private TipoTempoEnum tipoTempo;
-    private Integer duracao;
+
+	private Integer duracaoEmMinutos;
+
+	private Long excedente;
+
+	private Long totalEmMinutos;
 
     public Estacionamento() {
     }
 
-    public Estacionamento(String id, Condutor condutor, Veiculo veiculo, LocalDateTime entrada, LocalDateTime saida, TipoTempoEnum tipoTempo, Integer duracao) {
+	public Estacionamento(String id, Condutor condutor, Veiculo veiculo, LocalDateTime entrada, LocalDateTime saida,
+			TipoTempoEnum tipoTempo, Integer duracaoEmMinutos, Long excedente, Long totalEmMinutos) {
         this.id = id;
         this.condutor = condutor;
         this.veiculo = veiculo;
         this.entrada = entrada;
         this.saida = saida;
         this.tipoTempo = tipoTempo;
-        this.duracao = duracao;
+		this.duracaoEmMinutos = duracaoEmMinutos;
+		this.excedente = excedente;
+		this.totalEmMinutos = totalEmMinutos;
     }
 
     public String getId() {
@@ -80,12 +88,30 @@ public class Estacionamento {
         return this;
     }
 
-    public Integer getDuracao() {
-        return duracao;
+	public Integer getDuracaoEmMinutos() {
+		return duracaoEmMinutos;
+	}
+
+	public Estacionamento setDuracaoEmMinutos(Integer duracaoEmMinutos) {
+		this.duracaoEmMinutos = duracaoEmMinutos;
+		return this;
+	}
+
+	public Long getExcedente() {
+		return excedente;
+	}
+
+	public Estacionamento setExcedente(Long excedente) {
+		this.excedente = excedente;
+		return this;
+	}
+
+	public Long getTotalEmMinutos() {
+		return totalEmMinutos;
     }
 
-    public Estacionamento setDuracao(Integer duracao) {
-        this.duracao = duracao;
+	public Estacionamento setTotalEmMinutos(Long totalEmMinutos) {
+		this.totalEmMinutos = totalEmMinutos;
         return this;
     }
 }

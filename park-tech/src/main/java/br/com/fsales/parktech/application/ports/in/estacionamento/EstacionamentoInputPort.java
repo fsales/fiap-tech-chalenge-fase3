@@ -8,6 +8,11 @@ public interface EstacionamentoInputPort {
 	 * @param estacionamento
 	 * @return
 	 */
-	Estacionamento iniciarEstacionamento(Estacionamento estacionamento);
+	Estacionamento iniciarEstacionamento(final Estacionamento estacionamento);
 
+	/**
+	 * @param codigoIdentificador
+	 * @return
+	 */
+	Estacionamento finalizarEstacionamento(final String codigoIdentificador);
 }

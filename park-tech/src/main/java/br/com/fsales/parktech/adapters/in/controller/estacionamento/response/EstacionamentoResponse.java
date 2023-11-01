@@ -2,12 +2,17 @@ package br.com.fsales.parktech.adapters.in.controller.estacionamento.response;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-public record EstacionamentoResponse(String id, EstacionamentoResponse.Condutor condutor,
-		EstacionamentoResponse.Veiculo veiculo, LocalDateTime entrada, LocalDateTime saida,
-		EstacionamentoResponse.TipoTempoEnum tipoTempo, Integer duracao) {
+public record EstacionamentoResponse(String codigoIdentificador, EstacionamentoResponse.Condutor condutor,
+		EstacionamentoResponse.Veiculo veiculo, @JsonFormat(pattern = "dd/MM/yyyy HH:mm") LocalDateTime entrada,
+		@JsonFormat(pattern = "dd/MM/yyyy HH:mm") @JsonInclude(JsonInclude.Include.NON_NULL) LocalDateTime saida,
+		EstacionamentoResponse.TipoTempoEnum tipoTempo, @JsonInclude(JsonInclude.Include.NON_NULL) Integer duracao,
+		@JsonInclude(JsonInclude.Include.NON_NULL) Long excedente,
+
+		@JsonInclude(JsonInclude.Include.NON_NULL) Long totalHoras) {
 
 	public enum TipoTempoEnum {
 

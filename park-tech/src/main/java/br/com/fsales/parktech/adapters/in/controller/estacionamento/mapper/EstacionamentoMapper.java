@@ -4,6 +4,7 @@ import br.com.fsales.parktech.adapters.in.controller.estacionamento.request.Esta
 import br.com.fsales.parktech.adapters.in.controller.estacionamento.response.EstacionamentoResponse;
 import br.com.fsales.parktech.application.core.domain.Estacionamento;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
@@ -13,6 +14,7 @@ public interface EstacionamentoMapper {
 
 	Estacionamento toEstacionamento(EstacionamentoRequest estacionamentoRequest);
 
+	@Mapping(target = "codigoIdentificador", source = "id")
 	EstacionamentoResponse toEstacionamentoResponse(Estacionamento estacionamento);
 
 }

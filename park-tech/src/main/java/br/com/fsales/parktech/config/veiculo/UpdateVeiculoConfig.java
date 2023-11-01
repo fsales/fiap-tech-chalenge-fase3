@@ -1,6 +1,7 @@
 package br.com.fsales.parktech.config.veiculo;
 
 import br.com.fsales.parktech.application.core.usecase.veiculo.UpdateVeiculoUseCase;
+import br.com.fsales.parktech.application.ports.out.condutor.FindCondutorByIdOutputPort;
 import br.com.fsales.parktech.application.ports.out.veiculo.FindVeiculoByIdOutputPort;
 import br.com.fsales.parktech.application.ports.out.veiculo.UpdateVeiculoOutputPort;
 import org.springframework.context.annotation.Bean;
@@ -11,8 +12,9 @@ public class UpdateVeiculoConfig {
 
 	@Bean
 	public UpdateVeiculoUseCase updateVeiculoUseCase(UpdateVeiculoOutputPort updateVeiculoOutputPort,
-			FindVeiculoByIdOutputPort findVeiculoByIdOutputPort) {
-		return new UpdateVeiculoUseCase(updateVeiculoOutputPort, findVeiculoByIdOutputPort);
+			FindVeiculoByIdOutputPort findVeiculoByIdOutputPort,
+			FindCondutorByIdOutputPort findCondutorByIdOutputPort) {
+		return new UpdateVeiculoUseCase(updateVeiculoOutputPort, findVeiculoByIdOutputPort, findCondutorByIdOutputPort);
 	}
 
 }
