@@ -100,7 +100,11 @@ public class EstacionamentoUseCase implements EstacionamentoInputPort {
 		long duracaoEmMinutos = Duration.between(estacionamento.getEntrada(), estacionamento.getSaida()).toMinutes();
 		estacionamento.setTempoTotalEstacionado(duracaoEmMinutos);
 
-		// Caso o período seja fixo, verifica-se se não houve excesso de horário
+		if (duracaoEmMinutos < 5)
+			throw new IllegalArgumentException(
+					"Para finalizar, é necessário aguardar um período de cinco minutos após o início. ");
+
+		// Caso o período seja fixo, verifica-se se não houve excesso no horário
 		// estacionado.
 		if (TipoTempoEnum.FIXO.equals(estacionamento.getTipoTempo())
 				&& duracaoEmMinutos > estacionamento.getDuracao()) {

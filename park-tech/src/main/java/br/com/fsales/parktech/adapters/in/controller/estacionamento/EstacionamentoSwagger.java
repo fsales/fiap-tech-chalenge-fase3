@@ -8,4 +8,6 @@ public class EstacionamentoSwagger {
 	public static final String API_ESTACIONAMENTO_OPERATION_SUMMARY_INICIAR = "Inicia o período estacionado";
 
 	public static final String API_ESTACIONAMENTO_OPERATION_SUMMARY_FINALIZAR = "Finalizar o período estacionado";
+
+	public static final String API_ESTACIONAMENTO_OPERATION_SUMMARY_DETALHAR = "Detalhar dados do período estacionado";
 }
