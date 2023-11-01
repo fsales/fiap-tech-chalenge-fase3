@@ -23,8 +23,8 @@
     - [Aluno](#aluno)
   - [Pré-requisitos](#pré-requisitos)
   - [Como Executar](#como-executar)
-      - [Executar imagem Docker do Park Tech](#executar-imagem-docker-do-park-tech)
-      - [IDE de desenvolvimento](#ide-de-desenvolvimento)
+    - [Executar imagem Docker do Park Tech](#executar-imagem-docker-do-park-tech)
+    - [IDE de desenvolvimento](#ide-de-desenvolvimento)
   - [Arquitetura Hexagonal](#arquitetura-hexagonal)
     - [Consideração](#consideração)
   - [CI/CD](#cicd)
@@ -35,8 +35,8 @@
     - [Integração com Serviços](#integração-com-serviços)
     - [:hammer: Funcionalidades do projeto](#hammer-funcionalidades-do-projeto)
     - [Endpoints](#endpoints)
-        - [Requisição HTTP](#requisição-http)
-        - [API](#api)
+      - [Requisição HTTP](#requisição-http)
+      - [API](#api)
   - [Referência](#referência)
 
 ## 🛠️ Linguagem e ferramentas
@@ -100,16 +100,17 @@ Antes de começar, você precisará ter as seguintes ferramentas instaladas em s
 ## Como Executar
 
 1. Abrir o terminal
-  - Git Bash
-  - CMD
-  - Bash
-  - Outros
+
+- Git Bash
+- CMD
+- Bash
+- Outros
 
 2. **Clonar repositório.**
   git [https://github.com/fsales/fiap-tech-chalenge-fase3.git](https://github.com/fsales/fiap-tech-chalenge-fase3.git).
 
 ```sh
-$ git clone  https://github.com/fsales/fiap-tech-chalenge-fase3.git  fiap-tech-chalenge-fase3
+git clone  https://github.com/fsales/fiap-tech-chalenge-fase3.git  fiap-tech-chalenge-fase3
 ```
 
 ### Executar imagem Docker do Park Tech
@@ -120,21 +121,21 @@ $ git clone  https://github.com/fsales/fiap-tech-chalenge-fase3.git  fiap-tech-c
 
 1. **Park Tech utilizando o Docker.**
 
-* Iniciar o container do Park Tech
+- Iniciar o container do Park Tech
 
 ```sh
-$ docker-compose -f ./docker-compose/docker-compose-parktech.yaml up -d
+docker-compose -f ./docker-compose/docker-compose-parktech.yaml up -d
 ```
 
-* Parar o container do MongoDB
+- Parar o container do MongoDB
 
 ```sh
-$ docker-compose -f ./docker-compose/docker-compose-parktech.yaml down -v
+docker-compose -f ./docker-compose/docker-compose-parktech.yaml down -v
 ```
 
-* As configurações do Park Tech está definido no arquivo:
+- As configurações do Park Tech está definido no arquivo:
 
-    - [.env-parktech](/docker-compose/parktech-config/.env-parktech)
+  - [.env-parktech](/docker-compose/parktech-config/.env-parktech)
 
 > A variável de ambiente `PARK_TECH_SPRING_DOCKER_COMPOSE_ENABLE` deve ser configurado com o valor **false**
 
@@ -143,7 +144,7 @@ $ docker-compose -f ./docker-compose/docker-compose-parktech.yaml down -v
 1. **Acessar o diretório** `fiap-tech-chalenge-fase3/park-tech`.
 
 ```sh
-$ cd  /fiap-tech-chalenge-fase3/park-tech
+cd  /fiap-tech-chalenge-fase3/park-tech
 ```
 
 2. **Construir o projeto utilizando o maven.**
@@ -158,22 +159,22 @@ $ cd  /fiap-tech-chalenge-fase3/park-tech
 > arquivo [`docker-compose-mongodb.yaml`](/docker-compose/docker-compose-mongodb.yaml) com as definições do `MongoDB` e
 > do cliente `Mongo Express`.
 
-* Iniciar o container do MongoDB
+- Iniciar o container do MongoDB
 
 ```sh
-$ docker-compose -f ./docker-compose/docker-compose-mongodb.yaml up -d
+docker-compose -f ./docker-compose/docker-compose-mongodb.yaml up -d
 ```
 
-* Parar o container do MongoDB
+- Parar o container do MongoDB
 
 ```sh
-$ docker-compose -f ./docker-compose/docker-compose-mongodb.yaml down -v
+docker-compose -f ./docker-compose/docker-compose-mongodb.yaml down -v
 ```
 
-* As configurações do MongoDB e Mongo Express estão definidos no arquivo:
+- As configurações do MongoDB e Mongo Express estão definidos no arquivo:
 
-    - [.env-mongodb](/docker-compose/mongo-config/.env-mongodb)
-    - [.env-mongoexpress](/docker-compose/mongo-config/.env-mongoexpress)
+  - [.env-mongodb](/docker-compose/mongo-config/.env-mongodb)
+  - [.env-mongoexpress](/docker-compose/mongo-config/.env-mongoexpress)
 
 > Caso a variável de ambiente `PARK_TECH_PROFILE_ENVIRONMENT` esteja definida com o valor `dev`, o plugin
 > do [Spring Boot Docker Compose](https://spring.io/blog/2023/06/21/docker-compose-support-in-spring-boot-3-1) iniciará
@@ -430,16 +431,16 @@ GitHub Actions é uma plataforma de integração contínua e entrega contínua (
 
 1. **Publicação da Imagem no Docker Hub - Branch Develop [^4].**
 
-  - No início do desenvolvimento, é criada uma branch `feature/w.x.y.z` a partir da branch `develop`.
-  - Ao finalizar o desenvolvimento, é aberto um `Pull Request` da branch `feature/w.x.y.z` para `develop`.
-  - Quando esse `PR` for `mesclado`, o fluxo de trabalho `git-flow-publish-image-develop.yaml` do GitHub Actions será
+- No início do desenvolvimento, é criada uma branch `feature/w.x.y.z` a partir da branch `develop`.
+- Ao finalizar o desenvolvimento, é aberto um `Pull Request` da branch `feature/w.x.y.z` para `develop`.
+- Quando esse `PR` for `mesclado`, o fluxo de trabalho `git-flow-publish-image-develop.yaml` do GitHub Actions será
     acionado, gerando a imagem `Docker` e publicando-a no `Docker Hub`.
 
 2. **Criação da Release - Branch Main [^4].**
 
-  - Quando a validação das funcionalidades for realizada, é criada uma branch `release/w.x.y.z` a partir da
+- Quando a validação das funcionalidades for realizada, é criada uma branch `release/w.x.y.z` a partir da
     branch `develop`.
-  - Após mesclar esse `PR`, o fluxo de trabalho `create-release.yaml` do GitHub Actions será acionado, gerando a
+- Após mesclar esse `PR`, o fluxo de trabalho `create-release.yaml` do GitHub Actions será acionado, gerando a
     imagem `Docker` e publicando-a no `Docker Hub`, além de criar automaticamente uma `tag` de versão `w.x.y.z`.
 
 3. **Endereço do Docker Hub:**
@@ -451,16 +452,17 @@ GitHub Actions é uma plataforma de integração contínua e entrega contínua (
 Secrets são variáveis que você cria em uma organização, repositório ou ambiente de repositório. Os Secrets que você cria estão disponíveis para utilização nos fluxos de trabalho em GitHub Actions. GitHub Actions só poderá ler um Secret se você incluí-lo explicitamente em um fluxo de trabalho.
 
 1. **Lista dos secrets que devem ser configurados no repositório:**
-  - **Repositório Github:**
-      - GIT_TOKEN
-      - GIT_EMAIL
-  - **DockerHub:***
-     - DOCKERHUB_USERNAME
-     - DOCKERHUB_TOKEN
-  - **Park-Tech:**
-     - PARK_TECH_PROFILE_ENVIRONMENT
-     - PARK_TECH_MONGODB_URI
-     - PARK_TECH_MONGODB_DATABASE
+
+- **Repositório Github:**
+  - GIT_TOKEN
+  - GIT_EMAIL
+- **DockerHub:***
+  - DOCKERHUB_USERNAME
+  - DOCKERHUB_TOKEN
+- **Park-Tech:**
+  - PARK_TECH_PROFILE_ENVIRONMENT
+  - PARK_TECH_MONGODB_URI
+  - PARK_TECH_MONGODB_DATABASE
 
 ## Park Tech - Sistema de Gestão de Estacinamentos
 
@@ -477,6 +479,7 @@ armazenar essas informações para fins de fiscalização.
 - `API de condutores`: Os condutores podem se registrar no sistema, associando seus dados pessoais, como nome, endereço
   e informações de contato.
 - `API de veiculos`: Os condutores podem registrar no sistema vários veículos.
+- `API de estacionamentos`: tem como objetivo  permite iniciar o período de estacionamento, oferecendo opções de tempo fixo ou por hora.
 
 ### Endpoints
 
@@ -497,6 +500,7 @@ Descrição dos endpoints disponíveis na aplicação Park Tech.
 
 - [API de condutores](doc/api-condutores.md)
 - [API de veiculos](doc/api-veiculos.md)
+- [API de estacionamento](doc/api-estacionamentos.md)
 
 ## Referência
 
