@@ -12,7 +12,7 @@ public record EstacionamentoResponse(String codigoIdentificador, EstacionamentoR
 		EstacionamentoResponse.TipoTempoEnum tipoTempo, @JsonInclude(JsonInclude.Include.NON_NULL) Integer duracao,
 		@JsonInclude(JsonInclude.Include.NON_NULL) Long excedente,
 
-		@JsonInclude(JsonInclude.Include.NON_NULL) Long totalHoras) {
+		@JsonInclude(JsonInclude.Include.NON_NULL) Long tempoTotalEstacionado) {
 
 	public enum TipoTempoEnum {
 

@@ -18,8 +18,8 @@ public record EstacionamentoRequest(
 				pattern = "dd/MM/yyyy HH:mm") @FutureOrPresent @NotNull LocalDateTime entrada,
 		@Schema(name = "tipoTempo",
 				implementation = EstacionamentoRequest.TipoTempoEnum.class) @NotNull EstacionamentoRequest.TipoTempoEnum tipoTempo,
-		@Schema(name = "duracaoEmMinutos", example = "1",
-				description = "representação do tempo estacinando em minutos. Exemplo: 60, 90,120...") Integer duracaoEmMinutos) {
+		@Schema(name = "duracao", example = "1",
+				description = "representação do tempo estacinando em minutos. Exemplo: 60, 90,120...") Integer duracao) {
 
 	public enum TipoTempoEnum {
 

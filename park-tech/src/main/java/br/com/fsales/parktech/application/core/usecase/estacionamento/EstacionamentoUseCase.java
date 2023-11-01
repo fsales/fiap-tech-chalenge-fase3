@@ -2,6 +2,7 @@ package br.com.fsales.parktech.application.core.usecase.estacionamento;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import br.com.fsales.parktech.application.core.domain.Condutor;
 import br.com.fsales.parktech.application.core.domain.Estacionamento;
@@ -34,13 +35,13 @@ public class EstacionamentoUseCase implements EstacionamentoInputPort {
 
 	private void validarCampos(Estacionamento estacionamento) {
 
-		if (TipoTempoEnum.VARIAVEL.equals(estacionamento.getTipoTempo()) && estacionamento.getDuracaoEmMinutos() != null
+		if (TipoTempoEnum.VARIAVEL.equals(estacionamento.getTipoTempo()) && estacionamento.getDuracao() != null
 
 		) {
 			throw new IllegalArgumentException("No período variável, não é permitido informar a duração.");
 		}
 
-		if (TipoTempoEnum.FIXO.equals(estacionamento.getTipoTempo()) && estacionamento.getDuracaoEmMinutos() == null
+		if (TipoTempoEnum.FIXO.equals(estacionamento.getTipoTempo()) && estacionamento.getDuracao() == null
 
 		) {
 			throw new IllegalArgumentException("No período fixo, a duração é obrigatória.");
@@ -85,7 +86,11 @@ public class EstacionamentoUseCase implements EstacionamentoInputPort {
 			throw new IllegalArgumentException("O código identificador e obrigatorio");
 
 		var estacionamento = findEstacionamentoByIdOutPort.find(codigoIdentificador)
-			.orElseThrow(() -> new IllegalArgumentException("Não existe registro de entrada no estaciomento."));
+			.orElseThrow(() -> new IllegalArgumentException("Não existe registro de estaciomento."));
+
+		if (estacionamento.getSaida() != null)
+			throw new IllegalArgumentException(String.format("Registro de  estaciomento foi finalizado em %s.",
+					estacionamento.getSaida().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))));
 
 		validarCampos(estacionamento);
 
@@ -93,14 +98,14 @@ public class EstacionamentoUseCase implements EstacionamentoInputPort {
 		estacionamento.setSaida(LocalDateTime.now().withSecond(0).withNano(0));
 
 		long duracaoEmMinutos = Duration.between(estacionamento.getEntrada(), estacionamento.getSaida()).toMinutes();
-		estacionamento.setTotalEmMinutos(duracaoEmMinutos);
+		estacionamento.setTempoTotalEstacionado(duracaoEmMinutos);
 
 		// Caso o período seja fixo, verifica-se se não houve excesso de horário
 		// estacionado.
 		if (TipoTempoEnum.FIXO.equals(estacionamento.getTipoTempo())
-				&& estacionamento.getDuracaoEmMinutos() > duracaoEmMinutos) {
+				&& duracaoEmMinutos > estacionamento.getDuracao()) {
 
-			estacionamento.setExcedente(Math.subtractExact(estacionamento.getDuracaoEmMinutos(), duracaoEmMinutos));
+			estacionamento.setExcedente(Math.subtractExact(estacionamento.getDuracao(), duracaoEmMinutos));
 		}
 
 		return estacionamentoOutputPort.sairEstacionamento(estacionamento);

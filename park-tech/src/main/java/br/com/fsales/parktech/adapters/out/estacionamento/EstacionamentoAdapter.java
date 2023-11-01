@@ -36,7 +36,13 @@ public class EstacionamentoAdapter implements EstacionamentoOutputPort {
 	 */
 	@Override
 	public Estacionamento sairEstacionamento(Estacionamento estacionamento) {
-		return null;
+
+		var estacionamentoEntity = estacionamentoRepository.findById(estacionamento.getId()).orElseThrow();
+
+		estacionamentoEntityMapper.updateEstacionamentoEntityFromEstacionamento(estacionamento, estacionamentoEntity);
+		estacionamentoRepository.save(estacionamentoEntity);
+
+		return estacionamentoEntityMapper.toEstacionamento(estacionamentoEntity);
 	}
 
 }

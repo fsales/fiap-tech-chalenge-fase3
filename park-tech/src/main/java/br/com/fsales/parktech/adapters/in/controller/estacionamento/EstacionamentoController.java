@@ -23,7 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@Tag(name = EstacionamentoSwagger.API_ESTACIONAMENTO_TAG_NAME, description = EstacionamentoSwagger.API_ESTACIONAMENTO_TAG_DESCRIPTION)
+@Tag(name = EstacionamentoSwagger.API_ESTACIONAMENTO_TAG_NAME,
+		description = EstacionamentoSwagger.API_ESTACIONAMENTO_TAG_DESCRIPTION)
 
 @RestController
 @RequestMapping(ParktechResource.ESTACIONAMENTO)
@@ -67,8 +68,10 @@ public class EstacionamentoController {
 	@PutMapping("/{codigoIdentificador}")
 	public ResponseEntity<EstacionamentoResponse> finalizarEstacionamento(@PathVariable String codigoIdentificador) {
 
-		estacionamentoInputPort.finalizarEstacionamento(codigoIdentificador);
-		return null;
+		var estacimentoResponse = estacionamentoMapper
+			.toEstacionamentoResponse(estacionamentoInputPort.finalizarEstacionamento(codigoIdentificador));
+
+		return ResponseEntity.ok(estacimentoResponse);
 	}
 
 }

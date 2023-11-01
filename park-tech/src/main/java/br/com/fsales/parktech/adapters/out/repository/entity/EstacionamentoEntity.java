@@ -44,10 +44,9 @@ public class EstacionamentoEntity {
 	@NotNull
 	private TipoTempoEnumEntity tipoTempo;
 
-	private Integer duracaoEmMinutos;
+	private Integer duracao;
 
 	private Long excedente;
 
-	private Long totalEmMinutos;
-
+	private Long tempoTotalEstacionado;
 }

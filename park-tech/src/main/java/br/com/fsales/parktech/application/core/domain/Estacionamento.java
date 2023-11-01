@@ -12,26 +12,26 @@ public class Estacionamento {
     private LocalDateTime saida;
     private TipoTempoEnum tipoTempo;
 
-	private Integer duracaoEmMinutos;
+	private Integer duracao;
 
 	private Long excedente;
 
-	private Long totalEmMinutos;
+	private Long tempoTotalEstacionado;
 
     public Estacionamento() {
     }
 
 	public Estacionamento(String id, Condutor condutor, Veiculo veiculo, LocalDateTime entrada, LocalDateTime saida,
-			TipoTempoEnum tipoTempo, Integer duracaoEmMinutos, Long excedente, Long totalEmMinutos) {
+			TipoTempoEnum tipoTempo, Integer duracao, Long excedente, Long tempoTotalEstacionado) {
         this.id = id;
         this.condutor = condutor;
         this.veiculo = veiculo;
         this.entrada = entrada;
         this.saida = saida;
         this.tipoTempo = tipoTempo;
-		this.duracaoEmMinutos = duracaoEmMinutos;
+		this.duracao = duracao;
 		this.excedente = excedente;
-		this.totalEmMinutos = totalEmMinutos;
+		this.tempoTotalEstacionado = tempoTotalEstacionado;
     }
 
     public String getId() {
@@ -88,12 +88,12 @@ public class Estacionamento {
         return this;
     }
 
-	public Integer getDuracaoEmMinutos() {
-		return duracaoEmMinutos;
+	public Integer getDuracao() {
+		return duracao;
 	}
 
-	public Estacionamento setDuracaoEmMinutos(Integer duracaoEmMinutos) {
-		this.duracaoEmMinutos = duracaoEmMinutos;
+	public Estacionamento setDuracao(Integer duracao) {
+		this.duracao = duracao;
 		return this;
 	}
 
@@ -106,12 +106,12 @@ public class Estacionamento {
 		return this;
 	}
 
-	public Long getTotalEmMinutos() {
-		return totalEmMinutos;
+	public Long getTempoTotalEstacionado() {
+		return tempoTotalEstacionado;
     }
 
-	public Estacionamento setTotalEmMinutos(Long totalEmMinutos) {
-		this.totalEmMinutos = totalEmMinutos;
+	public Estacionamento setTempoTotalEstacionado(Long tempoTotalEstacionado) {
+		this.tempoTotalEstacionado = tempoTotalEstacionado;
         return this;
     }
 }
