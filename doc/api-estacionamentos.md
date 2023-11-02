@@ -287,6 +287,8 @@ curl -X 'GET' \
   -H 'accept: application/json'
 ```
 
+<details>
+
 <summary>Resposta</summary>
 
 ```json
