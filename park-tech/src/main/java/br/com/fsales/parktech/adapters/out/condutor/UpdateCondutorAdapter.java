@@ -25,14 +25,11 @@ public class UpdateCondutorAdapter implements UpdateCondutorOutputPort {
 	@Transactional
 	public Condutor update(Condutor condutor) {
 		Condutor condutorRetorno = new Condutor();
-		var condutorEntityOptional = condutorRepository.findById(condutor.getId());
+		var condutorEntity = condutorRepository.findById(condutor.getId()).orElseThrow();
 
-		if (condutorEntityOptional.isPresent()) {
-			var condutorEntity = condutorEntityOptional.get();
-			condutorEntityMapper.updateCondutorEntityFromCondutor(condutor, condutorEntity);
-			condutorRepository.save(condutorEntity);
-			condutorRetorno = condutorEntityMapper.toCondutor(condutorEntity);
-		}
+		condutorEntityMapper.updateCondutorEntityFromCondutor(condutor, condutorEntity);
+		condutorRepository.save(condutorEntity);
+		condutorRetorno = condutorEntityMapper.toCondutor(condutorEntity);
 
 		return condutorRetorno;
 	}

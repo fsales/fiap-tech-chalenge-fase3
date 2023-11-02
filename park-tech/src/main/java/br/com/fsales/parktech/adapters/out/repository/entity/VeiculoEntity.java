@@ -55,6 +55,7 @@ public class VeiculoEntity {
 
 	@NotNull
 	@DBRef
+	@Indexed
 	private CondutorEntity condutor;
 
 	@CreatedDate

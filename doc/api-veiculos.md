@@ -1,16 +1,16 @@
 # API de Veículo
 
 - [API de Veículo](#api-de-veículo)
-    - [Criar Veículo](#criar-veículo)
-        - [\[POST\] /veiculos](#post-veiculos)
-    - [Atualizar Veículo](#atualizar-veículo)
-        - [\[PUT\] /veiculos](#put-veiculos)
-    - [Excluir Veículo](#excluir-veículo)
-        - [\[DELETE\] /veiculos/{id}](#delete-veiculosid)
-    - [Detalhar Veículo](#detalhar-veículo)
-        - [\[GET\] /veiculos/{id}](#get-veiculosid)
-    - [Listar Veículo](#listar-veículo)
-        - [\[GET\] /veiculos](#get-veiculos)
+  - [Criar Veículo](#criar-veículo)
+    - [\[POST\] /veiculos](#post-veiculos)
+  - [Atualizar Veículo](#atualizar-veículo)
+    - [\[PUT\] /veiculos](#put-veiculos)
+  - [Excluir Veículo](#excluir-veículo)
+    - [\[DELETE\] /veiculos/{id}](#delete-veiculosid)
+  - [Detalhar Veículo](#detalhar-veículo)
+    - [\[GET\] /veiculos/{id}](#get-veiculosid)
+  - [Listar Veículo](#listar-veículo)
+    - [\[GET\] /veiculos](#get-veiculos)
 
 A API de Condutores tem como objetivo permitir o gerenciamento de múltiplos veículos no sistema, incluindo dados como
 placa, marca e modelo.
@@ -220,7 +220,8 @@ curl -X 'GET' \
  ```
 
  <details>
-    <summary>Resposta</summary>
+
+  <summary>Resposta</summary>
 
   ```json
 {

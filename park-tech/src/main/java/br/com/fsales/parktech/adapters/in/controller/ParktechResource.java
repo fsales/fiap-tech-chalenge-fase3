@@ -11,4 +11,6 @@ public final class ParktechResource {
 	/** VEICULO **/
 	public static final String VEICULO = "/veiculos";
 
+	public static final String ESTACIONAMENTO = "/estacionamentos";
+
 }

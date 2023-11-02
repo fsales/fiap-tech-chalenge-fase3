@@ -16,7 +16,7 @@ enum TipoCarto {
     DEBITO
 }
 
-enum TipoMovimentacao{
+enum TipoEstacionamento{
     FIXO
     HORA
 }
@@ -66,13 +66,13 @@ class Veiculo{
     - TipoVeiculo tipo
 }
 
-class Movimentacao{
+class Estacionamento{
  - Condutor condutor
  - Veiculo veiculos
  - LocalDateTime inicio
  - LocalDateTime saida
  - Double valor
- - TipoMovimentacao tipo
+ - TipoEstacionamento tipo
  - Pagamento pagamento
  - Integer tempoEstimado
  - Integer tempoReal
@@ -112,9 +112,9 @@ Cartao::pessoa --> PessoaFisica
 Pagamento::pix --> Pix
 Pagamento::cartao --> Cartao
 
-Movimentacao::tipo --> TipoMovimentacao
-Movimentacao::pagamento --> Pagamento
-Movimentacao::condutor --> Condutor
-Movimentacao::veiculos --> Veiculo
+Estacionamento::tipo --> TipoEstacionamento
+Estacionamento::pagamento --> Pagamento
+Estacionamento::condutor --> Condutor
+Estacionamento::veiculos --> Veiculo
 
 @enduml
