@@ -7,17 +7,17 @@ module "hmg" {
   cargoIAM         = "homologacao"
   ambiente         = "homologacao"
 
-  hostPort = 8080
-  albPort  = 8080
+  hostPort = 80
+  albPort  = 80
 
   containerName = "park-tech"
   image         = "docker.io/fosales/park-tech"
-  tag           = "0.0.1.6"
-  containerPort = 8080
+  tag           = var.imagemTag
+  containerPort = 80
   environment   = {
     "PROFILE_ENVIRONMENT" = {
       name  = "PARK_TECH_PROFILE_ENVIRONMENT",
-      value = "cloud-atlas"
+      value = "cloud"
     },
     "DATABASE" = {
       name  = "PARK_TECH_MONGODB_DATABASE",
@@ -26,6 +26,10 @@ module "hmg" {
     "DATABASE_URI" = {
       name  = "PARK_TECH_MONGODB_URI",
       value = var.uriDatabase
+    }
+    "PORT_APP_CONTAINER" = {
+      name  = "EXPOSE_PORT",
+      value = 80
     }
   }
 
