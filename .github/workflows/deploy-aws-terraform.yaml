@@ -24,6 +24,9 @@ jobs:
       packages: write
 
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install jq -y
 
