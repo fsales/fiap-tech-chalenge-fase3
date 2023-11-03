@@ -99,24 +99,24 @@ jobs:
   #          URI_DATABASE: ${{secrets.URI_DATABASE}}
   #          TAG_IMAGE: ${{env.TAG_IMAGE}}
 
-#  build-push-image-ecr:
-#    needs: [ deploy-aws ]
-#
-#    name: Publish image docker registry
-#    runs-on: ubuntu-latest
-#
-#    defaults:
-#      run:
-#        #working-directory: park-tech
-#        shell: bash
-#    permissions:
-#      contents: read
-#      packages: write
-#
-#    steps:
-#      - name: Echo Number New Release
-#        run: |
-#          echo "Tag image park-tech: ${{needs.deploy-aws.outputs.tag-image-parktech}}"
+  build-push-image-ecr:
+    needs: [ deploy-aws ]
+
+    name: Publish image docker registry
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        #working-directory: park-tech
+        shell: bash
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Echo Number New Release
+        run: |
+          echo "Tag image park-tech: ${{needs.deploy-aws.outputs.tag-image-parktech}}"
 
 #      - name: Check out the repo
 #        uses: actions/checkout@v4
