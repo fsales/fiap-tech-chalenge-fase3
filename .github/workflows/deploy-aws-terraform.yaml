@@ -50,27 +50,13 @@ jobs:
 
       - name: Terraform init and validate
         run: |
-          echo `pwd`
-          echo "tfpath ${{ github.event.inputs.tfpath }}"
           echo "** Running Terraform Init**"
           terraform init
 
-      - name: Set up Terraform
+      - name: Set up environment variables
         run: |
-          echo `pwd`
-          ls -la
-#      - name: Set up Terraform
-#        uses: hashicorp/setup-terraform@@v2
-#        with:
-#          terraform_version: "1.1.7"
-
-#      - name: Set up environment variables
-#        run: |
-#          echo "TF_VAR_uriDatabase=${{ secrets.URI_DATABASE }}" >> .env
-#          echo "TF_VAR_imagemTag=${{ steps.get_image_tag.outputs.tag }}" >> .env
-
-#      - name: Initialize Terraform
-#        run: terraform init
+          echo "TF_VAR_uriDatabase=${{ secrets.URI_DATABASE }}" >> .env
+          echo "TF_VAR_imagemTag=${{ steps.get_image_tag.outputs.tag }}" >> .env
 
 #      - name: Plan Terraform changes
 #        run: terraform plan -var-file=.env -out=tfplan
