@@ -100,38 +100,38 @@ jobs:
   build-push-image-ecr:
     needs: [ deploy-aws ]
 
-    name: Publish image docker registry
+    name: Publish image ECR
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        #working-directory: park-tech
+        working-directory: park-tech
         shell: bash
     permissions:
       contents: read
       packages: write
-
+    env:
+      TAG_IMAGE = ${{needs.deploy-aws.outputs.tag-image}}
     steps:
       - name: Echo Tag Image Park-tech
-        env:
-          TAG_IMAGE: ${{needs.deploy-aws.outputs.tag-image}}
+        #        env:
+        #          TAG_IMAGE: ${{needs.deploy-aws.outputs.tag-image}}
         run: |
           echo "Tag image park-tech: $TAG_IMAGE"
 
+      - name: Check out the repo
+        uses: actions/checkout@v4
 
-#      - name: Check out the repo
-#        uses: actions/checkout@v4
-#
-#      - name: Configure AWS credentials
-#        uses: aws-actions/configure-aws-credentials@v4
-#        with:
-#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#          aws-region: us-west-2
-#
-#      - name: Login to Amazon ECR
-#        id: login-ecr
-#        uses: aws-actions/amazon-ecr-login@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
 #      - name: Build, tag, and push image to Amazon ECR
 #        id: build-image
