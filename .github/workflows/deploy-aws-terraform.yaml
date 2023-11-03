@@ -46,8 +46,8 @@ jobs:
           echo "TF_VAR_uriDatabase=${{ secrets.URI_DATABASE }}" >> .env
           echo "TF_VAR_imagemTag=${{ steps.get_image_tag.outputs.tag }}" >> .env
 
-      - name: Initialize Terraform
-        run: terraform init
+#      - name: Initialize Terraform
+#        run: terraform init
 
 #      - name: Plan Terraform changes
 #        run: terraform plan -var-file=.env -out=tfplan
