@@ -1,0 +1,68 @@
+name: AWS - Terraform UnDeployment
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+
+    name: Terraform UnDeployment - AWS
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: terraform/env/hmg
+        shell: bash
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Executar ação manual
+        run: echo "Hello, World!"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Set SSL verification to false
+        run: git config --global http.sslVerify false
+
+      - name: Setup Terraform CLI
+        uses: hashicorp/setup-terraform@v2.0.2
+
+      - name: Terraform init
+        run: |
+          echo "** Running Terraform Init**"
+
+          export TF_VAR_uriDatabase=$URI_DATABASE
+          export TF_VAR_imagemTag=$TAG_IMAGE
+
+          terraform init
+
+        env:
+          URI_DATABASE: ${{secrets.URI_DATABASE}}
+          TAG_IMAGE: ${{env.TAG_IMAGE}}
+
+      - name: Plan Terraform changes
+        run: |
+          echo "** Running Terraform Destroy**"
+
+          export TF_VAR_uriDatabase=$URI_DATABASE
+          export TF_VAR_imagemTag=$TAG_IMAGE
+
+          terraform destroy -auto-approve -input=false
+
+        env:
+          URI_DATABASE: ${{secrets.URI_DATABASE}}
+          TAG_IMAGE: ${{env.TAG_IMAGE}}
