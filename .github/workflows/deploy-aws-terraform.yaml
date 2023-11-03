@@ -30,7 +30,6 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install jq -y
 
-      # pega a tag mais recente existente no docker hub
       - name: Get Docker Hub Image Tag
         id: get_image_tag
         run: |
@@ -39,7 +38,6 @@ jobs:
           echo "Latest Docker Hub Image Tag: $TAG_IMAGE"
           echo "::set-output name=tag::$TAG_IMAGE"
 
-      # terraform
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@@v2
 
