@@ -36,13 +36,11 @@ jobs:
         run: |
           TAG_IMAGE=$(curl -s "https://registry.hub.docker.com/v2/repositories/fosales/park-tech/tags/" | \
             jq -r '.results | sort_by(.last_updated) | last(.[]).name')
-          echo "Latest Docker Hub Image Tag: $TAG_IMAGE"
-          echo "TAG_IMAGE=$TAG_IMAGE" >> $GITHUB_ENV
           echo "tag-image-parktech=$TAG_IMAGE" >> $GITHUB_OUTPUT
 
       - name: Echo Tag Image Park-tech
         run: |
-          echo "Tag image park-tech: ${{steps.set-deploy-aws.outputs.tag-image-parktech}}"
+          echo "park-tech: ${{steps.set-deploy-aws.outputs.tag-image-parktech}}"
 
   #      - name: Configure AWS credentials
   #        uses: aws-actions/configure-aws-credentials@v4
@@ -116,7 +114,9 @@ jobs:
     steps:
       - name: Echo Number New Release
         run: |
+          echo ">> ${{needs.set-deploy-aws.outputs.tag-image-parktech}}"
           echo "Tag image park-tech: ${{needs.deploy-aws.outputs.tag-image-parktech}}"
+
 
 #      - name: Check out the repo
 #        uses: actions/checkout@v4
