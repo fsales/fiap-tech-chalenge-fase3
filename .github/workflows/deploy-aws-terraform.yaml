@@ -30,6 +30,7 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install jq -y
 
+      # pega a tag mais recente existente no docker hub
       - name: Get Docker Hub Image Tag
         id: get_image_tag
         run: |
@@ -37,3 +38,24 @@ jobs:
             jq -r '.results | sort_by(.last_updated) | last(.[]).name')
           echo "Latest Docker Hub Image Tag: $TAG_IMAGE"
           echo "::set-output name=tag::$TAG_IMAGE"
+
+      # terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@@v2
+
+      - name: Set up environment variables
+        run: |
+          echo "TF_VAR_uriDatabase=${{ secrets.URI_DATABASE }}" >> .env
+          echo "TF_VAR_imagemTag=${{ steps.get_image_tag.outputs.tag }}" >> .env
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Plan Terraform changes
+        run: terraform plan -var-file=.env -out=tfplan
+
+      - name: Apply Terraform changes
+        run: terraform apply tfplan
+        environment:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
