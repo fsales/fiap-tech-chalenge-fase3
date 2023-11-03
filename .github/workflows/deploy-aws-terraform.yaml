@@ -67,9 +67,24 @@ jobs:
       - name: Plan Terraform changes
         run: |
           echo "** Running Terraform Plan**"
+          
+          export TF_VAR_uriDatabase=$URI_DATABASE
+          export TF_VAR_imagemTag=$TAG_IMAGE
+          
           terraform plan -input=false -out=tfplan
+
+        env:
+          URI_DATABASE: ${{secrets.URI_DATABASE}}
+          TAG_IMAGE: ${{env.TAG_IMAGE}}
 
       - name: Terraform Apply
         run: |
           echo "** Running Terraform Apply**"
+          
+          export TF_VAR_uriDatabase=$URI_DATABASE
+          export TF_VAR_imagemTag=$TAG_IMAGE
+          
           terraform apply -auto-approve tfplan
+        env:
+          URI_DATABASE: ${{secrets.URI_DATABASE}}
+          TAG_IMAGE: ${{env.TAG_IMAGE}}
