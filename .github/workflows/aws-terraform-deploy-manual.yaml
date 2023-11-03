@@ -22,7 +22,7 @@ jobs:
       packages: write
 
     outputs:
-      tag-image-parktech: ${{ steps.set-deploy-aws.outputs.tag-image-parktech }}
+      tag-image: ${{ steps.deploy-aws.outputs.tag-image }}
 
     steps:
       - name: Check out the repo
@@ -36,11 +36,11 @@ jobs:
         run: |
           TAG_IMAGE=$(curl -s "https://registry.hub.docker.com/v2/repositories/fosales/park-tech/tags/" | \
             jq -r '.results | sort_by(.last_updated) | last(.[]).name')
-          echo "tag-image-parktech=$TAG_IMAGE" >> $GITHUB_OUTPUT
+          echo "tag-image=$TAG_IMAGE" >> "$GITHUB_OUTPUT"
 
       - name: Echo Tag Image Park-tech
         run: |
-          echo "park-tech: ${{steps.set-deploy-aws.outputs.tag-image-parktech}}"
+          echo "park-tech: ${{steps.deploy-aws.outputs.tag-image}}"
 
   #      - name: Configure AWS credentials
   #        uses: aws-actions/configure-aws-credentials@v4
@@ -112,10 +112,11 @@ jobs:
       packages: write
 
     steps:
-      - name: Echo Number New Release
+      - name: Echo Tag Image Park-tech
+        env:
+          TAG_IMAGE: ${{needs.deploy-aws.outputs.tag-image}}
         run: |
-          echo ">> ${{needs.set-deploy-aws.outputs.tag-image-parktech}}"
-          echo "Tag image park-tech: ${{needs.deploy-aws.outputs.tag-image-parktech}}"
+          echo "Tag image park-tech: $TAG_IMAGE"
 
 
 #      - name: Check out the repo
