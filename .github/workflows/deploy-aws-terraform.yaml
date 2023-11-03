@@ -1,0 +1,35 @@
+name: Terraform Deployment - AWS
+
+on:
+  push:
+    branches:
+      - deploy-aws-terraform
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+
+    name: Terraform Deployment - AWS
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: terraform/env/hmg
+        shell: bash
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install jq -y
+
+      - name: Get Docker Hub Image Tag
+        id: get_image_tag
+        run: |
+          TAG_IMAGE=$(curl -s "https://registry.hub.docker.com/v2/repositories/fosales/park-tech/tags/" | jq -r '.results | map(.name) | max_by(.)')
+          echo "Latest Docker Hub Image Tag: $TAG_IMAGE"
+          echo "::set-output name=tag::$TAG_IMAGE"
