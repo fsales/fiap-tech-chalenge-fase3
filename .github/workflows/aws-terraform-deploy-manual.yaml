@@ -8,18 +8,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  deploy-aws:
 
     name: Terraform Deployment - AWS
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        #working-directory: terraform/env/hmg
+        working-directory: terraform/env/hmg
         shell: bash
     permissions:
       contents: read
       packages: write
+
+    outputs:
+      tag-image: ${{ steps.get_image_tag.outputs.tag-image }}
 
     steps:
       - name: Check out the repo
@@ -33,8 +36,85 @@ jobs:
         run: |
           TAG_IMAGE=$(curl -s "https://registry.hub.docker.com/v2/repositories/fosales/park-tech/tags/" | \
             jq -r '.results | sort_by(.last_updated) | last(.[]).name')
-          echo "Latest Docker Hub Image Tag: $TAG_IMAGE"
-          echo "TAG_IMAGE=$TAG_IMAGE" >> $GITHUB_ENV
+          echo "tag-image=$TAG_IMAGE" >> $GITHUB_OUTPUT
+
+      - name: Echo Tag Image Park-tech
+        run: |
+          echo "park-tech: ${{steps.get_image_tag.outputs.tag-image}}"
+
+  #      - name: Configure AWS credentials
+  #        uses: aws-actions/configure-aws-credentials@v4
+  #        with:
+  #          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #          aws-region: us-west-2
+  #
+  #      - name: Set SSL verification to false
+  #        run: git config --global http.sslVerify false
+  #
+  #      - name: Setup Terraform CLI
+  #        uses: hashicorp/setup-terraform@v2.0.2
+  #
+  #      - name: Terraform init
+  #        run: |
+  #          echo "** Running Terraform Init**"
+  #
+  #          export TF_VAR_uriDatabase=$URI_DATABASE
+  #          export TF_VAR_imagemTag=$TAG_IMAGE
+  #
+  #          terraform init
+  #
+  #        env:
+  #          URI_DATABASE: ${{secrets.URI_DATABASE}}
+  #          TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
+  #
+  #      - name: Plan Terraform changes
+  #        run: |
+  #          echo "** Running Terraform Plan**"
+  #
+  #          export TF_VAR_uriDatabase=$URI_DATABASE
+  #          export TF_VAR_imagemTag=$TAG_IMAGE
+  #
+  #          terraform plan -input=false -out=tfplan
+  #
+  #        env:
+  #          URI_DATABASE: ${{secrets.URI_DATABASE}}
+  #          TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
+  #
+  #      - name: Terraform Apply
+  #        run: |
+  #          echo "** Running Terraform Apply**"
+  #
+  #          export TF_VAR_uriDatabase=$URI_DATABASE
+  #          export TF_VAR_imagemTag=$TAG_IMAGE
+  #
+  #          terraform apply -auto-approve -input=false tfplan
+  #        env:
+  #          URI_DATABASE: ${{secrets.URI_DATABASE}}
+  #          TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
+
+  build-push-image-ecr:
+    needs: [ deploy-aws ]
+
+    name: Publish image ECR
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Echo Tag Image Park-tech
+        env:
+          TAG_IMAGE: ${{needs.deploy-aws.outputs.tag-image}}
+        run: |
+          echo "Tag image park-tech: $TAG_IMAGE"
+
+      - name: Check out the repo
+        uses: actions/checkout@v4
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -52,56 +132,8 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: park-tech
-          IMAGE_TAG: ${{env.TAG_IMAGE}}
+          IMAGE_TAG: ${{needs.deploy-aws.outputs.tag-image}}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         working-directory: park-tech
-
-
-      - name: Set SSL verification to false
-        run: git config --global http.sslVerify false
-
-      - name: Setup Terraform CLI
-        uses: hashicorp/setup-terraform@v2.0.2
-
-      - name: Terraform init
-        run: |
-          echo "** Running Terraform Init**"
-
-          export TF_VAR_uriDatabase=$URI_DATABASE
-          export TF_VAR_imagemTag=$TAG_IMAGE
-
-          terraform init
-
-        env:
-          URI_DATABASE: ${{secrets.URI_DATABASE}}
-          TAG_IMAGE: ${{env.TAG_IMAGE}}
-        working-directory: terraform/env/hmg
-
-      - name: Plan Terraform changes
-        run: |
-          echo "** Running Terraform Plan**"
-
-          export TF_VAR_uriDatabase=$URI_DATABASE
-          export TF_VAR_imagemTag=$TAG_IMAGE
-
-          terraform plan -input=false -out=tfplan
-
-        env:
-          URI_DATABASE: ${{secrets.URI_DATABASE}}
-          TAG_IMAGE: ${{env.TAG_IMAGE}}
-        working-directory: terraform/env/hmg
-
-      - name: Terraform Apply
-        run: |
-          echo "** Running Terraform Apply**"
-
-          export TF_VAR_uriDatabase=$URI_DATABASE
-          export TF_VAR_imagemTag=$TAG_IMAGE
-
-          terraform apply -auto-approve -input=false tfplan
-        env:
-          URI_DATABASE: ${{secrets.URI_DATABASE}}
-          TAG_IMAGE: ${{env.TAG_IMAGE}}
-        working-directory: terraform/env/hmg
