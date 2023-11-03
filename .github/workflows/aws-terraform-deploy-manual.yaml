@@ -31,67 +31,72 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install jq -y
 
+      #      - name: Get Docker Hub Image Tag
+      #        id: get_image_tag
+      #        run: |
+      #          TAG_IMAGE=$(curl -s "https://registry.hub.docker.com/v2/repositories/fosales/park-tech/tags/" | \
+      #            jq -r '.results | sort_by(.last_updated) | last(.[]).name')
+      #          echo "tag-image=$TAG_IMAGE" >> $GITHUB_OUTPUT
+
       - name: Get Docker Hub Image Tag
         id: get_image_tag
         run: |
-          TAG_IMAGE=$(curl -s "https://registry.hub.docker.com/v2/repositories/fosales/park-tech/tags/" | \
-            jq -r '.results | sort_by(.last_updated) | last(.[]).name')
-          echo "tag-image=$TAG_IMAGE" >> $GITHUB_OUTPUT
+          echo "tag-image=latest" >> $GITHUB_OUTPUT
 
       - name: Echo Tag Image Park-tech
         run: |
           echo "park-tech: ${{steps.get_image_tag.outputs.tag-image}}"
 
-  #      - name: Configure AWS credentials
-  #        uses: aws-actions/configure-aws-credentials@v4
-  #        with:
-  #          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #          aws-region: us-west-2
-  #
-  #      - name: Set SSL verification to false
-  #        run: git config --global http.sslVerify false
-  #
-  #      - name: Setup Terraform CLI
-  #        uses: hashicorp/setup-terraform@v2.0.2
-  #
-  #      - name: Terraform init
-  #        run: |
-  #          echo "** Running Terraform Init**"
-  #
-  #          export TF_VAR_uriDatabase=$URI_DATABASE
-  #          export TF_VAR_imagemTag=$TAG_IMAGE
-  #
-  #          terraform init
-  #
-  #        env:
-  #          URI_DATABASE: ${{secrets.URI_DATABASE}}
-  #          TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
-  #
-  #      - name: Plan Terraform changes
-  #        run: |
-  #          echo "** Running Terraform Plan**"
-  #
-  #          export TF_VAR_uriDatabase=$URI_DATABASE
-  #          export TF_VAR_imagemTag=$TAG_IMAGE
-  #
-  #          terraform plan -input=false -out=tfplan
-  #
-  #        env:
-  #          URI_DATABASE: ${{secrets.URI_DATABASE}}
-  #          TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
-  #
-  #      - name: Terraform Apply
-  #        run: |
-  #          echo "** Running Terraform Apply**"
-  #
-  #          export TF_VAR_uriDatabase=$URI_DATABASE
-  #          export TF_VAR_imagemTag=$TAG_IMAGE
-  #
-  #          terraform apply -auto-approve -input=false tfplan
-  #        env:
-  #          URI_DATABASE: ${{secrets.URI_DATABASE}}
-  #          TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Set SSL verification to false
+        run: git config --global http.sslVerify false
+
+      - name: Setup Terraform CLI
+        uses: hashicorp/setup-terraform@v2.0.2
+
+      - name: Terraform init
+        run: |
+          echo "** Running Terraform Init**"
+
+          export TF_VAR_uriDatabase=$URI_DATABASE
+          export TF_VAR_imagemTag=$TAG_IMAGE
+
+          terraform init
+
+        env:
+          URI_DATABASE: ${{secrets.URI_DATABASE}}
+          TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
+
+      - name: Plan Terraform changes
+        run: |
+          echo "** Running Terraform Plan**"
+
+          export TF_VAR_uriDatabase=$URI_DATABASE
+          export TF_VAR_imagemTag=$TAG_IMAGE
+
+          terraform plan -input=false -out=tfplan
+
+        env:
+          URI_DATABASE: ${{secrets.URI_DATABASE}}
+          TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
+
+      - name: Terraform Apply
+        run: |
+          echo "** Running Terraform Apply**"
+
+          export TF_VAR_uriDatabase=$URI_DATABASE
+          export TF_VAR_imagemTag=$TAG_IMAGE
+
+          terraform apply -auto-approve -input=false tfplan
+        env:
+          URI_DATABASE: ${{secrets.URI_DATABASE}}
+          TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
 
   build-push-image-ecr:
     needs: [ deploy-aws ]
