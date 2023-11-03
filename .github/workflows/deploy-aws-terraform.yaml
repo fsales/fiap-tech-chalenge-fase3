@@ -55,7 +55,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan -input=false -var="uriDatabase=${{ secrets.URI_DATABASE }}" -var="imagemTag=${{ secrets.TAG_IMAGE }}" -out=tfplan
+        run: terraform plan -input=false -var TF_VAR_uriDatabase=${{secrets.URI_DATABASE}} -var TF_VAR_imagemTag=$TAG_IMAGE -out=tfplan
 
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
