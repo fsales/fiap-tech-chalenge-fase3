@@ -46,6 +46,9 @@ jobs:
           aws-region: us-west-2
 
       # terraform
+      - name: Set permissions terraform write/reader
+        run: chmod ug+rw .env
+
       - name: Set SSL verification to false
         run: git config --global http.sslVerify false
       - name: Setup Terraform CLI
@@ -61,12 +64,6 @@ jobs:
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{env.TAG_IMAGE}}
-
-
-      #      - name: Set up environment variables
-      #        run: |
-      #          echo "TF_VAR_uriDatabase=${{ secrets.URI_DATABASE }}" >> .env
-      #          echo "TF_VAR_imagemTag=${{ env.TAG_IMAGE }}" >> .env
 
       - name: Plan Terraform changes
         run: terraform plan -var-file=.env -out=tfplan
