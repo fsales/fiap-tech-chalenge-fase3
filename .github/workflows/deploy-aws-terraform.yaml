@@ -53,13 +53,20 @@ jobs:
 
       - name: Terraform init and validate
         run: |
+          export TF_VAR_uriDatabase=$URI_DATABASE
+          export TF_VAR_imagemTag=$TAG_IMAGE
+          
           echo "** Running Terraform Init**"
           terraform init
+        env:
+          URI_DATABASE: ${{secrets.URI_DATABASE}}
+          TAG_IMAGE: ${{env.TAG_IMAGE}}
 
-      - name: Set up environment variables
-        run: |
-          echo "TF_VAR_uriDatabase=${{ secrets.URI_DATABASE }}" >> .env
-          echo "TF_VAR_imagemTag=${{ env.TAG_IMAGE }}" >> .env
+
+      #      - name: Set up environment variables
+      #        run: |
+      #          echo "TF_VAR_uriDatabase=${{ secrets.URI_DATABASE }}" >> .env
+      #          echo "TF_VAR_imagemTag=${{ env.TAG_IMAGE }}" >> .env
 
       - name: Plan Terraform changes
         run: terraform plan -var-file=.env -out=tfplan
