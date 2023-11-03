@@ -37,8 +37,6 @@ jobs:
             jq -r '.results | sort_by(.last_updated) | last(.[]).name')
           echo "Latest Docker Hub Image Tag: $TAG_IMAGE"
           echo "tag=$TAG_IMAGE" >> $GITHUB_OUTPUT
-      
-      
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -46,6 +44,16 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
+
+      - name: Setup Terraform CLI
+        uses: hashicorp/setup-terraform@v2.0.2
+
+      - name: Terraform init and validate
+        run: |
+          echo `pwd`
+          echo "tfpath ${{ github.event.inputs.tfpath }}"
+          echo "** Running Terraform Init**"
+          terraform init
 
       - name: Set up Terraform
         run: |
