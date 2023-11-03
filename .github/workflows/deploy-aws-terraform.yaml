@@ -84,7 +84,7 @@ jobs:
           export TF_VAR_uriDatabase=$URI_DATABASE
           export TF_VAR_imagemTag=$TAG_IMAGE
           
-          terraform apply -auto-approve tfplan
+          terraform apply -auto-approve -input=false tfplan
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{env.TAG_IMAGE}}
