@@ -36,7 +36,9 @@ jobs:
           TAG_IMAGE=$(curl -s "https://registry.hub.docker.com/v2/repositories/fosales/park-tech/tags/" | \
             jq -r '.results | sort_by(.last_updated) | last(.[]).name')
           echo "Latest Docker Hub Image Tag: $TAG_IMAGE"
-          echo "::set-output name=tag::$TAG_IMAGE"
+          echo "tag=$TAG_IMAGE" >> $GITHUB_OUTPUT
+      
+      
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
