@@ -51,11 +51,25 @@ jobs:
       - name: Setup Terraform CLI
         uses: hashicorp/setup-terraform@v2.0.2
 
-      - name: Terraform Init
-        run: terraform init
+      - name: Terraform init
+        run: |
+          echo "** Running Terraform Init**"
+          
+          export TF_VAR_uriDatabase=$URI_DATABASE
+          export TF_VAR_imagemTag=$TAG_IMAGE
 
-      - name: Terraform Plan
-        run: terraform plan -input=false -var TF_VAR_uriDatabase=${{secrets.URI_DATABASE}} -var TF_VAR_imagemTag=$TAG_IMAGE -out=tfplan
+          terraform init
+
+        env:
+          URI_DATABASE: ${{secrets.URI_DATABASE}}
+          TAG_IMAGE: ${{env.TAG_IMAGE}}
+
+      - name: Plan Terraform changes
+        run: |
+          echo "** Running Terraform Plan**"
+          terraform plan -input=false -out=tfplan
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        run: |
+          echo "** Running Terraform Apply**"
+          terraform apply -auto-approve
