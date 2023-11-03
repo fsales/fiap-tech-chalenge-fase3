@@ -15,7 +15,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: terraform/env/hmg
+        #working-directory: terraform/env/hmg
         shell: bash
     permissions:
       contents: read
@@ -43,6 +43,22 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
 
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: park-tech
+          IMAGE_TAG: ${{env.TAG_IMAGE}}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        working-directory: park-tech
+
+
       - name: Set SSL verification to false
         run: git config --global http.sslVerify false
 
@@ -52,7 +68,7 @@ jobs:
       - name: Terraform init
         run: |
           echo "** Running Terraform Init**"
-          
+
           export TF_VAR_uriDatabase=$URI_DATABASE
           export TF_VAR_imagemTag=$TAG_IMAGE
 
@@ -61,28 +77,31 @@ jobs:
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{env.TAG_IMAGE}}
+        working-directory: terraform/env/hmg
 
       - name: Plan Terraform changes
         run: |
           echo "** Running Terraform Plan**"
-          
+
           export TF_VAR_uriDatabase=$URI_DATABASE
           export TF_VAR_imagemTag=$TAG_IMAGE
-          
+
           terraform plan -input=false -out=tfplan
 
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{env.TAG_IMAGE}}
+        working-directory: terraform/env/hmg
 
       - name: Terraform Apply
         run: |
           echo "** Running Terraform Apply**"
-          
+
           export TF_VAR_uriDatabase=$URI_DATABASE
           export TF_VAR_imagemTag=$TAG_IMAGE
-          
+
           terraform apply -auto-approve -input=false tfplan
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{env.TAG_IMAGE}}
+        working-directory: terraform/env/hmg
