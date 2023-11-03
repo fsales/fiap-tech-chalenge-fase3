@@ -45,6 +45,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
 
+      # terraform
+      - name: Set SSL verification to false
+        run: git config --global http.sslVerify false
       - name: Setup Terraform CLI
         uses: hashicorp/setup-terraform@v2.0.2
 
@@ -57,7 +60,9 @@ jobs:
         run: |
           echo "TF_VAR_uriDatabase=${{ secrets.URI_DATABASE }}" >> .env
           echo "TF_VAR_imagemTag=${{ steps.get_image_tag.outputs.tag }}" >> .env
-
+      - name: debug
+        run: |
+          ls -la
 #      - name: Plan Terraform changes
 #        run: terraform plan -var-file=.env -out=tfplan
 #
