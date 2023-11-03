@@ -3,7 +3,7 @@ name: Terraform Deployment - AWS
 on:
   push:
     branches:
-      - deploy-aws-terraform
+      - deploy-aws-terraform2
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
