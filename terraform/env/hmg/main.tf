@@ -3,15 +3,15 @@ module "hmg" {
 
   nomeResource = "park-tech"
 
-  nome_repositorio = "homologacao"
+  nome_repositorio = "park-tech"
   cargoIAM         = "homologacao"
   ambiente         = "homologacao"
 
   hostPort = 80
   albPort  = 80
-
   containerName = "park-tech"
-  image         = "docker.io/fosales/park-tech"
+  #image         = "docker.io/fosales/park-tech"
+  image         = "145439845532.dkr.ecr.us-west-2.amazonaws.com/park-tech"
   tag           = var.imagemTag
   containerPort = 80
   environment   = {
