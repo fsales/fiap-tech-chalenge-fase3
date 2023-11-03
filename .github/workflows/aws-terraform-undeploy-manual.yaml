@@ -1,4 +1,4 @@
-name: Manual Workflow
+name: AWS - Terraform UnDeployment
 
 on:
   workflow_dispatch:
