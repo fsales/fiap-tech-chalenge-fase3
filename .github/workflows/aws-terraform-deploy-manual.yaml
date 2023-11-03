@@ -116,7 +116,7 @@ jobs:
         env:
           TAG_IMAGE: ${{needs.deploy-aws.outputs.tag-image}}
         run: |
-          echo "Tag image park-tech: $TAG_IMAGE"
+          echo "Tag image park-tech: ${{TAG_IMAGE}}"
 
 
 #      - name: Check out the repo
