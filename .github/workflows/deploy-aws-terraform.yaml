@@ -33,6 +33,7 @@ jobs:
       - name: Get Docker Hub Image Tag
         id: get_image_tag
         run: |
-          TAG_IMAGE=$(curl -s "https://registry.hub.docker.com/v2/repositories/fosales/park-tech/tags/" | jq -r '.results | map(.name) | max_by(.)')
+          TAG_IMAGE=$(curl -s "https://registry.hub.docker.com/v2/repositories/fosales/park-tech/tags/" | \
+            jq -r '.results | sort_by(.last_updated) | last(.[]).name')
           echo "Latest Docker Hub Image Tag: $TAG_IMAGE"
           echo "::set-output name=tag::$TAG_IMAGE"
