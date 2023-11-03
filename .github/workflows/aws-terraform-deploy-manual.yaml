@@ -22,7 +22,7 @@ jobs:
       packages: write
 
     outputs:
-      tag-image: ${{ steps.deploy-aws.outputs.tag-image }}
+      tag-image: ${{ steps.get_image_tag.outputs.tag-image }}
 
     steps:
       - name: Check out the repo
