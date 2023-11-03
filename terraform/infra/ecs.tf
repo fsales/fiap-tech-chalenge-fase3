@@ -18,11 +18,11 @@ module "ecs" {
         weight = 50
       }
     }
-    FARGATE_SPOT = {
-      default_capacity_provider_strategy = {
-        weight = 50
-      }
-    }
+    #    FARGATE_SPOT = {
+    #      default_capacity_provider_strategy = {
+    #        weight = 50
+    #      }
+    #    }
   }
   tags = {
     Terraform     = "true"
@@ -94,10 +94,10 @@ resource "aws_ecs_service" "app_api_ecs_svc" {
     weight            = 1 #100/100
   }
 
-  capacity_provider_strategy {
-    capacity_provider = "FARGATE_SPOT"
-    weight            = 1 #100/100
-  }
+  #  capacity_provider_strategy {
+  #    capacity_provider = "FARGATE_SPOT"
+  #    weight            = 1 #100/100
+  #  }
 
   tags = {
     Terraform     = "true"

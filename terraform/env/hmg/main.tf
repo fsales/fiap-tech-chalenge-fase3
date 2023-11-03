@@ -38,3 +38,4 @@ module "hmg" {
 output "ip_abl" {
   value = module.hmg.ip
 }
+
