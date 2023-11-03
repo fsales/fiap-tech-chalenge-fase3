@@ -63,11 +63,9 @@ jobs:
       - name: debug
         run: |
           ls -la
-#      - name: Plan Terraform changes
-#        run: terraform plan -var-file=.env -out=tfplan
-#
+
+      - name: Plan Terraform changes
+        run: terraform plan -var-file=.env -out=tfplan
+
 #      - name: Apply Terraform changes
 #        run: terraform apply tfplan
-#        environment:
-#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
