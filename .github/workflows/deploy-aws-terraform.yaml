@@ -45,28 +45,21 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
 
-      # terraform
-      - name: Set permissions terraform write/reader
-        run: chmod ug+rw .env
-
       - name: Set SSL verification to false
         run: git config --global http.sslVerify false
+
       - name: Setup Terraform CLI
         uses: hashicorp/setup-terraform@v2.0.2
 
-      - name: Terraform init and validate
+      - name: Terraform Init and Plan
         run: |
-          export TF_VAR_uriDatabase=$URI_DATABASE
-          export TF_VAR_imagemTag=$TAG_IMAGE
-          
-          echo "** Running Terraform Init**"
-          terraform init
+          echo "** Running Terraform Init and Plan **"
+          terraform init -var="uriDatabase=${{ secrets.URI_DATABASE }}" -var="imagemTag=${{ env.TAG_IMAGE }}"
+          terraform plan -input=false -out=tfplan
         env:
-          URI_DATABASE: ${{secrets.URI_DATABASE}}
-          TAG_IMAGE: ${{env.TAG_IMAGE}}
+          TAG_IMAGE: ${{ secrets.TAG_IMAGE }}
 
-      - name: Plan Terraform changes
-        run: terraform plan -out=tfplan
-
-#      - name: Apply Terraform changes
-#        run: terraform apply tfplan
+      - name: Terraform Apply
+        run: |
+          echo "** Applying Terraform Changes **"
+          terraform apply -auto-approve -input=false tfplan
