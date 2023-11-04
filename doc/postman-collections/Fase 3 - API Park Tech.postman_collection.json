@@ -12,11 +12,26 @@
 				{
 					"name": "Cadastrar",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parktech",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "parktech",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nome\" : \"Rafael\",\r\n  \"cpf\": \"12073188761\",\r\n  \"dataNascimento\": \"01/08/2001\",\r\n  \"numeroHabilitacao\": \"02628824471\",\r\n  \"endereco\": {\r\n      \"cep\": \"01001000\",\r\n      \"rua\": \"villa nova\",\r\n      \"logradouro\": \"Praça da Sé\",\r\n      \"numero\": 32,\r\n      \"complemento\": \"lado ímpar\",\r\n      \"bairro\": \"Sé\"\r\n\r\n  },\r\n  \"contato\": {\r\n      \"email\": \"baudilia2182@uorak.com\",\r\n      \"telefone\": \"(24)3871-7919\"\r\n  }\r\n}",
+							"raw": "{\r\n  \"nome\" : \"Rafael Souza\",\r\n  \"cpf\": \"76444055008\",\r\n  \"dataNascimento\": \"01/08/2001\",\r\n  \"numeroHabilitacao\": \"02628884471\",\r\n  \"endereco\": {\r\n      \"cep\": \"01001000\",\r\n      \"rua\": \"villa nova\",\r\n      \"logradouro\": \"Praça da Sé\",\r\n      \"numero\": 32,\r\n      \"complemento\": \"lado ímpar\",\r\n      \"bairro\": \"Sé\"\r\n\r\n  },\r\n  \"contato\": {\r\n      \"email\": \"baudilia2182@uorak.com\",\r\n      \"telefone\": \"(24)3871-7919\"\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -38,11 +53,26 @@
 				{
 					"name": "Atualizar",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parktech",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "parktech",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": \"65388e8c9e71041ef831fe95\",\r\n  \"nome\" : \"Rafael Souza\",\r\n  \"cpf\": \"12073188761\",\r\n  \"dataNascimento\": \"01/08/2001\",\r\n  \"numeroHabilitacao\": \"02628824471\",\r\n  \"endereco\": {\r\n      \"cep\": \"01001000\",\r\n      \"rua\": \"villa nova 2\",\r\n      \"logradouro\": \"Praça da Sé 2\",\r\n      \"numero\": 32,\r\n      \"complemento\": \"lado ímpar 2\",\r\n      \"bairro\": \"Sé\"\r\n\r\n  },\r\n  \"contato\": {\r\n      \"email\": \"baudilia21822@uorak.com.br\",\r\n      \"telefone\": \"(61)3871-7919\"\r\n  }\r\n}",
+							"raw": "{\r\n  \"id\": \"654597879eedb47cb36786e9\",\r\n  \"nome\" : \"Rafael Souza\",\r\n  \"cpf\": \"76126318064\",\r\n  \"dataNascimento\": \"01/08/2001\",\r\n  \"numeroHabilitacao\": \"14628824472\",\r\n  \"endereco\": {\r\n      \"cep\": \"01001000\",\r\n      \"rua\": \"villa nova 2\",\r\n      \"logradouro\": \"Praça da Sé 2\",\r\n      \"numero\": 32,\r\n      \"complemento\": \"lado ímpar 2\",\r\n      \"bairro\": \"Sé\"\r\n\r\n  },\r\n  \"contato\": {\r\n      \"email\": \"baudilia21822@uorak.com.br\",\r\n      \"telefone\": \"(61)3871-7919\"\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -64,16 +94,31 @@
 				{
 					"name": "Detalhar",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parktech",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "parktech",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/condutores/65388e8c9e71041ef831fe95",
+							"raw": "{{url}}/condutores/654597879eedb47cb36786e9",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"condutores",
-								"65388e8c9e71041ef831fe95"
+								"654597879eedb47cb36786e9"
 							]
 						}
 					},
@@ -82,16 +127,31 @@
 				{
 					"name": "Delete",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parktech",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "parktech",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/condutores/65388e8c9e71041ef831fe95",
+							"raw": "{{url}}/condutores/654597879eedb47cb36786e9",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"condutores",
-								"65388e8c9e71041ef831fe95"
+								"654597879eedb47cb36786e9"
 							]
 						}
 					},
@@ -100,6 +160,21 @@
 				{
 					"name": "Listar",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parktech",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "parktech",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -148,11 +223,26 @@
 				{
 					"name": "Cadastrar",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parktech",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "parktech",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"modelo\": \"Onix LT\",\r\n  \"marca\": \"Chevrolet\",\r\n  \"placa\": \"VSP4T88\",\r\n  \"renavam\": \"2534467890\",\r\n  \"condutor\": {\r\n      \"id\": \"653b1ba58289bd3c500c33a8\"\r\n  }\r\n}",
+							"raw": "{\r\n  \"modelo\": \"Onix LT\",\r\n  \"marca\": \"Chevrolet\",\r\n  \"placa\": \"VSP4T88\",\r\n  \"renavam\": \"2534467890\",\r\n  \"condutor\": {\r\n      \"id\": \"654552dda982b236bda2a19c\"\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -174,11 +264,26 @@
 				{
 					"name": "Atualizar",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parktech",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "parktech",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": \"6539aeb706ddb549353874c0\",\r\n  \"modelo\": \"Virtus Highline GTS\",\r\n  \"marca\": \"Volkswagen Group\",\r\n  \"placa\": \"SST4T88\",\r\n  \"renavam\": \"1234467890\",\r\n  \"condutor\": {\r\n      \"id\": \"6536d7609826445f718f38eb\"\r\n  }\r\n}",
+							"raw": "{\r\n  \"id\": \"65459bdc2d0f907c656260ad\",\r\n  \"modelo\": \"Virtus Highline GTS\",\r\n  \"marca\": \"Volkswagen Group\",\r\n  \"placa\": \"SST4T88\",\r\n  \"renavam\": \"1234467890\",\r\n  \"condutor\": {\r\n      \"id\": \"654552dda982b236bda2a19c\"\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -200,16 +305,19 @@
 				{
 					"name": "Delete",
 					"request": {
+						"auth": {
+							"type": "bearer"
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/veiculos/65387272c614e265859b9ff5",
+							"raw": "{{url}}/veiculos/65459bdc2d0f907c656260ad",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"veiculos",
-								"65387272c614e265859b9ff5"
+								"65459bdc2d0f907c656260ad"
 							]
 						}
 					},
@@ -218,16 +326,31 @@
 				{
 					"name": "Detalhar",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parktech",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "parktech",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/veiculos/653876ea4bb3a15f1239046c",
+							"raw": "{{url}}/veiculos/65459bdc2d0f907c656260ad",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"veiculos",
-								"653876ea4bb3a15f1239046c"
+								"65459bdc2d0f907c656260ad"
 							]
 						}
 					},
@@ -236,10 +359,25 @@
 				{
 					"name": "Listar",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parktech",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "parktech",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/veiculos?idCondutor=6536d7609826445f718f38eb",
+							"raw": "{{url}}/veiculos?idCondutor=654552dda982b236bda2a19c",
 							"host": [
 								"{{url}}"
 							],
@@ -274,7 +412,7 @@
 								},
 								{
 									"key": "idCondutor",
-									"value": "6536d7609826445f718f38eb"
+									"value": "654552dda982b236bda2a19c"
 								}
 							]
 						}
@@ -289,11 +427,26 @@
 				{
 					"name": "Iniciar",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parktech",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "parktech",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"condutor\": {\r\n    \"id\": \"6536d7609826445f718f38eb\"\r\n  },\r\n  \"veiculo\": {\r\n    \"id\": \"653876ea4bb3a15f1239046c\"\r\n  },\r\n  \"entrada\": \"31/10/2023 23:59\",\r\n  \"tipoTempo\": \"VARIAVEL\"\r\n}",
+							"raw": "{\r\n  \"condutor\": {\r\n    \"id\": \"654552dda982b236bda2a19c\"\r\n  },\r\n  \"veiculo\": {\r\n    \"id\": \"65459bdc2d0f907c656260ad\"\r\n  },\r\n  \"entrada\": \"03/11/2023 22:59\",\r\n  \"tipoTempo\": \"VARIAVEL\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -315,16 +468,31 @@
 				{
 					"name": "Finalizar",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parktech",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "parktech",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/estacionamentos/6541bb8f0704ff5ff56a8ab2",
+							"raw": "{{url}}/estacionamentos/65459c9a2d0f907c656260ae",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"estacionamentos",
-								"6541bb8f0704ff5ff56a8ab2"
+								"65459c9a2d0f907c656260ae"
 							]
 						}
 					},
@@ -333,16 +501,31 @@
 				{
 					"name": "Detalhar",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "parktech",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "parktech",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/estacionamentos/6541bb8f0704ff5ff56a8ab2",
+							"raw": "{{url}}/estacionamentos/65459c9a2d0f907c656260ae",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"estacionamentos",
-								"6541bb8f0704ff5ff56a8ab2"
+								"65459c9a2d0f907c656260ae"
 							]
 						}
 					},

@@ -2,6 +2,9 @@ package br.com.fsales.parktech.adapters.in.controller.exception;
 
 import br.com.fsales.parktech.adapters.in.controller.exception.response.ValidationErrorResponse;
 import br.com.fsales.parktech.adapters.in.controller.exception.response.ViolationResponse;
+import com.mongodb.DuplicateKeyException;
+import com.mongodb.MongoException;
+import com.mongodb.MongoWriteException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -41,6 +44,58 @@ public class ParkTechControlerExceptionHandler extends ResponseEntityExceptionHa
 		error.violation(ViolationResponse.builder().message(ex.getMessage()).build());
 
 		return new ResponseEntity<>(error, new HttpHeaders(), statusCode);
+	}
+
+	/**
+	 * @param e
+	 * @return
+	 */
+	@ExceptionHandler(DuplicateKeyException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseBody
+	ValidationErrorResponse onDuplicateKeyException(DuplicateKeyException e) {
+		log.error(e.getMessage(), e);
+		ValidationErrorResponse error = new ValidationErrorResponse();
+		error.violation(ViolationResponse.builder().message(e.getMessage()).build());
+		return error;
+	}
+
+	@ExceptionHandler(org.springframework.dao.DuplicateKeyException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseBody
+	ValidationErrorResponse onDuplicateKeyException(org.springframework.dao.DuplicateKeyException e) {
+		log.error(e.getMessage(), e);
+		ValidationErrorResponse error = new ValidationErrorResponse();
+		error.violation(ViolationResponse.builder().message(e.getMessage()).build());
+		return error;
+	}
+
+	/**
+	 * @param e
+	 * @return
+	 */
+	@ExceptionHandler(MongoException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseBody
+	ValidationErrorResponse onMongoException(MongoException e) {
+		log.error(e.getMessage(), e);
+		ValidationErrorResponse error = new ValidationErrorResponse();
+		error.violation(ViolationResponse.builder().message(e.getMessage()).build());
+		return error;
+	}
+
+	/**
+	 * @param e
+	 * @return
+	 */
+	@ExceptionHandler(MongoWriteException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseBody
+	ValidationErrorResponse onMongoWriteException(MongoWriteException e) {
+		log.error(e.getMessage(), e);
+		ValidationErrorResponse error = new ValidationErrorResponse();
+		error.violation(ViolationResponse.builder().message(e.getMessage()).build());
+		return error;
 	}
 
 	/**

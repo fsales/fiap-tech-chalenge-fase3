@@ -66,12 +66,16 @@ jobs:
 
           export TF_VAR_uriDatabase=$URI_DATABASE
           export TF_VAR_imagemTag=$TAG_IMAGE
+          export TF_VAR_parktechNasicAuthName=$PARK_TECH_BASIC_AUTH_NAME
+          export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
 
           terraform init
 
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
+          PARK_TECH_BASIC_AUTH_NAME: ${{secrets.PARK_TECH_BASIC_AUTH_NAME}}
+          PARK_TECH_BASIC_AUTH_PASSWORD: ${{secrets.PARK_TECH_BASIC_AUTH_PASSWORD}}
 
       - name: Plan Terraform changes
         run: |
@@ -79,12 +83,16 @@ jobs:
 
           export TF_VAR_uriDatabase=$URI_DATABASE
           export TF_VAR_imagemTag=$TAG_IMAGE
+          export TF_VAR_parktechNasicAuthName=$PARK_TECH_BASIC_AUTH_NAME
+          export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
 
           terraform plan -input=false -out=tfplan
 
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
+          PARK_TECH_BASIC_AUTH_NAME: ${{secrets.PARK_TECH_BASIC_AUTH_NAME}}
+          PARK_TECH_BASIC_AUTH_PASSWORD: ${{secrets.PARK_TECH_BASIC_AUTH_PASSWORD}}
 
       - name: Terraform Apply
         run: |
@@ -92,11 +100,15 @@ jobs:
 
           export TF_VAR_uriDatabase=$URI_DATABASE
           export TF_VAR_imagemTag=$TAG_IMAGE
+          export TF_VAR_parktechNasicAuthName=$PARK_TECH_BASIC_AUTH_NAME
+          export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
 
           terraform apply -auto-approve -input=false tfplan
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
+          PARK_TECH_BASIC_AUTH_NAME: ${{secrets.PARK_TECH_BASIC_AUTH_NAME}}
+          PARK_TECH_BASIC_AUTH_PASSWORD: ${{secrets.PARK_TECH_BASIC_AUTH_PASSWORD}}
 
   build-push-image-ecr:
     needs: [ deploy-aws ]

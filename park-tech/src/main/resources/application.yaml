@@ -20,14 +20,18 @@ spring:
   profiles:
     active: ${PARK_TECH_PROFILE_ENVIRONMENT:}
 
+  security:
+    user:
+      name: ${PARK_TECH_BASIC_AUTH_NAME:parktech}
+      password: ${PARK_TECH_BASIC_AUTH_PASSWORD:parktech}
+      roles: "USER"
+
 
 springdoc:
   show-actuator: true
   api-docs:
     groups:
       enabled: true
-
-
 
 logging:
   pattern:
@@ -47,7 +51,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: health, info, prometheus
   endpoint:
     health:
       show-details: always
