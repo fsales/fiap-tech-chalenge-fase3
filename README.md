@@ -37,6 +37,7 @@
     - [Endpoints](#endpoints)
       - [Requisição HTTP](#requisição-http)
       - [API](#api)
+  - [Desafio encontrado durante o desenvolvimento](#desafio-encontrado-durante-o-desenvolvimento)
   - [Referência](#referência)
 
 ## 🛠️ Linguagem e ferramentas
@@ -47,12 +48,18 @@
 
 [![logo spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)](https://spring.io/)
 [![logo spring-boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)](https://spring.io/projects/spring-boot)
+[![logo spring security](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=Spring-Security&logoColor=white)](https://spring.io/projects/spring-security)
+
 
 [![logo git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/)
 [![logo github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com)
+[![logo github action](https://img.shields.io/badge/Github%20Actions-282a2e?style=for-the-badge&logo=githubactions&logoColor=367cfe)](https://docs.github.com/pt/actions)
+
 
 [![logo AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
 [![logo docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
+[![logo terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
+
 
 [![logo eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)](https://www.eclipse.org/)
 [![logo intellij](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)](https://www.jetbrains.com/pt-br/idea/)
@@ -218,7 +225,7 @@ Para mitigar a dependência direta desses fatores externos (como interface de us
 Essencialmente, a arquitetura hexagonal é um padrão que separa a lógica de negócios do sistema das preocupações técnicas, como a interação com o usuário ou o acesso ao banco de dados. Ela se baseia na ideia de que uma aplicação é composta por "portas" de entrada e saída, que possibilitam a comunicação com o mundo exterior, e "adaptadores", que convertem essas informações em um formato compreensível para a aplicação e vice-versa.
 
 <details>
-  <summary>Organização do Projeto</summary>
+  <summary>Exemplo da Organização do Projeto</summary>
 
 ```
 ├── src
@@ -463,6 +470,22 @@ Secrets são variáveis que você cria em uma organização, repositório ou amb
   - PARK_TECH_PROFILE_ENVIRONMENT
   - PARK_TECH_MONGODB_URI
   - PARK_TECH_MONGODB_DATABASE
+  - PARK_TECH_BASIC_AUTH_NAME
+  - PARK_TECH_BASIC_AUTH_PASSWORD
+  - URI_DATABASE
+- **AWS**
+    - AWS_ACCESS_KEY_ID
+    - AWS_SECRET_ACCESS_KEY
+
+4. **Publicação da versão**
+
+Escolhemos o [`Amazon Elastic Container Service (ECS)`](https://aws.amazon.com/pt/ecs/) como plataforma para hospedar
+nossa aplicação na nuvem da `AWS`. Para garantir uma implantação eficaz e segura, optamos por utilizar o `Terraform`,
+uma ferramenta que nos permite provisionar toda a `infraestrutura` necessária e publicar o contêiner no ECS. O processo
+de execução do Terraform é cuidadosamente gerenciado pelo fluxo de trabalho `aws-terraform-deploy-manual.yaml`
+no `GitHub Action`s, sendo ativado manualmente para garantir um controle preciso sobre a implantação. Além disso, se
+necessário, podemos reverter o processo de implantação acionando o fluxo de
+trabalho `aws-terraform-undeploy-manual.yaml`.
 
 ## Park Tech - Sistema de Gestão de Estacinamentos
 
@@ -501,6 +524,32 @@ Descrição dos endpoints disponíveis na aplicação Park Tech.
 - [API de condutores](doc/api-condutores.md)
 - [API de veiculos](doc/api-veiculos.md)
 - [API de estacionamento](doc/api-estacionamentos.md)
+
+## Desafio encontrado durante o desenvolvimento
+
+Durante o desenvolvimento do projeto, não enfrentei dificuldades significativas com o Framework Spring. Por essa razão,
+pude concentrar-me em desenvolver funcionalidades básicas e aprimorar minhas habilidades em atividades para as quais não
+tinha experiência anteriormente. Introduzi no projeto as seguintes melhorias:
+
+1. **Utilização do banco de dados MongoDB:** Optei por utilizar o MongoDB como parte do nosso sistema de gerenciamento
+   de banco de dados, explorando uma abordagem diferente e valiosa para armazenar dados.
+
+2. **Implementação de uma Infraestrutura na Nuvem AWS utilizando o Terraform:** Aproveitei a oportunidade para utilizar
+   a nuvem pública, específicamente a AWS, e empregar o Terraform para provisionar e disponibilizar nossa infraestrutura
+   na nuvem, proporcionando escalabilidade e flexibilidade ao projeto.
+
+3. **Criação de um Pipeline de CI/CD utilizando o GitHub Actions:** Estabeleci um Pipeline de Integração Contínua e
+   Entrega Contínua (CI/CD) utilizando o GitHub Actions. Esse pipeline automatizado realiza diversas etapas essenciais,
+   como o build do projeto, a geração da imagem Docker e sua publicação no Docker Hub, a criação de tags e releases no
+   GitHub, além de provisionar recursos com o Terraform e publicá-los na nuvem da AWS, proporcionando uma implantação
+   contínua e confiável.
+
+4. **Implementação dos Conceitos Básicos da Arquitetura Hexagonal:** Iniciei o estudo para aplicar os conceitos da
+   arquitetura hexagonal, melhorando a estrutura do projeto para torná-lo mais simples de entender e modificar.
+
+Nesta fase do projeto, percebo um grande avanço em meu conhecimento e saio extremamente satisfeito com os resultados
+alcançados. Estou confiante de que essas melhorias enriqueceram significativamente minha experiência e habilidades no
+desenvolvimento de software.
 
 ## Referência
 
