@@ -10,15 +10,14 @@ import org.springframework.stereotype.Component;
 @Data
 public class SwaggerConfigProperties {
 
-    @NestedConfigurationProperty
-    private Application application;
+	@NestedConfigurationProperty
+	private Application application;
 
-    public record Application(
-            String name,
+	public record Application(String name,
 
-            String description,
+			String description,
 
-            String version
-    ) {
-    }
+			String version) {
+	}
+
 }

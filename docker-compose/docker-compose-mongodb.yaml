@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  mongo:
+    container_name: mongodb
+    build:
+      context: .
+      dockerfile: mongo-config/Dockerfile
+    volumes:
+      - mongodb_dev:/data/db
+    env_file:
+      - mongo-config/.env-mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - spring-docker-compose-mongodb
+
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express:1.0.0-20-alpine3.18
+    restart: always
+    depends_on:
+      - mongo
+    env_file:
+      - mongo-config/.env-mongoexpress
+    ports:
+      - 8081:8081
+    networks:
+      - spring-docker-compose-mongodb
+volumes:
+  mongodb_dev:
+
+networks:
+  spring-docker-compose-mongodb:

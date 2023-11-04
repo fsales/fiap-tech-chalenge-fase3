@@ -1,0 +1,20 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  docker:
+    compose:
+      enabled: ${PARK_TECH_SPRING_DOCKER_COMPOSE_ENABLE:true}
+      file: docker-compose/docker-compose-mongodb.yaml
+
+
+logging:
+  pattern:
+    console: "%d{ABSOLUTE_MICROS} [%-5level] [%t] %c{1} - %msg%n"
+
+  level:
+    br:
+      com:
+        fsales: debug
+
