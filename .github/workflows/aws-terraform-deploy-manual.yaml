@@ -88,7 +88,7 @@ jobs:
         working-directory: park-tech
 
   deploy-aws:
-
+    needs: [ build-push-image-ecr ]
     name: Terraform Deployment - AWS
     runs-on: ubuntu-latest
 
@@ -99,9 +99,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-
-    outputs:
-      tag-image: ${{ steps.get_image_tag.outputs.tag-image }}
 
     steps:
       - name: Check out the repo
