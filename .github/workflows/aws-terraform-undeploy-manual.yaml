@@ -46,7 +46,7 @@ jobs:
           echo "** Running Terraform Init**"
           terraform init
         working-directory: terraform/ecr/env/hmg
-      - name: Plan Terraform changes ECS
+      - name: Plan Terraform changes ECR
         run: |
           echo "** Running Terraform Destroy**"
           terraform destroy -auto-approve -input=false
