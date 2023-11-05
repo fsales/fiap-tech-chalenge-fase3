@@ -59,12 +59,16 @@ jobs:
 
           export TF_VAR_uriDatabase=$URI_DATABASE
           export TF_VAR_imagemTag=$TAG_IMAGE
+          export TF_VAR_parktechNasicAuthName=$PARK_TECH_BASIC_AUTH_NAME
+          export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
 
           terraform init
 
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{env.TAG_IMAGE}}
+          PARK_TECH_BASIC_AUTH_NAME: ${{secrets.PARK_TECH_BASIC_AUTH_NAME}}
+          PARK_TECH_BASIC_AUTH_PASSWORD: ${{secrets.PARK_TECH_BASIC_AUTH_PASSWORD}}
         working-directory: terraform/ecs/env/hmg
 
       - name: Plan Terraform changes ECS
@@ -73,10 +77,14 @@ jobs:
 
           export TF_VAR_uriDatabase=$URI_DATABASE
           export TF_VAR_imagemTag=$TAG_IMAGE
+          export TF_VAR_parktechNasicAuthName=$PARK_TECH_BASIC_AUTH_NAME
+          export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
 
           terraform destroy -auto-approve -input=false
 
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{env.TAG_IMAGE}}
+          PARK_TECH_BASIC_AUTH_NAME: ${{secrets.PARK_TECH_BASIC_AUTH_NAME}}
+          PARK_TECH_BASIC_AUTH_PASSWORD: ${{secrets.PARK_TECH_BASIC_AUTH_PASSWORD}}
         working-directory: terraform/ecs/env/hmg
