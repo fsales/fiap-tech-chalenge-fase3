@@ -8,6 +8,85 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  build-push-image-ecr:
+
+    name: Publish image ECR
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+    permissions:
+      contents: read
+      packages: write
+
+    outputs:
+      tag-image: ${{ steps.get_image_tag.outputs.tag-image }}
+
+    steps:
+
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Get Docker Hub Image Tag
+        id: get_image_tag
+        run: |
+          echo "tag-image=latest" >> $GITHUB_OUTPUT
+
+      - name: Echo Tag Image Park-tech
+        run: |
+          echo "park-tech: ${{steps.get_image_tag.outputs.tag-image}}"
+
+      # autentica na aws
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      # executa o terraform para fazer a criação do ecr
+      - name: Set SSL verification to false
+        run: git config --global http.sslVerify false
+
+      - name: Setup Terraform CLI
+        uses: hashicorp/setup-terraform@v2.0.2
+
+      - name: Terraform init ECR
+        run: |
+          echo "** Running Terraform Init**"
+          terraform init
+        working-directory: terraform/ecr/env/hmg
+
+      - name: Plan Terraform changes ECR
+        run: |
+          echo "** Running Terraform Plan**"  
+          terraform plan -input=false -out=tfplan
+        working-directory: terraform/ecr/env/hmg
+
+
+      - name: Terraform Apply ECR
+        run: |
+          echo "** Running Terraform Apply**"
+          terraform apply -auto-approve -input=false tfplan
+        working-directory: terraform/ecr/env/hmg
+
+      ## realizar o build e push
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: park-tech
+          IMAGE_TAG: ${{steps.get_image_tag.outputs.tag-image}}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        working-directory: park-tech
+
   deploy-aws:
 
     name: Terraform Deployment - AWS
@@ -15,7 +94,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: terraform/env/hmg
+        working-directory: terraform/ecs/env/hmg
         shell: bash
     permissions:
       contents: read
@@ -28,25 +107,12 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
 
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install jq -y
-
-      #      - name: Get Docker Hub Image Tag
-      #        id: get_image_tag
-      #        run: |
-      #          TAG_IMAGE=$(curl -s "https://registry.hub.docker.com/v2/repositories/fosales/park-tech/tags/" | \
-      #            jq -r '.results | sort_by(.last_updated) | last(.[]).name')
-      #          echo "tag-image=$TAG_IMAGE" >> $GITHUB_OUTPUT
-
-      - name: Get Docker Hub Image Tag
-        id: get_image_tag
-        run: |
-          echo "tag-image=latest" >> $GITHUB_OUTPUT
-
       - name: Echo Tag Image Park-tech
         run: |
-          echo "park-tech: ${{steps.get_image_tag.outputs.tag-image}}"
+          echo "park-tech: ${{needs.build-push-image-ecr.outputs.tag-image}}"
+      
 
+      ###########################################################
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -60,97 +126,52 @@ jobs:
       - name: Setup Terraform CLI
         uses: hashicorp/setup-terraform@v2.0.2
 
-      - name: Terraform init
+      - name: Terraform init ECS
         run: |
           echo "** Running Terraform Init**"
-
+          
           export TF_VAR_uriDatabase=$URI_DATABASE
           export TF_VAR_imagemTag=$TAG_IMAGE
           export TF_VAR_parktechNasicAuthName=$PARK_TECH_BASIC_AUTH_NAME
           export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
-
+          
           terraform init
 
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
-          TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
+          TAG_IMAGE: ${{needs.build-push-image-ecr.outputs.tag-image}}
           PARK_TECH_BASIC_AUTH_NAME: ${{secrets.PARK_TECH_BASIC_AUTH_NAME}}
           PARK_TECH_BASIC_AUTH_PASSWORD: ${{secrets.PARK_TECH_BASIC_AUTH_PASSWORD}}
 
-      - name: Plan Terraform changes
+      - name: Plan Terraform changes ECS
         run: |
           echo "** Running Terraform Plan**"
-
+          
           export TF_VAR_uriDatabase=$URI_DATABASE
           export TF_VAR_imagemTag=$TAG_IMAGE
           export TF_VAR_parktechNasicAuthName=$PARK_TECH_BASIC_AUTH_NAME
           export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
-
+          
           terraform plan -input=false -out=tfplan
 
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
-          TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
+          TAG_IMAGE: ${{needs.build-push-image-ecr.outputs.tag-image}}
           PARK_TECH_BASIC_AUTH_NAME: ${{secrets.PARK_TECH_BASIC_AUTH_NAME}}
           PARK_TECH_BASIC_AUTH_PASSWORD: ${{secrets.PARK_TECH_BASIC_AUTH_PASSWORD}}
 
-      - name: Terraform Apply
+      - name: Terraform Apply ECS
         run: |
           echo "** Running Terraform Apply**"
-
+          
           export TF_VAR_uriDatabase=$URI_DATABASE
           export TF_VAR_imagemTag=$TAG_IMAGE
           export TF_VAR_parktechNasicAuthName=$PARK_TECH_BASIC_AUTH_NAME
           export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
-
+          
           terraform apply -auto-approve -input=false tfplan
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
-          TAG_IMAGE: ${{steps.get_image_tag.outputs.tag-image}}
+          TAG_IMAGE: ${{needs.build-push-image-ecr.outputs.tag-image}}
           PARK_TECH_BASIC_AUTH_NAME: ${{secrets.PARK_TECH_BASIC_AUTH_NAME}}
           PARK_TECH_BASIC_AUTH_PASSWORD: ${{secrets.PARK_TECH_BASIC_AUTH_PASSWORD}}
-
-  build-push-image-ecr:
-    needs: [ deploy-aws ]
-
-    name: Publish image ECR
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        shell: bash
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
-      - name: Echo Tag Image Park-tech
-        env:
-          TAG_IMAGE: ${{needs.deploy-aws.outputs.tag-image}}
-        run: |
-          echo "Tag image park-tech: $TAG_IMAGE"
-
-      - name: Check out the repo
-        uses: actions/checkout@v4
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-2
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Build, tag, and push image to Amazon ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: park-tech
-          IMAGE_TAG: ${{needs.deploy-aws.outputs.tag-image}}
-        run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        working-directory: park-tech

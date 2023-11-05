@@ -15,7 +15,6 @@ jobs:
 
     defaults:
       run:
-        working-directory: terraform/env/hmg
         shell: bash
     permissions:
       contents: read
@@ -41,7 +40,20 @@ jobs:
       - name: Setup Terraform CLI
         uses: hashicorp/setup-terraform@v2.0.2
 
-      - name: Terraform init
+      # ECR
+      - name: Terraform init ECR
+        run: |
+          echo "** Running Terraform Init**"
+          terraform init
+        working-directory: terraform/ecr/env/hmg
+      - name: Plan Terraform changes ECS
+        run: |
+          echo "** Running Terraform Destroy**"
+          terraform destroy -auto-approve -input=false
+        working-directory: terraform/ecr/env/hmg
+
+      # ECS
+      - name: Terraform init ECS
         run: |
           echo "** Running Terraform Init**"
 
@@ -53,8 +65,9 @@ jobs:
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{env.TAG_IMAGE}}
+        working-directory: terraform/ecs/env/hmg
 
-      - name: Plan Terraform changes
+      - name: Plan Terraform changes ECS
         run: |
           echo "** Running Terraform Destroy**"
 
@@ -66,3 +79,4 @@ jobs:
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{env.TAG_IMAGE}}
+        working-directory: terraform/ecs/env/hmg
