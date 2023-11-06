@@ -18,34 +18,34 @@ module "vpc" {
   }
 }
 
-# Obter o intervalo de IP da VPC
-output "vpc_cidr_block" {
-  value = module.vpc.vpc_cidr_block
-}
-
-
-# Obter os intervalos de IP das sub-redes privadas
-output "subnet_cidr_blocks" {
-  value = module.vpc.private_subnets_cidr_blocks
-}
-
-resource "aws_vpc_peering_connection" "mongodb_atlas" {
-  peer_vpc_id = "vpc-0b9a5e973e76b8409"  # ID da VPC do MongoDB Atlas
-  vpc_id      = module.vpc.vpc_id  # ID da sua VPC na AWS
-  auto_accept = true
-  tags        = {
-    Terraform     = "true"
-    Environment   = "${var.ambiente}"
-    nomeResource  = "${var.nomeResource}"
-    containerName = "${var.containerName}"
-  }
-}
-
-resource "aws_route" "route_to_mongodb" {
-  route_table_id            = module.vpc.private_route_table_ids[0]  # ou o ID da sua tabela de roteamento privada
-  destination_cidr_block    = "192.168.248.0/21"  # CIDR da VPC do MongoDB Atlas
-  vpc_peering_connection_id = aws_vpc_peering_connection.mongodb_atlas.id
-}
+## Obter o intervalo de IP da VPC
+#output "vpc_cidr_block" {
+#  value = module.vpc.vpc_cidr_block
+#}
+#
+#
+## Obter os intervalos de IP das sub-redes privadas
+#output "subnet_cidr_blocks" {
+#  value = module.vpc.private_subnets_cidr_blocks
+#}
+#
+#resource "aws_vpc_peering_connection" "mongodb_atlas" { # peering mongodb atlas: https://www.youtube.com/watch?v=8NITVf0L5X0
+#  peer_vpc_id = "vpc-xxx"  # ID da VPC do MongoDB Atlas
+#  vpc_id      = module.vpc.vpc_id  # ID da sua VPC na AWS
+#  auto_accept = true
+#  tags        = {
+#    Terraform     = "true"
+#    Environment   = "${var.ambiente}"
+#    nomeResource  = "${var.nomeResource}"
+#    containerName = "${var.containerName}"
+#  }
+#}
+#
+#resource "aws_route" "route_to_mongodb" {
+#  route_table_id            = module.vpc.private_route_table_ids[0]  # ou o ID da sua tabela de roteamento privada
+#  destination_cidr_block    = "000.000.000.0/21"  # CIDR da VPC do MongoDB Atlas
+#  vpc_peering_connection_id = aws_vpc_peering_connection.mongodb_atlas.id
+#}
 
 
 

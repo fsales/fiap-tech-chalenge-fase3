@@ -35,7 +35,7 @@ module "hmg" {
       value = var.parktechNasicAuthName
     },
     "parktechNasicAuthPassword" = {
-      name  = "PARK_TECH_BASIC_AUTH_NAME",
+      name = "PARK_TECH_BASIC_AUTH_PASSWORD",
       value = var.parktechNasicAuthPassword
     }
   }
