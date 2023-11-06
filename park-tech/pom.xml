@@ -247,7 +247,7 @@
 				<configuration>
 					<jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments>
 					<layers>
-						<enabled>true</enabled>
+						<enabled>false</enabled>
 					</layers>
 					<excludes>
 						<exclude>
@@ -262,6 +262,12 @@
 				</configuration>
 
 			</plugin>
+
+			<plugin>
+				<groupId>org.graalvm.buildtools</groupId>
+				<artifactId>native-maven-plugin</artifactId>
+			</plugin>
+
 
 		</plugins>
 	</build>

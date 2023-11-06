@@ -1,5 +1,5 @@
-FROM eclipse-temurin:17-jdk-alpine as build
-WORKDIR /workspace/app
+FROM amazoncorretto:17-alpine as build
+WORKDIR /app
 
 COPY mvnw .
 COPY .mvn .mvn
@@ -9,15 +9,17 @@ COPY src src
 # Dar permissões de execução ao arquivo mvnw
 RUN chmod +x mvnw
 
-RUN ./mvnw install -DskipTests
+RUN ./mvnw package -DskipTests -Pnative
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
-FROM eclipse-temurin:17-jdk-alpine
-VOLUME /tmp
+FROM amazoncorretto:17-alpine-jdk
 
 ENV EXPOSE_PORT=8080
 
-ARG DEPENDENCY=/workspace/app/target/dependency
+# Adicione dependências do sistema necessárias para o GraalVM
+#RUN apk --no-cache add libstdc++ libgcc
+
+ARG DEPENDENCY=/app/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app

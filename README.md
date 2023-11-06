@@ -131,7 +131,7 @@ git clone  https://github.com/fsales/fiap-tech-chalenge-fase3.git  fiap-tech-cha
 - Iniciar o container do Park Tech
 
 ```sh
-docker-compose -f ./docker-compose/docker-compose-parktech.yaml up -d
+docker-compose -f ./docker-compose/docker-compose-parktech.yaml up -d --force-recreate
 ```
 
 - Parar o container do MongoDB
