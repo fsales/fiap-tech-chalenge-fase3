@@ -61,14 +61,14 @@ jobs:
       - name: Plan Terraform changes ECR
         run: |
           echo "** Running Terraform Plan**"  
-          terraform plan -input=false -out=tfplan
+          terraform plan -input=false -out=tfplan > /dev/null 2>&1
         working-directory: terraform/ecr/env/hmg
 
 
       - name: Terraform Apply ECR
         run: |
           echo "** Running Terraform Apply**"
-          terraform apply -auto-approve -input=false tfplan
+          terraform apply -auto-approve -input=false tfplan > /dev/null 2>&1
         working-directory: terraform/ecr/env/hmg
 
       ## realizar o build e push
@@ -152,7 +152,7 @@ jobs:
           export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
           export TF_VAR_idConexaoPeeringMongoDB=$ID_CONEXAO_PEERING_MONGODB
           
-          terraform plan -input=false -out=tfplan
+          terraform plan -input=false -out=tfplan > /dev/null 2>&1
 
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
@@ -171,7 +171,7 @@ jobs:
           export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
           export TF_VAR_idConexaoPeeringMongoDB=$ID_CONEXAO_PEERING_MONGODB
           
-          terraform apply -auto-approve -input=false tfplan
+          terraform apply -auto-approve -input=false tfplan > /dev/null 2>&1
         env:
           URI_DATABASE: ${{secrets.URI_DATABASE}}
           TAG_IMAGE: ${{needs.build-push-image-ecr.outputs.tag-image}}

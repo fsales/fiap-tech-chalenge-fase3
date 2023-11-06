@@ -37,15 +37,15 @@ resource "aws_ecs_task_definition" "app_api_tks" {
   family                   = "tks-api-${var.nomeResource}"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  cpu                      = 512
-  memory                   = 1024
+  cpu                      = 256
+  memory                   = 512
   execution_role_arn       = aws_iam_role.cargo.arn
   container_definitions    = jsonencode([
     {
       "name"      = var.containerName
       "image"     = "${var.image}:${var.tag}"
-      "cpu"       = 512
-      "memory"    = 1024
+      "cpu"       = 256
+      "memory"    = 512
       "essential" = true
       "portMappings" : [
         {
@@ -53,6 +53,16 @@ resource "aws_ecs_task_definition" "app_api_tks" {
           "hostPort"      = var.hostPort
         }
       ],
+      "healthCheck" : {
+        "command" : [
+          "CMD-SHELL",
+          "curl -f http://localhost::${var.containerPort}/actuator/health || exit 1"
+        ],
+        "interval" : 30,
+        "timeout" : 5,
+        "retries" : 3,
+        "startPeriod" : 60
+      },
       "environment" = [
         for env in var.environment : {
           name  = env.name
@@ -74,7 +84,7 @@ resource "aws_ecs_service" "app_api_ecs_svc" {
   name            = "svc-ecs-api-${var.nomeResource}"
   cluster         = module.ecs.cluster_id
   task_definition = aws_ecs_task_definition.app_api_tks.arn
-  desired_count   = 1
+  desired_count   = 2
 
   load_balancer {
     target_group_arn = aws_lb_target_group.tg_ecs_app.arn

@@ -23,15 +23,16 @@ public class SecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(authConfig -> {
 			authConfig.requestMatchers("/").authenticated();
-			authConfig.requestMatchers(ParktechResource.ACTUATOR + "/**").authenticated();
 			authConfig.requestMatchers(ParktechResource.CONDUTOR + "/**").authenticated();
 			authConfig.requestMatchers(ParktechResource.ESTACIONAMENTO + "/**").authenticated();
 			authConfig.requestMatchers(ParktechResource.VEICULO + "/**").authenticated();
+			authConfig.requestMatchers(ParktechResource.ACTUATOR + "/**").permitAll();
 			authConfig.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll();
 			authConfig.anyRequest().permitAll();
 		})
 			.csrf(AbstractHttpConfigurer::disable)
-			.formLogin(Customizer.withDefaults()) // Login with browser and Form
+			.cors(AbstractHttpConfigurer::disable)
+			// .formLogin(Customizer.withDefaults()) // Login with browser and Form
 			.httpBasic(Customizer.withDefaults()); // Login with postman and Basic Auth
 		return http.build();
 	}
