@@ -40,6 +40,8 @@ module "hmg" {
     }
   }
 
+  idConexaoPeeringMongoDB = var.idConexaoPeeringMongoDB
+
 }
 
 output "ip_abl" {

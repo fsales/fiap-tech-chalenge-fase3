@@ -54,9 +54,8 @@ variable "environment" {
   default = {}
 }
 
-/*
-variable "teste" {
+variable "idConexaoPeeringMongoDB" {
   description = "Secret variable"
   type        = string
   sensitive   = true
-}*/
+}

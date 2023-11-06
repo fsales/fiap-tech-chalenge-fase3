@@ -131,6 +131,7 @@ jobs:
           export TF_VAR_imagemTag=$TAG_IMAGE
           export TF_VAR_parktechNasicAuthName=$PARK_TECH_BASIC_AUTH_NAME
           export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
+          export TF_VAR_idConexaoPeeringMongoDB=$ID_CONEXAO_PEERING_MONGODB
           
           terraform init
 
@@ -139,6 +140,7 @@ jobs:
           TAG_IMAGE: ${{needs.build-push-image-ecr.outputs.tag-image}}
           PARK_TECH_BASIC_AUTH_NAME: ${{secrets.PARK_TECH_BASIC_AUTH_NAME}}
           PARK_TECH_BASIC_AUTH_PASSWORD: ${{secrets.PARK_TECH_BASIC_AUTH_PASSWORD}}
+          ID_CONEXAO_PEERING_MONGODB: ${{secrets.ID_CONEXAO_PEERING_MONGODB}}
 
       - name: Plan Terraform changes ECS
         run: |
@@ -148,6 +150,7 @@ jobs:
           export TF_VAR_imagemTag=$TAG_IMAGE
           export TF_VAR_parktechNasicAuthName=$PARK_TECH_BASIC_AUTH_NAME
           export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
+          export TF_VAR_idConexaoPeeringMongoDB=$ID_CONEXAO_PEERING_MONGODB
           
           terraform plan -input=false -out=tfplan
 
@@ -156,6 +159,7 @@ jobs:
           TAG_IMAGE: ${{needs.build-push-image-ecr.outputs.tag-image}}
           PARK_TECH_BASIC_AUTH_NAME: ${{secrets.PARK_TECH_BASIC_AUTH_NAME}}
           PARK_TECH_BASIC_AUTH_PASSWORD: ${{secrets.PARK_TECH_BASIC_AUTH_PASSWORD}}
+          ID_CONEXAO_PEERING_MONGODB: ${{secrets.ID_CONEXAO_PEERING_MONGODB}}
 
       - name: Terraform Apply ECS
         run: |
@@ -165,6 +169,7 @@ jobs:
           export TF_VAR_imagemTag=$TAG_IMAGE
           export TF_VAR_parktechNasicAuthName=$PARK_TECH_BASIC_AUTH_NAME
           export TF_VAR_parktechNasicAuthPassword=$PARK_TECH_BASIC_AUTH_PASSWORD
+          export TF_VAR_idConexaoPeeringMongoDB=$ID_CONEXAO_PEERING_MONGODB
           
           terraform apply -auto-approve -input=false tfplan
         env:
@@ -172,3 +177,4 @@ jobs:
           TAG_IMAGE: ${{needs.build-push-image-ecr.outputs.tag-image}}
           PARK_TECH_BASIC_AUTH_NAME: ${{secrets.PARK_TECH_BASIC_AUTH_NAME}}
           PARK_TECH_BASIC_AUTH_PASSWORD: ${{secrets.PARK_TECH_BASIC_AUTH_PASSWORD}}
+          ID_CONEXAO_PEERING_MONGODB: ${{secrets.ID_CONEXAO_PEERING_MONGODB}}

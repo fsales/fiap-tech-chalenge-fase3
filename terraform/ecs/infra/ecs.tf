@@ -37,15 +37,15 @@ resource "aws_ecs_task_definition" "app_api_tks" {
   family                   = "tks-api-${var.nomeResource}"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  cpu                      = 256
-  memory                   = 512
+  cpu                      = 512
+  memory                   = 1024
   execution_role_arn       = aws_iam_role.cargo.arn
   container_definitions    = jsonencode([
     {
       "name"      = var.containerName
       "image"     = "${var.image}:${var.tag}"
-      "cpu"       = 256
-      "memory"    = 512
+      "cpu"       = 512
+      "memory"    = 1024
       "essential" = true
       "portMappings" : [
         {

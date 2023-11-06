@@ -23,3 +23,10 @@ variable "parktechNasicAuthPassword" {
   type        = string
   sensitive   = true
 }
+
+
+variable "idConexaoPeeringMongoDB" {
+  description = "Secret variable"
+  type        = string
+  sensitive   = true
+}
