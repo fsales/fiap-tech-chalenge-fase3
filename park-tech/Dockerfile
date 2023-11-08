@@ -5,7 +5,7 @@ COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
-
+# https://aws.amazon.com/pt/blogs/containers/start-spring-boot-applications-faster-on-aws-fargate-using-soci/
 # Dar permissões de execução ao arquivo mvnw
 RUN chmod +x mvnw
 
