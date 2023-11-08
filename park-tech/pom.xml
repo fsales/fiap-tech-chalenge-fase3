@@ -168,6 +168,9 @@
 	</dependencies>
 
 	<build>
+
+		<finalName>park-tech</finalName>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -218,8 +221,9 @@
 							<goal>repackage</goal>
 						</goals>
 						<configuration>
-							<finalName>park-tech</finalName> <!-- Especifique o nome do seu arquivo JAR aqui -->
+							<mainClass>br.com.fsales.parktech.ParkTechApplication</mainClass>
 						</configuration>
+
 					</execution>
 				</executions>
 				<configuration>
