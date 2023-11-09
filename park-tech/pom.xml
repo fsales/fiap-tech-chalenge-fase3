@@ -221,9 +221,8 @@
 							<goal>repackage</goal>
 						</goals>
 						<configuration>
-							<mainClass>br.com.fsales.parktech.ParkTechApplication</mainClass>
+      					<mainClass>br.com.fsales.parktech.ParkTechApplication</mainClass>
 						</configuration>
-
 					</execution>
 				</executions>
 				<configuration>
